@@ -1,3 +1,4 @@
+@section('title','Login')
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
@@ -48,8 +49,9 @@
                 @endif
 
                 <x-button class="ml-3">
-                    {{ __('Log in') }}
+                    {{ __('Login') }}
                 </x-button>
+
             </div>
         </form>
     </x-auth-card>
