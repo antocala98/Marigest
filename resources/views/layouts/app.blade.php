@@ -20,16 +20,14 @@
         <link rel="icon" href="../img/LOGO-Maripers.ico" type="image/png" />
         
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased h-14 bg-gradient-to-r from-sky-500 to-indigo-500 overflow-hidden">
+        <div class="min-h-screen bg-gray-900 items-center">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+            {{ $header }}
+            
+            
 
             <!-- Page Content -->
             <main>
@@ -37,4 +35,5 @@
             </main>
         </div>
     </body>
+    @include('layouts.footer')
 </html>
