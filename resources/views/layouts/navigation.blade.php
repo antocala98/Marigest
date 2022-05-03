@@ -46,6 +46,7 @@
                     
                     @if(Auth::user())
                     <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
                     <x-slot name="content">
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -57,6 +58,7 @@
                                 {{ __('Logout') }}
                             </x-dropdown-link>
                         </form>
+                    </x-slot>
                     </x-slot>
                 </x-dropdown>
                 @endif
