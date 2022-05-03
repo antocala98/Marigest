@@ -1,6 +1,15 @@
+Guida Per clonare l'applicazione DA GIT
+THE CODE TO COPY AND PASTE
+composer install 
+mv .env.example .env 
+php artisan cache:clear 
+composer dump-autoload 
+php artisan key:generate
+
+file.env
 APP_NAME=Laravel
 APP_ENV=local
-APP_KEY=
+APP_KEY=base64:qBiJyQpP3CWu+QwbLCokhP4OR2/bAJS9rAdhOAUewUw=
 APP_DEBUG=true
 APP_URL=http://localhost
 
@@ -11,13 +20,13 @@ LOG_LEVEL=debug
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=laravel
+DB_DATABASE=prototiponavigazionetesi
 DB_USERNAME=root
 DB_PASSWORD=
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
-FILESYSTEM_DRIVER=local
+FILESYSTEM_DISK=local
 QUEUE_CONNECTION=sync
 SESSION_DRIVER=file
 SESSION_LIFETIME=120
@@ -34,7 +43,7 @@ MAIL_PORT=1025
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS=null
+MAIL_FROM_ADDRESS="hello@example.com"
 MAIL_FROM_NAME="${APP_NAME}"
 
 AWS_ACCESS_KEY_ID=
