@@ -31,7 +31,7 @@
             </div>
 
             <!-- Profile dropdown -->
-            <x-button class="hover:border-gray-900" href="{{ route('login') }}">
+            <x-button element="a" class="hover:border-gray-900" href="{{ route('login') }}">
                 {{ __('Login') }}
             </x-button>
            
