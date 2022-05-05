@@ -48,7 +48,7 @@
                     </a>
                 @endif
 
-                <x-button element="button" class="ml-3" type="submit">
+                <x-button element="button" class="hover:border-white ml-3" type="submit">
                     {{ __('Login') }}
                 </x-button>
 

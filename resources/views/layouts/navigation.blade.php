@@ -3,7 +3,7 @@
         <div class="relative flex items-center justify-between h-16">
 
             <!-- LOGO -->
-            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex-1 flex items-center sm:items-stretch sm:justify-start">
                 <div class="flex-shrink-0 flex items-center">
                     <img class="block lg:hidden h-12 w-auto" src="../img/LOGO-Maripers.png" alt="Logo">
                     <img class="hidden lg:block h-12 w-auto" src="../img/LOGO-Maripers.png" alt="Logo">
@@ -20,7 +20,7 @@
               
             </x-button> -->
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto lg:px-0">
         <div class="relative flex items-center justify-between h-16">
             <!-- Settings Dropdown -->
             <div class="relative flex items-center justify-between h-16">
