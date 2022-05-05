@@ -20,8 +20,8 @@
         <link rel="icon" href="../img/LOGO-Maripers.ico" type="image/png" />
         
     </head>
-    <body class="font-sans antialiased h-14 bg-gradient-to-r from-sky-500 to-indigo-500 overflow-hidden">
-        <div class="min-h-screen bg-gray-900 items-center">
+    <body class="font-sans antialiased h-14 bg-gradient-to-r bg-white overflow-hidden">
+        <div class="min-h-screen items-center">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
