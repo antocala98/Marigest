@@ -21,6 +21,11 @@ Route::get('/standby', function (){
     return view('standby');
 })->name('standby');
 
+Route::get('home', function(){
+    return view('corsi.admin.home');
+})->middleware(['auth'])->name('homeCorsiAdmin');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
