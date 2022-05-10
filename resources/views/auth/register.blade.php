@@ -14,25 +14,45 @@
             @csrf
             
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+                <!-- Name -->
+                <div>
+                    <x-label for="nome" :value="__('Nome')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                    <x-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus />
 
-                <x-label for="cognome" :value="__('Cognome')" />
+                </div>
 
-                <x-input id="cognome" class="block mt-1 w-full" type="text" name="name" :value="old('cognome')" required autofocus />
+                <div class="mt-4">
+                    <x-label for="cognome" :value="__('Cognome')" />
+
+                    <x-input id="cognome" class="block mt-1 w-full" type="text" name="cognome" :value="old('cognome')" required autofocus />
+                </div>
+
+                <!-- Email Address -->
+                <div class="mt-4">
+                    <x-label for="email" :value="__('Email')" />
+
+                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                </div>
+
             </div>
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <!-- Name -->
+                <div>
+                    <x-label for="sezione_appartenenza" :value="__('Sezione appartenenza')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                    <select id="sezione_appartenenza" name="sezione_appartenenza" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="corsi">Corsi</option>
+                        <option value="incorporamento">Incorporamento</option>
+                        <option value="sanitaria">Sanitaria</option>
+                        <option value="vestiario">Vestiario</option>
+                    </select>
+
+                </div>
+
             </div>
 
-            </div>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <!-- Password -->
