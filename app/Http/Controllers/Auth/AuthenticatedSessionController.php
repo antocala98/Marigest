@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -27,12 +28,36 @@ class AuthenticatedSessionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(LoginRequest $request)
-    {
-        $request->authenticate();
+    {   
+        $user=User::where('email', '=', $request->email)->first();
+        switch($user->sezione_appartenenza){
+            case 'incorporamento': break; //non registrato
+            case 'corsi': 
+                switch($user->tipo_utente){
+                    case '0':
+                        return redirect(route('standby'));
+                    case '1': 
+                        $request->authenticate();
+                        $request->session()->regenerate();
+                        return redirect()->intended(RouteServiceProvider::HOME);
+                    
+                    case '2': break;
 
-        $request->session()->regenerate();
+                    case '3': break;
+                }
+                //admin
+            case 'vestiario': break; //admin junior
+            case 'sanitaria': break; //addetto
+        }
+        if($user->tipo_utente == '1'){
+            $request->authenticate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            $request->session()->regenerate();
+    
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } else {
+            return redirect(route('standby'));
+        }  
     }
 
     /**

@@ -45,7 +45,8 @@ class RegisteredUserController extends Controller
             'nome' => $request->nome,
             'cognome' => $request->cognome,
             'email' => $request->email,
-            'sezione_appartenenza' => $request->sezione,
+            'sezione_appartenenza' => $request->sezione_appartenenza,
+            'tipo_utente' => '0',
             'password' => Hash::make($request->password),
         ]);
 
