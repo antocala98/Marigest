@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IncorporandiVfp1Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,7 @@ Route::get('home', function(){
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::post('home', [IncorporandiVfp1Controller::class, 'import'])->name('file-import');
 
 require __DIR__.'/auth.php';

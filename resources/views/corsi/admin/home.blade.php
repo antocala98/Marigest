@@ -52,7 +52,7 @@
                 <button
                     class="inline-block p-4 rounded-t-lg border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500"
                     id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
-                    aria-selected="true">Profile</button>
+                    aria-selected="true">Gestione Personale</button>
             </li>
             <li class="mr-2" role="presentation">
                 <button
@@ -64,7 +64,7 @@
                 <button
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings"
-                    aria-selected="false">Settings</button>
+                    aria-selected="false">Acquisisci dati incorporamento</button>
             </li>
             <li role="presentation">
                 <button
@@ -91,10 +91,16 @@
         </div>
         <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel"
             aria-labelledby="settings-tab">
-            <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                    class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>.
-                Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps
-                classes to control the content visibility and styling.</p>
+            <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
+                    <div class="custom-file text-left">
+                        <input type="file" name="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Import data</button>
+            </form>
         </div>
         <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="contacts" role="tabpanel"
             aria-labelledby="contacts-tab">

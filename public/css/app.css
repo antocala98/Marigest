@@ -1406,6 +1406,9 @@ input[type="range"]::-ms-fill-lower {
 .pr-4 {
   padding-right: 1rem;
 }
+.text-left {
+  text-align: left;
+}
 .text-center {
   text-align: center;
 }
