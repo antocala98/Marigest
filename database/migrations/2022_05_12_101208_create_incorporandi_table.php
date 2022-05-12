@@ -29,10 +29,10 @@ class CreateIncorporandiTable extends Migration
             $table->string('PROFILO DI IMPIEGO')->nullable(true);
             $table->string('SESSO')->nullable(true);
             $table->string('COMP')->nullable(true);
-            $table->dateTime('DATA INCORPORAMENTO')->nullable(true);
-            $table->string('DATA AMMINISTRATIVA')->nullable(true);
+            $table->date('DATA INCORPORAMENTO')->nullable(true);
+            $table->date('DATA AMMINISTRATIVA')->nullable(true);
             $table->string('CODICE FISCALE')->nullable(true);
-            $table->string('DATA DI NASCITA')->nullable(true);
+            $table->date('DATA DI NASCITA')->nullable(true);
             $table->string('COMUNE DI NASCITA')->nullable(true);
             $table->string('PROVINCIA DI NASCITA')->nullable(true);
             $table->string('CAP DI NASCITA')->nullable(true);
@@ -52,7 +52,6 @@ class CreateIncorporandiTable extends Migration
             $table->string('E-MAIL')->nullable(true);
             $table->string('PEC')->nullable(true);
             $table->string('INCORPORATO')->nullable(true);
-
         });
     }
 
