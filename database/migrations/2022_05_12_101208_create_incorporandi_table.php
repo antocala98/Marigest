@@ -29,7 +29,7 @@ class CreateIncorporandiTable extends Migration
             $table->string('PROFILO DI IMPIEGO')->nullable(true);
             $table->string('SESSO')->nullable(true);
             $table->string('COMP')->nullable(true);
-            $table->string('DATA INCORPORAMENTO')->nullable(true);
+            $table->dateTime('DATA INCORPORAMENTO')->nullable(true);
             $table->string('DATA AMMINISTRATIVA')->nullable(true);
             $table->string('CODICE FISCALE')->nullable(true);
             $table->string('DATA DI NASCITA')->nullable(true);
@@ -45,8 +45,7 @@ class CreateIncorporandiTable extends Migration
             $table->string('COMUNE DOMICILIO')->nullable(true);
             $table->string('PROVINCIA DOMICILIO')->nullable(true);
             $table->string('INDIRIZZO DOMICILIO')->nullable(true);
-            $table->string('NUMERO CIVICO')->nullable(true);
-            $table->string('DOMICILIO')->nullable(true);
+            $table->string('NUMERO CIVICO DOMICILIO')->nullable(true);
             $table->string('CAP DOMICILIO')->nullable(true);
             $table->string('CELLULARE FAMILIARE')->nullable(true);
             $table->string('CELLULARE PERSONALE')->nullable(true);

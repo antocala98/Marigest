@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Imports;
-
+use Carbon\Carbon;
 use App\Models\IncorporandiVfp1;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Row;
 
 class ImportIncorporandiVfp1 implements ToModel
 {
@@ -12,8 +13,9 @@ class ImportIncorporandiVfp1 implements ToModel
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    
     public function model(array $row)
-    {
+    {        
         return new IncorporandiVfp1([
             'ID' => $row[0],	
             'ANNO'  => $row[1],	
@@ -29,10 +31,10 @@ class ImportIncorporandiVfp1 implements ToModel
             'SPECIALITA'  => $row[11],
             'PROFILO DI IMPIEGO'  => $row[12],
             'SESSO'  => $row[13],
-            'COMP'  => $row[14],	
-            'DATA INCORPORAMENTO'  => $row[15],	
-            'DATA AMMINISTRATIVA'  => $row[16],	
-            'CODICE FISCALE'  => $row[17],	
+            'COMP'  => $row[14],
+            'DATA INCORPORAMENTO' =>Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject((int)$row[15])),
+            'DATA AMMINISTRATIVA' => $row[16],	
+            'CODICE FISCALE'  => $row[17],
             'DATA DI NASCITA'  => $row[18],	
             'COMUNE DI NASCITA'  => $row[19],	
             'PROVINCIA DI NASCITA'  => $row[20],	
@@ -46,14 +48,13 @@ class ImportIncorporandiVfp1 implements ToModel
             'COMUNE DOMICILIO'  => $row[28],	
             'PROVINCIA DOMICILIO'  => $row[29],	
             'INDIRIZZO DOMICILIO'  => $row[30],	
-            'NUMERO CIVICO'  => $row[31], 
-            'DOMICILIO'  => $row[32],	
-            'CAP DOMICILIO'  => $row[33],	
-            'CELLULARE FAMILIARE'  => $row[34],	
-            'CELLULARE PERSONALE'  => $row[35],	
-            'E-MAIL'  => $row[36],
-            'PEC'  => $row[37],	
-            'INCORPORATO'  => $row[38],
+            'NUMERO CIVICO DOMICLIO'  => $row[31], 	
+            'CAP DOMICILIO'  => $row[32],	
+            'CELLULARE FAMILIARE'  => $row[33],	
+            'CELLULARE PERSONALE'  => $row[34],	
+            'E-MAIL'  => $row[35],
+            'PEC'  => $row[36],	
+            'INCORPORATO'=> $row[37],	
         ]);
     }
 }
