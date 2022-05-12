@@ -91,6 +91,9 @@
         </div>
         <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel"
             aria-labelledby="settings-tab">
+            @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
+            @endif
             <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
