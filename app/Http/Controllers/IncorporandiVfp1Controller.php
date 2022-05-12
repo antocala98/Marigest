@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Imports\ImportIncorporandiVfp1;
 use App\Models\IncorporandiVfp1;
