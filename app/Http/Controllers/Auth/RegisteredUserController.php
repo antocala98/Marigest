@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Str;
 
 class RegisteredUserController extends Controller
 {
@@ -42,12 +43,15 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $token = Str::random(60);
+
         $user = User::create([
             'nome' => $request->nome,
             'cognome' => $request->cognome,
             'email' => $request->email,
             'sezione_appartenenza' => $request->sezione_appartenenza,
             'tipo_utente' => '0',
+            'remember_token'  => hash('sha256', $token),
             'password' => Hash::make($request->password),
         ]);
 

@@ -27,9 +27,17 @@ Route::get('/standby', function (){
     return view('standby');
 })->name('standby');
 
-Route::get('home', [ListaPersonaleCorsiController::class,'up'])->middleware('auth')->name('homeCorsiAdmin');
+Route::prefix('/admin')->group(function () {
+    Route::get('home', [ListaPersonaleCorsiController::class, 'up'])->middleware('auth')->name('home');
+});
 
-Route::get('home', [AdminJuniorCorsiController::class,'ListaPersonale'])->middleware('auth')->name('homeCorsiAdminJunior');
+Route::prefix('/adminJ')->group(function () {
+    Route::get('home', [AdminJuniorCorsiController::class,'ListaPersonale'])->middleware('auth')->name('homeCorsiAdminJunior');
+});
+
+
+
+//Route::get('home', [AdminJuniorCorsiController::class,'ListaPersonale'])->middleware('auth')->name('homeCorsiAdminJunior');
 
 
 Route::get('/dashboard', function () {
