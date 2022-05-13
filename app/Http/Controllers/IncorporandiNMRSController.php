@@ -11,11 +11,11 @@ class IncorporandiNMRSController extends Controller
 {
     public function import(Request $request) 
     {
-        try {
-            Excel::import(new ImportIncorporandiNMRS, $request->file('file')->store('temp'));
-            return back();
-        } catch (NoTypeDetectedException $e) {
-            return back()->withErrors('Tipo di file non riconosciuto! Inserisci un file excel');
-        }
+        $request->validate([
+            'file' => 'required|file|max:2048|mimes:xls,xlsx,csv',
+
+        ]);
+        Excel::import(new ImportIncorporandiNMRS, $request->file('file')->store('temp'));
+        return back();
     }
 }

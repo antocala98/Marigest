@@ -20,7 +20,7 @@ class CreateAllieviTable extends Migration
             $table->string('cognome');
             $table->char('sesso');
             $table->string('codice_fiscale')->unique();
-            $table->string('data_nascita');
+            $table->date('data_nascita');
             $table->string('luogo_nascita');
             $table->string('provincia_nascita');
             $table->string('nazione_nascita');
@@ -30,7 +30,7 @@ class CreateAllieviTable extends Migration
             $table->string('corso');
             $table->string('titolo_studio');
             $table->string('voto_diploma');
-            $table->string('data_incorporamento');
+            $table->date('data_incorporamento');
             $table->string('residenza');
             $table->timestamps();
         });

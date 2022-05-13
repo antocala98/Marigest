@@ -37,11 +37,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::get('/aggiungidaticorsi', [AggiungiDatiCorsiController::class,'up'])->middleware('auth')->name('aggiungidaticorsi');
+Route::get('aggiungidaticorsi', [AggiungiDatiCorsiController::class,'up'])->middleware('auth')->name('aggiungidaticorsi');
 
-Route::post('aggiungidaticorsi', [IncorporandiVfp1Controller::class, 'import'])->name('file-import');
+Route::post('aggiungidaticorsi', [IncorporandiVfp1Controller::class, 'import'])->name('aggiungiDatiVFP1');
 
-Route::post('aggiungidaticorsi', [IncorporandiNMRSController::class, 'import'])->name('file-import');
+Route::post('aggiungidaticorsi', [IncorporandiNMRSController::class, 'import'])->name('aggiungiDatiNMRS');
+
+Route::get('aggiungidaticorsi', [AdminJuniorCorsiController::class,'create'])->name('aggiungidaticorsi');
 
 Route::get('/gestionepersonalecorsi', [GestionePersonaleCorsiController::class,'up'])->middleware('auth')->name('aggiungidaticorsi');
 require __DIR__.'/auth.php';

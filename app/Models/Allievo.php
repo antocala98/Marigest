@@ -30,6 +30,7 @@ class Allievo extends Model
         'residenza',
     ];
 
+
     public function provvedimentiDisciplinari(){
         return $this->hasMany(ProvvedimentoDisciplinare::class);
     }
