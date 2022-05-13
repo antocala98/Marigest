@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 class ListaPersonaleCorsiController extends Controller
 {
-    public function ListaPersonale()
+    public function up()
     {
-        $users=User::where('sezione_appartenenza','corsi')->get();
-        return view('corsi.admin.home',['users'=>$users]);
+        return view('corsi.admin.home');
     }
 }

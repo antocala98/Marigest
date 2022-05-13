@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AggiungiDatiCorsiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncorporandiVfp1Controller;
 use App\Http\Controllers\ListaPersonaleCorsiController;
+use App\Http\Controllers\GestionePersonaleCorsiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,13 +24,15 @@ Route::get('/standby', function (){
     return view('standby');
 })->name('standby');
 
-Route::get('home', [ListaPersonaleCorsiController::class,'ListaPersonale'])->middleware('auth')->name('homeCorsiAdmin');
+Route::get('home', [ListaPersonaleCorsiController::class,'up'])->middleware('auth')->name('homeCorsiAdmin');
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::post('home', [IncorporandiVfp1Controller::class, 'import'])->name('file-import');
+Route::get('/aggiungidaticorsi', [AggiungiDatiCorsiController::class,'up'])->middleware('auth')->name('aggiungidaticorsi');
+Route::post('aggiungidaticorsi', [IncorporandiVfp1Controller::class, 'import'])->name('file-import');
 
+Route::get('/gestionepersonalecorsi', [GestionePersonaleCorsiController::class,'up'])->middleware('auth')->name('aggiungidaticorsi');
 require __DIR__.'/auth.php';

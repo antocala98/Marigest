@@ -52,13 +52,13 @@
                 <a href="gestionepersonalecorsi"
                     class="inline-block p-4 rounded-t-lg border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500"
                     id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
-                    aria-selected="true">Gestione Personale</a>
+                    aria-selected="false">Gestione Personale</a>
             </li>
             <li class="mr-2" role="presentation">
-                <a href="aggiungidaticorsi"
+                <a href="#"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings"
-                    aria-selected="false">Acquisisci dati incorporamento</a>
+                    aria-selected="true">Acquisisci dati incorporamento</a>
             </li>
             <li class="mr-2" role="presentation">
                 <a href="#"
@@ -74,6 +74,24 @@
             </li>
         </ul>
     </div>
-    
+    <div id="myTabContent">
+        
+        <div class=" p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel"
+            aria-labelledby="settings-tab">
+            @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
+            @endif
+            <form action="{{ route('file-import')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
+                    <div class="custom-file text-left">
+                        <input type="file" name="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Import data</button>
+            </form>
+        </div>
+    </div>
 
 </x-app-layout>
