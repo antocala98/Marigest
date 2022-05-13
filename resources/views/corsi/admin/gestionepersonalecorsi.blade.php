@@ -49,7 +49,7 @@
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent"
             role="tablist">
             <li class="mr-2" role="presentation">
-                <a href="gestionepersonalecorsi"
+                <a href="#"
                     class="inline-block p-4 rounded-t-lg border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500"
                     id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
                     aria-selected="true">Gestione Personale</a>
@@ -67,13 +67,55 @@
                     aria-selected="false">Dashboard</a>
             </li>
             <li role="presentation">
-                <a href="#"
+                <button
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts"
-                    aria-selected="false">Contacts</a>
+                    aria-selected="false">Contacts</button>
             </li>
         </ul>
     </div>
-    
+    <div id="myTabContent">
+        <div class="p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel"
+            aria-labelledby="profile-tab">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Nome
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Cognome
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Tipo di utente
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $user)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                {{$user->nome}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{$user->cognome}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$user->tipo_utente}}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
 </x-app-layout>
