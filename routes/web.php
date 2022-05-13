@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncorporandiVfp1Controller;
-
+use App\Http\Controllers\ListaPersonaleCorsiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,9 +22,7 @@ Route::get('/standby', function (){
     return view('standby');
 })->name('standby');
 
-Route::get('home', function(){
-    return view('corsi.admin.home');
-})->middleware(['auth'])->name('homeCorsiAdmin');
+Route::get('home', [ListaPersonaleCorsiController::class,'ListaPersonale'])->middleware('auth')->name('homeCorsiAdmin');
 
 
 Route::get('/dashboard', function () {
