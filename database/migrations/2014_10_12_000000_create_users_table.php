@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('img_profilo')->nullable(true);
             $table->string('tipo_utente')->default(0);
             $table->string('sezione_appartenenza')->nullable(true);
+            $table->string('comando_appartenenza')->nullable(true);
             $table->rememberToken(); 
             $table->timestamps();
         });

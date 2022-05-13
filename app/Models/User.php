@@ -22,6 +22,7 @@ class User extends Authenticatable
         'cognome',
         'email',
         'sezione_appartenenza',
+        'comando_appartenenza',
         'password',
         'tipo_utente',
         'img_profilo',

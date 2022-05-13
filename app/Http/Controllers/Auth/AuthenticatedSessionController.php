@@ -36,12 +36,27 @@ class AuthenticatedSessionController extends Controller
                 switch($user->tipo_utente){
                     case '0':
                         return redirect(route('standby'));
-                    case '1': 
+                    case '1':
                         $request->authenticate();
                         $request->session()->regenerate();
                         return redirect()->intended(RouteServiceProvider::HOME);
                     
-                    case '2': break;
+                    case '2': 
+                        switch($user->comando_appartenenza){
+                            case 'prima classe': 
+                                return redirect(route('standby'));
+                            case 'seconda classe': 
+                                return redirect(route('standby'));
+                            case 'terza classe':
+                                $request->authenticate();
+                                $request->session()->regenerate();
+                                return redirect()->intended(route('homeCorsiAdminJunior'));
+                            case 'vfp4': 
+                                return redirect(route('standby'));
+                            case 'vfp1': 
+                                return redirect(route('standby'));
+                        } 
+                        
 
                     case '3': break;
                 }

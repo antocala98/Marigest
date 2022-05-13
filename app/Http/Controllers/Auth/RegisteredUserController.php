@@ -38,6 +38,7 @@ class RegisteredUserController extends Controller
             'cognome' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'sezione_appartenenza' => ['required', 'string', 'max:255'],
+            'comando_appartenenza' => ['string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
