@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
 
 class IncorporandiVfp1Controller extends Controller
 {
-    public function import(Request $request) 
+    public static function import(Request $request) 
     {
         try {
             Excel::import(new ImportIncorporandiVfp1, $request->file('file')->store('temp'));
