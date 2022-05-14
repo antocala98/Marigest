@@ -44,8 +44,6 @@ Route::prefix('/adminJ')->group(function () {
 
 
 
-//Route::get('home', [AdminJuniorCorsiController::class,'ListaPersonale'])->middleware('auth')->name('homeCorsiAdminJunior');
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
