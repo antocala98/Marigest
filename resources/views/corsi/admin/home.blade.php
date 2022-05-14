@@ -1,10 +1,5 @@
-<x-app-layout>
-    <x-slot name="header">
-        
-    </x-slot>
+@extends('layouts.layoutAdminCorsi')
+@section('body')
+Body
 
-
-    
-    
-
-</x-app-layout>
+@endsection

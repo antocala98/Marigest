@@ -7,6 +7,7 @@ use App\Http\Controllers\IncorporandiNMRSController;
 use App\Http\Controllers\ListaPersonaleCorsiController;
 use App\Http\Controllers\GestionePersonaleCorsiController;
 use App\Http\Controllers\AdminJuniorCorsiController;
+use App\Http\Controllers\AdminCorsiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,20 +20,26 @@ use App\Http\Controllers\AdminJuniorCorsiController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function(){
     return view('welcome');
-}); 
+});
 
 Route::get('/standby', function (){
     return view('standby');
 })->name('standby');
 
 Route::prefix('/admin')->group(function () {
-    Route::get('home', [ListaPersonaleCorsiController::class, 'up'])->middleware('auth')->name('home');
+    Route::get('home', [AdminCorsiController::class, 'view'])->middleware('auth')->name('homeCorsiAdmin');
+    Route::get('/gestione-personale-corsi', [AdminCorsiController::class,'gestionePersonale'])->middleware('auth')->name('gestionePersonale');
+    Route::get('aggiungi-dati-corsi', [AdminCorsiController::class,'aggiungiDatiCorsi'])->middleware('auth')->name('aggiungidaticorsi');
+    Route::post('aggiungi-dati-corsi', [AdminCorsiController::class, 'inserimentoDati'])->middleware('auth')->name('inserimentoDatiAdmin');
 });
 
 Route::prefix('/adminJ')->group(function () {
-    Route::get('home', [AdminJuniorCorsiController::class,'ListaPersonale'])->middleware('auth')->name('homeCorsiAdminJunior');
+    Route::get('home', [AdminJuniorCorsiController::class, 'view'])->middleware('auth')->name('homeCorsiAdminJunior');
+    Route::get('/gestione-personale-corsi', [AdminJuniorCorsiController::class,'gestionePersonale'])->middleware('auth')->name('gestionePersonale');
+    Route::get('aggiungi-dati-corsi', [AdminJuniorCorsiController::class,'aggiungiDatiCorsi'])->middleware('auth')->name('aggiungidaticorsi');
+    Route::post('aggiungi-dati-corsi', [AdminJuniorCorsiController::class, 'inserimentoDati'])->middleware('auth')->name('inserimentoDatiAdminJunior');
 });
 
 
@@ -45,13 +52,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::get('aggiungidaticorsi', [AggiungiDatiCorsiController::class,'up'])->middleware('auth')->name('aggiungidaticorsi');
 
-Route::post('aggiungidaticorsi', [IncorporandiVfp1Controller::class, 'import'])->name('aggiungiDatiVFP1');
 
-Route::post('aggiungidaticorsi', [IncorporandiNMRSController::class, 'import'])->name('aggiungiDatiNMRS');
 
-Route::get('aggiungidaticorsi', [AdminJuniorCorsiController::class,'create'])->name('aggiungidaticorsi');
 
-Route::get('/gestionepersonalecorsi', [GestionePersonaleCorsiController::class,'up'])->middleware('auth')->name('aggiungidaticorsi');
 require __DIR__.'/auth.php';

@@ -1,20 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\IncorporandiVfp1;
 
-class AdminJuniorCorsiController extends Controller
+class AdminCorsiController extends Controller
 {
-    public function create(){
-        return view('corsi.admin_jr.aggiungidaticorsi');
-    }
-    public function ListaPersonale()
-    {
-        $users=User::where('sezione_appartenenza','corsi')->get();
-        return view('corsi.admin_jr.home',['users'=>$users]);
+    public function index(){
+        return view('corsi.admin.home');
     }
 
     public function view()
@@ -22,10 +18,10 @@ class AdminJuniorCorsiController extends Controller
       // get current logged in user
       $user = Auth::user();
 
-      $userAdmin= new User(['tipo_utente' => '2']);
+      $userAdmin= new User(['tipo_utente' => '1']);
        
       if ($user->can('view', $userAdmin)) {
-        return view('corsi.admin_jr.home');
+        return view('corsi.admin.home');
       } else {
         abort(403, 'Azione non autorizzata.');
       }
@@ -36,10 +32,10 @@ class AdminJuniorCorsiController extends Controller
 
         $users=User::where('sezione_appartenenza','corsi')->get();
 
-        $userAdminJunior= new User(['tipo_utente' => '2']);
+        $userAdmin= new User(['tipo_utente' => '1']);
         
-        if ($user->can('view', $userAdminJunior)) {
-            return view('corsi.admin_jr.gestionepersonalecorsi',['users'=>$users]);
+        if ($user->can('view', $userAdmin)) {
+            return view('corsi.admin.gestionepersonalecorsi',['users'=>$users]);
           } else {
             abort(403, 'Azione non autorizzata.');
           }
@@ -51,10 +47,10 @@ class AdminJuniorCorsiController extends Controller
 
         $users=User::where('sezione_appartenenza','corsi')->get();
 
-        $userAdminJunior= new User(['tipo_utente' => '2']);
+        $userAdmin= new User(['tipo_utente' => '1']);
         
-        if ($user->can('view', $userAdminJunior)) {
-            return view('corsi.admin_jr.aggiungidaticorsi');
+        if ($user->can('view', $userAdmin)) {
+            return view('corsi.admin.aggiungidaticorsi');
           } else {
             abort(403, 'Azione non autorizzata.');
           }
@@ -64,7 +60,7 @@ class AdminJuniorCorsiController extends Controller
     
     public function inserimentoDati(Request $request){
         IncorporandiNMRSController::import($request);
-        return view('corsi.admin_jr.aggiungidaticorsi')->with(['feedback_utente' => "File Excel inserito con successo nel database!"]);
+        return view('corsi.admin.aggiungidaticorsi')->with(['feedback_utente' => "File Excel inserito con successo nel database!"]);
         /*switch(Auth::user()->comando_appartenenza){
             case '':
                 IncorporandiNMRSController::import($request);

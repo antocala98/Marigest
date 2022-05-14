@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
                     case '1':
                         $request->authenticate();
                         $request->session()->regenerate();
-                        return redirect()->intended(RouteServiceProvider::HOME);
+                        return redirect()->intended(route('homeCorsiAdmin'));
                     
                     case '2': 
                         switch($user->comando_appartenenza){

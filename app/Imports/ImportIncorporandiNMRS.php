@@ -24,11 +24,7 @@ class ImportIncorporandiNMRS implements ToModel, WithHeadingRow
     
 
     public function model(array $row)
-    {    
-        $this->allievi=Allievo::all();
-        if ($this->allievi->contains('matricola_militare', $row['MATRICOLA'])) {
-            
-        }   
+    {      
         return new Allievo([
             'matricola_militare' => $row['MATRICOLA'],
             'nome' => $row['NOME'],
