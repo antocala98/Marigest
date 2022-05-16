@@ -18,7 +18,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
 
         <!-- Favicon -->
-        <link rel="icon" href="../img/LOGO-Maripers.ico" type="image/png" />
+        <link rel="icon" href="{{ asset('img/LOGO-Maripers.ico') }}" type="image/png" />
         
     </head>
     <body class="font-sans antialiased h-14 bg-gradient-to-r bg-white overflow-hidden">

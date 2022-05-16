@@ -5,8 +5,8 @@
             <!-- LOGO -->
             <div class="flex-1 flex items-center sm:items-stretch sm:justify-start">
                 <div class="flex-shrink-0 flex items-center">
-                    <img class="block lg:hidden h-12 w-auto" src="../img/LOGO-Maripers.png" alt="Logo">
-                    <img class="hidden lg:block h-12 w-auto" src="../img/LOGO-Maripers.png" alt="Logo">
+                    <img class="block lg:hidden h-12 w-auto" src="{{asset('img/LOGO-Maripers.png')}}" alt="Logo">
+                    <img class="hidden lg:block h-12 w-auto" src="{{asset('img/LOGO-Maripers.png')}}" alt="Logo">
                 </div>
                 <!-- Primary Navbar items -->
                 <div class=" hidden sm:block sm:ml-6">
