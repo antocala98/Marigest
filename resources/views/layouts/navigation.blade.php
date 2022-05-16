@@ -44,14 +44,18 @@
                     </x-slot>
                 </x-dropdown>
             </div>
-                
+
             @else
             <x-button element="a" class="hover:border-gray-900" href="{{ route('login') }}">
                 {{ __('Login') }}
             </x-button>
-                
+                <x-button element="a" class="hover:border-gray-900" href="{{ route('register') }}">
+                    {{ __('Registrazione') }}
+                </x-button>
+
+
             @endif
-    
+
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">

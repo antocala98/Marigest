@@ -30,7 +30,7 @@
     <x-slot name="slot">
         <div class="relative overflow-hidden bg-no-repeat bg-cover" style="
         background-position: 100%;
-        background-image: url('../img/bg-img.jpg');
+        background-image: url('../img/sfondo2.png');
         height: 650px;
         ">
 
@@ -49,6 +49,5 @@
             </div>
         </div>
     </x-slot>
-
 
 </x-app-layout>
