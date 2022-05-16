@@ -10,6 +10,7 @@ use App\Models\Allievo;
 use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\Error;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 HeadingRowFormatter::default('none');
 class ImportIncorporandiNMRS implements ToModel, WithHeadingRow
 {
@@ -36,6 +37,7 @@ class ImportIncorporandiNMRS implements ToModel, WithHeadingRow
             'provincia_nascita' => $row['PROV_NASC'],
             'nazione_nascita' => $row['NAZIONE'],
             'titolo_studio' => $row['STUDIO'],
+            'corso' => Auth::user()->comando_appartenenza,
             'data_incorporamento' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject((int)$row['DATATTOARR'])),
             'residenza' => $row['LUOGO_RESI'],
         ]);
