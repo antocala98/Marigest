@@ -37,20 +37,30 @@ class AuthenticatedSessionController extends Controller
                     case '0':
                         return redirect(route('standby'));
                     case '1':
-                        $request->authenticate();
-                        $request->session()->regenerate();
-                        return redirect()->intended(route('homeCorsiAdmin'));
-                    
-                    case '2': 
                         switch($user->comando_appartenenza){
-                            case 'prima classe': 
+                            case '24_NMRS': 
                                 return redirect(route('standby'));
-                            case 'seconda classe': 
+                            case '23_NMRS': 
                                 return redirect(route('standby'));
-                            case 'terza classe':
+                            case '22_NMRS':
                                 $request->authenticate();
                                 $request->session()->regenerate();
-                                return redirect()->intended(route('homeCorsiAdminJunior'));
+                                return redirect()->intended(route('homeCorsiAdmin22NMRS'));
+                            case 'vfp4': 
+                                return redirect(route('standby'));
+                            case 'vfp1': 
+                                return redirect(route('standby'));
+                        } 
+                    case '2': 
+                        switch($user->comando_appartenenza){
+                            case '24_NMRS': 
+                                return redirect(route('standby'));
+                            case '23_NMRS': 
+                                return redirect(route('standby'));
+                            case '22_NMRS':
+                                $request->authenticate();
+                                $request->session()->regenerate();
+                                return redirect()->intended(route('homeCorsiAdminJunior22NMRS'));
                             case 'vfp4': 
                                 return redirect(route('standby'));
                             case 'vfp1': 

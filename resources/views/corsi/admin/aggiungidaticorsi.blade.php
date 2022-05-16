@@ -5,7 +5,7 @@
         <div class=" p-4 bg-gray-50 rounded-lg dark:bg-gray-800">
             
             
-            <form action="{{ route('inserimentoDatiAdmin')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('inserimentoDatiAdmin22NMRS')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
                     <div class="custom-file text-left">
