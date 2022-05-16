@@ -38,7 +38,7 @@
             </div>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                <!-- Name -->
+                <!-- Sezione appartenenza e tipo corso -->
                 <div>
                     <x-label for="sezione_appartenenza" :value="__('Sezione appartenenza')" />
 
@@ -47,6 +47,26 @@
                         <option value="incorporamento">Incorporamento</option>
                         <option value="sanitaria">Sanitaria</option>
                         <option value="vestiario">Vestiario</option>
+                    </select>
+
+                </div>
+
+
+                <div>
+                    <x-label for="comando_appartenenza" :value="__('Comando')" />
+
+                    <select id="comando_appartenenza" name="comando_appartenenza" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <?php 
+                        if(isset($corsi)){
+                            foreach($corsi as $corso){ 
+                                if($corso->tipo_corso == "NMRS" || $corso->tipo_corso == "Vfp4") { ?>
+                                    <option value="{{$corso->numero_corso}}_{{$corso->tipo_corso}}">{{$corso->numero_corso}} {{$corso->tipo_corso}}</option> <?php
+                                } else { ?>
+                                    <option value="{{$corso->tipo_corso}}">{{$corso->tipo_corso}}</option> <?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
 
                 </div>
@@ -88,3 +108,10 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+<script>
+    document.getElementById("sezione_appartenenza").onchange = function () {
+        document.getElementById("comando_appartenenza").setAttribute("disabled", "disabled");
+        if (this.value == 'corsi')
+            document.getElementById("comando_appartenenza").removeAttribute("disabled");
+    };
+</script>    

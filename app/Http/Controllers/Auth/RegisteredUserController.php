@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Corso;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -21,7 +22,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $corsi=Corso::all();
+        return view('auth.register')->with(['corsi' => $corsi]);
     }
 
     /**
@@ -43,6 +45,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+
         $token = Str::random(60);
 
         $user = User::create([
@@ -50,6 +53,7 @@ class RegisteredUserController extends Controller
             'cognome' => $request->cognome,
             'email' => $request->email,
             'sezione_appartenenza' => $request->sezione_appartenenza,
+            'comando_appartenenza' => $request->comando_appartenenza,
             'tipo_utente' => '0',
             'remember_token'  => hash('sha256', $token),
             'password' => Hash::make($request->password),
