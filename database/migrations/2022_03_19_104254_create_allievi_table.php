@@ -26,12 +26,12 @@ class CreateAllieviTable extends Migration
             $table->string('nazione_nascita');
             $table->string('matricola_universita')->unique()->nullable(true);
             $table->string('categoria')->nullable(true);
-            $table->string('foto');
-            $table->string('corso');
-            $table->string('titolo_studio');
-            $table->string('voto_diploma');
-            $table->date('data_incorporamento');
-            $table->string('residenza');
+            $table->string('foto')->nullable(true);;
+            $table->string('corso')->nullable(true);;
+            $table->string('titolo_studio')->nullable(true);;
+            $table->string('voto_diploma')->nullable(true);;
+            $table->date('data_incorporamento')->nullable(true);;
+            $table->string('residenza')->nullable(true);;
             $table->timestamps();
         });
     }

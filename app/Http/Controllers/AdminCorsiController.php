@@ -30,7 +30,19 @@ class AdminCorsiController extends Controller
     public function gestionePersonale(){
         $user = Auth::user();
 
-        $users=User::where('sezione_appartenenza','corsi')->get();
+        $users=User::where('sezione_appartenenza','corsi')->where('comando_appartenenza',$user->comando_appartenenza)->where('id', '<>', $user->id)->get();
+        foreach($users as $utente){
+          switch($utente->tipo_utente){
+              case '0': $utente->tipo_utente="Account in attesa di attivazione";
+              break;
+              case '1': $utente->tipo_utente="Admin";
+              break;
+              case '2': $utente->tipo_utente="Admin Junior";
+              break;
+              case '3': $utente->tipo_utente="Addetto";
+              break;
+          }
+        }
 
         $userAdmin= new User(['tipo_utente' => '1']);
         
