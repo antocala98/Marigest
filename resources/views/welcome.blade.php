@@ -1,4 +1,5 @@
 <x-app-layout>
+
     <x-slot name="header">
         <h2 class="font-semibold text-center text-sm leading-tight">
             <div class="bg-gray-900">
