@@ -34,11 +34,15 @@
                                 {{$user->tipo_utente}}
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <form method="POST" action="{{url('corsi/22-nmrs/admin/gestione-personale-corsi/$user->id')}}">
+                                    @csrf
+                                    <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" >Edit</button>
+                                </form>
+                                
                             </td>
                         </tr>
                         @endforeach
-                    </tbody>
+                    </tbody>      
                 </table>
             </div>
         </div>
