@@ -6,7 +6,8 @@
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
         </x-slot>
-
+        <?php
+        if(!isset($standby)){ ?>
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -106,6 +107,14 @@
                 </x-button>
             </div>
         </form>
+        <?php } else { 
+            echo $standby;
+        ?>
+        <br><br><br>
+        <x-button element="a" href="{{url('/')}}" class="ml-4 justify-center">
+            {{ __('Continua...') }}
+        </x-button> <?php 
+        } ?>
     </x-auth-card>
 </x-guest-layout>
 <script>

@@ -62,7 +62,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         //Auth::login($user);
-        return redirect(route('standby'));
+        return view('auth.register')->with(["standby" => "Registrazione effettuata. Sei in attesa che il tuo account venga attivato"]);
         //return redirect(RouteServiceProvider::HOME);
     }
 }

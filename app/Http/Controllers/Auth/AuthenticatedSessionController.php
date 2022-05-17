@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
             case 'corsi': 
                 switch($user->tipo_utente){
                     case '0':
-                        return redirect(route('standby'));
+                        return view('auth.register')->with(["standby" => "Il tuo account non è stato ancora attivato."]);
                     case '1':
                         switch($user->comando_appartenenza){
                             case '24_NMRS': 
@@ -74,15 +74,7 @@ class AuthenticatedSessionController extends Controller
             case 'vestiario': break; //admin junior
             case 'sanitaria': break; //addetto
         }
-        if($user->tipo_utente == '1'){
-            $request->authenticate();
-
-            $request->session()->regenerate();
-    
-            return redirect()->intended(RouteServiceProvider::HOME);
-        } else {
-            return redirect(route('standby'));
-        }  
+        
     }
 
     /**
