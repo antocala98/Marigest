@@ -1,4 +1,4 @@
-<footer class="text-center bg-gray-900 text-white inset-x-0 bottom-0 absolute">
+<footer class="text-center bg-gray-900 text-white inset-x-0 bottom-12 relative ">
     <div class="container px-2 pt-2 max-w-7x1"> 
         <div class="flex justify-between">
             <a class="text-whitehite" href="{{url('/')}}">© 2022 Copyright: Marigest</a>
