@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\IncorporandiVfp1;
 
+
 class AdminCorsiController extends Controller
 {
     public function index(){
@@ -30,7 +31,7 @@ class AdminCorsiController extends Controller
     public function gestionePersonale(){
         $user = Auth::user();
 
-        $users=User::where('sezione_appartenenza','corsi')->where('comando_appartenenza',$user->comando_appartenenza)->where('id', '<>', $user->id)->get();
+        $users=User::where('sezione_appartenenza','corsi')->where('comando_appartenenza',$user->comando_appartenenza)->where('id', '<>', $user->id)->paginate(7);
         foreach($users as $utente){
           switch($utente->tipo_utente){
               case '0': $utente->tipo_utente="Account in attesa di attivazione";
