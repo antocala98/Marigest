@@ -21,7 +21,7 @@
         <link rel="icon" href="{{ asset('img/LOGO-Maripers.ico') }}" type="image/png" />
         
     </head>
-    <body class="font-sans antialiased h-14 bg-gradient-to-r bg-white overflow-hidden">
+    <body class="font-sans antialiased h-14 bg-gradient-to-r bg-white overflow-auto">
         <div class="min-h-screen items-center">
             @include('layouts.navigation')
 
