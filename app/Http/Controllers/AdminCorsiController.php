@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\IncorporandiVfp1;
+use App\Models\Allievo;
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 class AdminCorsiController extends Controller
@@ -80,4 +82,25 @@ class AdminCorsiController extends Controller
 
         } */
     }
+
+    public function schedeIndividualiAllievi(){
+      $user = Auth::user();
+
+      $allievi=Allievo::where('corso', $user->comando_appartenenza)->get();
+
+      $userAdminJunior= new User(['tipo_utente' => '1']);
+      
+      if ($user->can('view', $userAdminJunior)) {
+          return view('corsi.admin.schedeIndividuali',['allievi'=>$allievi]);
+        } else {
+          abort(403, 'Azione non autorizzata.');
+        }
+     
+    }
+
+    public function downloadSchedaIndividuale($matricola){
+      $pdf = PDF::loadView('allegatoD');
+      return $pdf->download('test.pdf');
+    }
+
 }

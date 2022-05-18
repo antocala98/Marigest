@@ -90,10 +90,10 @@ class AdminJuniorCorsiController extends Controller
 
       $allievi=Allievo::where('corso', $user->comando_appartenenza)->get();
 
-      $userAdminJunior= new User(['tipo_utente' => '1']);
+      $userAdminJunior= new User(['tipo_utente' => '2']);
       
       if ($user->can('view', $userAdminJunior)) {
-          return view('corsi.admin.schedeIndividuali',['allievi'=>$allievi]);
+          return view('corsi.admin_jr.schedeIndividuali',['allievi'=>$allievi]);
         } else {
           abort(403, 'Azione non autorizzata.');
         }
