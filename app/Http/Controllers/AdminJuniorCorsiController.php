@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\Models\Allievo;
 
 class AdminJuniorCorsiController extends Controller
 {
@@ -32,19 +33,31 @@ class AdminJuniorCorsiController extends Controller
     }
 
     public function gestionePersonale(){
-        $user = Auth::user();
+      $user = Auth::user();
 
-        $users=User::where('sezione_appartenenza','corsi')->get();
+      $users=User::where('sezione_appartenenza','corsi')->where('comando_appartenenza',$user->comando_appartenenza)->where('id', '<>', $user->id)->paginate(7);
+      foreach($users as $utente){
+        switch($utente->tipo_utente){
+            case '0': $utente->tipo_utente="Account in attesa di attivazione";
+            break;
+            case '1': $utente->tipo_utente="Admin";
+            break;
+            case '2': $utente->tipo_utente="Admin Junior";
+            break;
+            case '3': $utente->tipo_utente="Addetto";
+            break;
+        }
+      }
 
-        $userAdminJunior= new User(['tipo_utente' => '2']);
-        
-        if ($user->can('view', $userAdminJunior)) {
-            return view('corsi.admin_jr.gestionepersonalecorsi',['users'=>$users]);
-          } else {
-            abort(403, 'Azione non autorizzata.');
-          }
-       
-    }
+      $userAdmin= new User(['tipo_utente' => '2']);
+      
+      if ($user->can('view', $userAdmin)) {
+          return view('corsi.admin_jr.gestionepersonalecorsi',['users'=>$users]);
+        } else {
+          abort(403, 'Azione non autorizzata.');
+        }
+     
+  }
 
     public function aggiungiDatiCorsi(){
         $user = Auth::user();
@@ -71,4 +84,19 @@ class AdminJuniorCorsiController extends Controller
 
         } */
     }
+
+    public function schedeIndividualiAllievi(){
+      $user = Auth::user();
+
+      $allievi=Allievo::where('corso', $user->comando_appartenenza)->get();
+
+      $userAdminJunior= new User(['tipo_utente' => '1']);
+      
+      if ($user->can('view', $userAdminJunior)) {
+          return view('corsi.admin.schedeIndividuali',['allievi'=>$allievi]);
+        } else {
+          abort(403, 'Azione non autorizzata.');
+        }
+     
+  }
 }

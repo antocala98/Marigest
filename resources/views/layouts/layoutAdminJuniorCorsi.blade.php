@@ -40,7 +40,7 @@
                 <a href="#"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard"
-                    aria-selected="false">Dashboard</a>
+                    aria-selected="false">Schede individuali allievi</a>
             </li>
             <li role="presentation">
                 <a href="#"
