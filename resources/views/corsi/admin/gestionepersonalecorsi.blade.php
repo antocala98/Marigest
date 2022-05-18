@@ -1,10 +1,10 @@
 @extends('layouts.layoutAdminCorsi')
 @section('body')
-    <div id="myTabContent" >
-        <div class="p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel"
+    <div id="myTabContent" class="overflow-auto" >
+        <div class="overflow-auto p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel"
             aria-labelledby="profile-tab">
-            <div id="accordion-collapse" data-accordion="collapse" class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full table-fixed text-sm text-left text-gray-500 dark:text-gray-400">
+            <div id="accordion-collapse" data-accordion="collapse" class="relative overflow-auto shadow-md sm:rounded-lg">
+                <table class="overflow-auto w-full table-fixed text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -21,7 +21,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="hoverflow-auto">
                         @foreach ($users as $user)
                             <tr id="accordion-collapse" data-accordion="collapse" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
