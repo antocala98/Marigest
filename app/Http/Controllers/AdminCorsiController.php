@@ -81,6 +81,44 @@ class AdminCorsiController extends Controller
                 IncorporandiNMRSController::import($request);
 
         } */
+
+    
+    }
+    public function modificaPermessi(Request $request){
+        $user = Auth::user();
+        if(($request->submit)=="gestionePermessi"){
+            User::where('id', $request->id_personale_gestito_da_admin)->update(['tipo_utente' => $request->permessi]);
+            $users=User::where('sezione_appartenenza','corsi')->where('comando_appartenenza',$user->comando_appartenenza)->where('id', '<>', $user->id)->paginate(7);
+            foreach($users as $utente){
+              switch($utente->tipo_utente){
+                  case '0': $utente->tipo_utente="Account in attesa di attivazione";
+                  break;
+                  case '1': $utente->tipo_utente="Admin";
+                  break;
+                  case '2': $utente->tipo_utente="Admin Junior";
+                  break;
+                  case '3': $utente->tipo_utente="Addetto";
+                  break;
+              }
+            }
+            return view('corsi.admin.gestionepersonalecorsi',['users'=>$users]);
+        }else{
+          User::where('id', $request->id_personale_gestito_da_admin)->delete();
+          $users=User::where('sezione_appartenenza','corsi')->where('comando_appartenenza',$user->comando_appartenenza)->where('id', '<>', $user->id)->paginate(7);
+            foreach($users as $utente){
+              switch($utente->tipo_utente){
+                  case '0': $utente->tipo_utente="Account in attesa di attivazione";
+                  break;
+                  case '1': $utente->tipo_utente="Admin";
+                  break;
+                  case '2': $utente->tipo_utente="Admin Junior";
+                  break;
+                  case '3': $utente->tipo_utente="Addetto";
+                  break;
+              }
+            }
+            return view('corsi.admin.gestionepersonalecorsi',['users'=>$users]);
+        }
     }
 
     public function schedeIndividualiAllievi(){
