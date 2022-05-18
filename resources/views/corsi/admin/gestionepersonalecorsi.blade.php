@@ -54,23 +54,26 @@
                                     <label class="pl-5" for="description">Scegli quale permesso concedere a {{$user->cognome}}</label>
                                 </td>
                                 <td class="pl-4">
-                                    <form class="inline-flex">                                               
-                                        <input type="text" id="tipo_permesso" value="{{$user->nome}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Addetto" required>
+                                    <form method="POST" action="{{url('corsi/22-nmrs/admin/gestione-personale-corsi')}}" class="inline-flex">
+                                        @csrf                                               
+                                        <select name="permessi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Addetto" required>>
+                                            <option value="1">Admin</option>
+                                            <option value="2">Admin Junior</option>
+                                            <option value="3">Addetto</option>                                            
+                                        </select>
                                         <div class="hidden">
                                             <!-- assegno in input lo useer->id -->
-                                            <input type="hidden" id="id" value="{{$user->id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{$user->id}}" required>
-                                            </div>
+                                            <input type="number" name="id_personale_gestito_da_admin" value="{{$user->id}}">
+                                        </div>
                                         <div>
                                             <td class="pl-6">
-                                                <button type="submit" class=" pl-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Concedi Permessi</button>
+                                                <button type="submit" name="submit" value="gestionePermessi" class=" pl-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Concedi Permessi</button>
+                                            </td>
+                                            <td class="">
+                                                <button type="submit" name="submit" value="elimina" class="pl-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cancella Utente</button>
                                             </td>
                                     </form>
-                                    <form >
-                                        <input type="text" id="id" class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{$user->id}}" required>
-                                        <td class="">
-                                            <button type="submit" value="{{$user->id}}" class="pl-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cancella Utente</button>
-                                        </td>
-                                    </form>
+                                    
                                 </td>
                             </tr>
                         @endforeach
