@@ -41,6 +41,9 @@
                             <td class="px-6 py-4">
                                 {{$allievo->matricola_militare}}
                             </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{{ route('downloadScheda22NMRS', ['matricola' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
