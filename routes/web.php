@@ -39,9 +39,9 @@ Route::prefix('/corsi')->group(function(){
             Route::post('aggiungi-dati-corsi', [AdminCorsiController::class, 'inserimentoDati'])->middleware('auth')->name('inserimentoDatiAdmin22NMRS');
             Route::get('schede-individuali', [AdminCorsiController::class,'schedeIndividualiAllievi'])->middleware('auth')->name('schedeIndividuali22NMRS');
             Route::get('scheda-allievo/{id}', [AdminCorsiController::class, 'downloadSchedaIndividuale'])->middleware('auth')->name('downloadScheda22NMRS');
-            Route::get('/schede-ripielogative', function (){
-                return view('corsi.admin.schederipielogative');
-            })->middleware('auth')->name('schederipielogative');
+            Route::get('/schede-riepilogative', function (){
+                return view('corsi.admin.schederiepilogative');
+            })->middleware('auth')->name('schederiepilogative');
         });
         Route::prefix('/adminJ')->group(function () {
             Route::get('home', [AdminJuniorCorsiController::class, 'view'])->middleware('auth')->name('homeCorsiAdminJunior22NMRS');
@@ -49,9 +49,9 @@ Route::prefix('/corsi')->group(function(){
             Route::get('aggiungi-dati-corsi', [AdminJuniorCorsiController::class,'aggiungiDatiCorsi'])->middleware('auth')->name('aggiungidaticorsi22NMRS');
             Route::post('aggiungi-dati-corsi', [AdminJuniorCorsiController::class, 'inserimentoDati'])->middleware('auth')->name('inserimentoDatiAdminJunior22NMRS');
             Route::get('schede-individuali', [AdminJuniorCorsiController::class,'schedeIndividualiAllievi'])->middleware('auth')->name('schedeIndividuali22NMRS');
-            Route::get('/schede-ripielogative', function (){
-                return view('corsi.admin.schederipielogative');
-            })->middleware('auth')->name('schederipielogative');
+            Route::get('/schede-riepilogative', function (){
+                return view('corsi.admin.schederiepilogative');
+            })->middleware('auth')->name('schederiepilogative');
         });
     });
 });
