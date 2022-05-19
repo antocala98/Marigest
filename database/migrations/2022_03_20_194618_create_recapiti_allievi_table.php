@@ -15,9 +15,9 @@ class CreateRecapitiAllieviTable extends Migration
     {
         Schema::create('recapiti_allievi', function (Blueprint $table) {
             $table->id();
-            $table->string('num_cellulare');
+            $table->string('num_cellulare')->nullable(true);
             $table->string('email_istituzionale')->nullable(true);
-            $table->string('email_alternativa');
+            $table->string('email_alternativa')->nullable(true);
             $table->string('matricola_allievo');
             $table->timestamps();
         });

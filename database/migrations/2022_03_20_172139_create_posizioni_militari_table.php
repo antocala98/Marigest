@@ -16,8 +16,8 @@ class CreatePosizioniMilitariTable extends Migration
         Schema::create('posizioni_militari', function (Blueprint $table) {
             $table->id();
             $table->boolean('ex_militare')->nullable(true);
-            $table->boolean('in_servizio')->nullable(true);
-            $table->boolean('in_congedo')->nullable(true);
+            $table->string('in_servizio')->nullable(true);
+            $table->string('in_congedo')->nullable(true);
             $table->boolean('spe')->nullable(true);
             $table->string('grado')->nullable(true);
             $table->string('categoria')->nullable(true);

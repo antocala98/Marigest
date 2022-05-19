@@ -15,12 +15,14 @@ class CreateDatiFamiliariAllieviTable extends Migration
     {
         Schema::create('dati_familiari_allievi', function (Blueprint $table) {
             $table->id();
-            $table->string('grado_parentela');
-            $table->string('citta_residenza');
-            $table->string('provincia_residenza');
-            $table->string('cap_residenza');
-            $table->string('indirizzo_residenza');
-            $table->string('recapito_telefonico');
+            $table->string('cognome')->nullable(true);
+            $table->string('nome')->nullable(true);
+            $table->string('grado_parentela')->nullable(true);
+            $table->string('citta_residenza')->nullable(true);
+            $table->string('provincia_residenza')->nullable(true);
+            $table->string('cap_residenza')->nullable(true);
+            $table->string('indirizzo_residenza')->nullable(true);
+            $table->string('recapito_telefonico')->nullable(true);
             $table->string('matricola_allievo');
             $table->timestamps();
         });

@@ -29,6 +29,10 @@ class PosizioneMilitare extends Model
         'data_visite_periodiche',
         'data_pef',
         'matricola_allievo',
+        'giuramento',
+        'num_fratelli',
+        'in_congedo',
+        'in_servizio',
     ];
 
     public function allievo(){

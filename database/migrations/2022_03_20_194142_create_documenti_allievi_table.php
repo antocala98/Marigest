@@ -15,11 +15,11 @@ class CreateDocumentiAllieviTable extends Migration
     {
         Schema::create('documenti_allievi', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo_documento');
-            $table->string('rilasciato_da');
-            $table->string('num_documento');
-            $table->string('data_rilascio');
-            $table->string('data_scadenza');
+            $table->string('tipo_documento')->nullable(true);
+            $table->string('rilasciato_da')->nullable(true);
+            $table->string('num_documento')->nullable(true);
+            $table->string('data_rilascio')->nullable(true);
+            $table->string('data_scadenza')->nullable(true);
             $table->string('matricola_allievo');
             $table->timestamps();
         });

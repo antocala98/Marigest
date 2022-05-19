@@ -15,11 +15,11 @@ class CreateProfiliSanitariAllieviTable extends Migration
     {
         Schema::create('profili_sanitari_allievi', function (Blueprint $table) {
             $table->id();
-            $table->string('gruppo_sanguigno');
-            $table->string('fattore_rh');
-            $table->string('asl_appartenenza');
+            $table->string('gruppo_sanguigno')->nullable(true);
+            $table->string('fattore_rh')->nullable(true);
+            $table->string('asl_appartenenza')->nullable(true);
             $table->boolean('idoneita_lq')->nullable(true);
-            $table->string('id_user');
+            $table->string('id_user')->nullable(true);
             $table->string('matricola_allievo');
             $table->timestamps();
         });

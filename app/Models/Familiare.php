@@ -12,10 +12,13 @@ class Familiare extends Model
     protected $table="dati_familiari_allievi";
 
     protected $fillable=[
+        'nome',
+        'cognome',
         'grado_parentela',
         'citta_residenza',
         'cap_residenza',
         'indirizzo_residenza',
+        'provincia_residenza',
         'recapito_telefonico',
         'matricola_allievo',
     ];
