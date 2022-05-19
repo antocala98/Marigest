@@ -6,7 +6,7 @@
             @if($errors->any())
             <h4>{{$errors->first()}}</h4>
             @endif
-            <form action="{{ route('inserimentoDatiAdminJunior')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('inserimentoDatiAdminJunior22NMRS')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
                     <div class="custom-file text-left">
