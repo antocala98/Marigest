@@ -140,7 +140,11 @@ class AdminCorsiController extends Controller
 
     public function ricercaSchedaIndividuale(Request $request){
         $user = Auth::user();
-        $allievi=Allievo::where('corso', $user->comando_appartenenza)->where('cognome', $request->cerca)->orwhere('nome',$request->cerca)->get();
+        $allievi=Allievo::where('corso', $user->comando_appartenenza)->where('cognome', $request->cerca)
+            ->orwhere('nome',$request->cerca)
+            ->orwhere('sesso',$request->cerca)
+            ->orwhere('categoria',$request->cerca)
+            ->get();
 
         return view ('corsi.admin.schedeIndividuali',['allievi'=>$allievi]);
 

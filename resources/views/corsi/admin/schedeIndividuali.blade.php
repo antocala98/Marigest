@@ -37,8 +37,13 @@
                             Nome
                         </th>
                         <th scope="col" class="px-6 py-3">
+                           Sesso
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Matricola
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Categoria
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Download</span>
                         </th>
@@ -54,7 +59,13 @@
                                 {{$allievo->nome}}
                             </td>
                             <td class="px-6 py-4">
+                                {{$allievo->sesso}}
+                            </td>
+                            <td class="px-6 py-4">
                                 {{$allievo->matricola_militare}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$allievo->categoria}}
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('downloadScheda22NMRS', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Scarica PDF</a>
