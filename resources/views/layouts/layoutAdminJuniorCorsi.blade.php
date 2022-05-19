@@ -23,25 +23,25 @@
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent"
             role="tablist">
             <li class="mr-2" role="presentation">
-                <a href="{{url('corsi/adminJ/gestione-personale-corsi')}}"
+                <a href="{{url('corsi/22-nmrs/adminJ/gestione-personale-corsi')}}"
                 class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
                     aria-selected="true">Gestione Personale</a>
             </li>
             <li class="mr-2" role="presentation">
-                <a href="{{url('corsi/adminJ/aggiungi-dati-corsi')}}"
+                <a href="{{url('corsi/22-nmrs/adminJ/aggiungi-dati-corsi')}}"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings"
                     aria-selected="false">Acquisisci dati incorporamento</a>
             </li>
             <li class="mr-2" role="presentation">
-                <a href="#"
+                <a href="{{url('corsi/22-nmrs/adminJ/schede-individuali-allievi')}}"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard"
                     aria-selected="false">Schede individuali allievi</a>
             </li>
             <li role="presentation">
-                <a href="{{url('corsi/adminJ/schede-riepilogative')}}"
+                <a href="{{url('corsi/22-nmrs/adminJ/schede-riepilogative')}}"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts"
                     aria-selected="false">Schede Riepilogative</a>
