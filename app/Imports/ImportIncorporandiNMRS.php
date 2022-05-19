@@ -26,6 +26,11 @@ class ImportIncorporandiNMRS implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {      
+        $row['NOME']=strtolower($row['NOME']);
+        $row['NOME']=ucwords($row['NOME']);
+        $row['COGNOME']=strtolower($row['COGNOME']);
+        $row['COGNOME']=ucwords($row['COGNOME']);
+        
         return new Allievo([
             'matricola_militare' => $row['MATRICOLA'],
             'nome' => $row['NOME'],

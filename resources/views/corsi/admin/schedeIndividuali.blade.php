@@ -25,7 +25,7 @@
                             Matricola
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
+                            <span class="sr-only">Download</span>
                         </th>
                     </tr>
                 </thead>
@@ -42,7 +42,7 @@
                                 {{$allievo->matricola_militare}}
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('downloadScheda22NMRS', ['matricola' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <a href="{{ route('downloadScheda22NMRS', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Scarica PDF</a>
                             </td>
                         </tr>
                     @endforeach

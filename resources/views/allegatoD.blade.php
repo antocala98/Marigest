@@ -4289,7 +4289,7 @@
       margin-bottom: 0.39370078740157in;
     }
   </style>
-  <table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
+  <table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0">
     <col class="col0">
     <col class="col1">
     <col class="col2">
@@ -4341,10 +4341,9 @@
         <td class="column4">&nbsp;</td>
         <td class="column5">&nbsp;</td>
         <td class="column6 style0 null">
-          <div style="position: relative;"><img
-              style="position: absolute; z-index: 1; left: 50px; top: 1px; width: 39px; height: 47px;"
-              src="zip:///home/CloudConvertio/tmp/in_work/d61691b2c87d4192fa4a38d88d7c0c19.xlsx#xl/media/image1.png"
-              border="0" /></div>
+          <div style="position: relative;">
+            <img style="left: 50%;" src="..\public\img\logo_mariscuola.jpg" border="0" />
+          </div>
         </td>
         <td class="column7 style128 null style128" colspan="2"></td>
         <td class="column9">&nbsp;</td>
@@ -4365,10 +4364,9 @@
         <td class="column2">&nbsp;</td>
         <td class="column3 style132 s style132" colspan="12">SCUOLE SOTTUFFICIALI M.M. TARANTO</td>
         <td class="column15 style128 null style128" colspan="3" rowspan="6">
-          <div style="position: relative;"><img
-              style="position: absolute; z-index: 1; left: 4px; top: 1px; width: 121px; height: 139px;"
-              src="zip:///home/CloudConvertio/tmp/in_work/d61691b2c87d4192fa4a38d88d7c0c19.xlsx#xl/media/image2.png"
-              border="0" /></div>
+          <div style="position: relative;">
+            <img style="position: absolute; z-index: 1; left: 4px; top: 1px; width: 121px; height: 139px;" src="..\public\img\f1.jpg" border="0" />
+          </div>
         </td>
         <td class="column18">&nbsp;</td>
         <td class="column19">&nbsp;</td>
@@ -4383,26 +4381,26 @@
       </tr>
       <tr class="row4">
         <td class="column0 style12 null"></td>
-        <td class="column1 style21 s">Allievo {{"corso"}}° N.MRS:</td>
-        <td class="column2 style139 s style139" colspan="2">categoria</td>
-        <td class="column4 style124 s style124" colspan="5">nome cognome</td>
-        <td class="column9 style125 s style125" colspan="4">matricola: {{"matricola"}}</td>
-        <td class="column13 style126 s style127" colspan="2">{{"ciao"}}</td>
+        <td class="column1 style21 s">Allievo {{$allievo['corso']}}:</td>
+        <td class="column2 style139 s style139" colspan="2">{{$allievo['categoria']}}</td>
+        <td class="column4 style124 s style124" colspan="5">{{$allievo['cognome']}} {{$allievo['nome']}}</td>
+        <td class="column9 style125 s style125" colspan="4">matricola: </td>
+        <td class="column13 style126 s style127" colspan="2"> {{$allievo['matricola_militare']}}</td>
         <td class="column18">&nbsp;</td>
         <td class="column19">&nbsp;</td>
       </tr>
       <tr class="row5">
         <td class="column0 style12 null"></td>
-        <td class="column1 style22 s">Nato / a : {{"luogonascita"}}</td>
-        <td class="column2 style53 s style53" colspan="5">{{"ciao"}}</td>
-        <td class="column7 style137 s style138" colspan="8">&nbsp;il: {{"datanascita"}}</td>
+        <td class="column1 style22 s">Nato / a : </td>
+        <td class="column2 style53 s style53" colspan="5">{{$allievo['luogo_nascita']}}</td>
+        <td class="column7 style137 s style138" colspan="8">&nbsp;il: {{$allievo['data_nascita']}}</td>
         <td class="column18">&nbsp;</td>
         <td class="column19">&nbsp;</td>
       </tr>
       <tr class="row6">
         <td class="column0 style12 null"></td>
         <td class="column1 style23 s">Titolo di Studio :</td>
-        <td class="column2 style54 s style54" colspan="7">DIPLOMA - xxxx</td>
+        <td class="column2 style54 s style54" colspan="7">{{$allievo['titolo_studio']}}</td>
         <td class="column9 style129 s style129" colspan="2">Voto:</td>
         <td class="column11 style136 n style136" colspan="2">0</td>
         <td class="column13 style20 s">su: <span
@@ -4458,7 +4456,7 @@
       <tr class="row11">
         <td class="column0 style1 null"></td>
         <td class="column1 style55 s style56" colspan="4">Matematica</td>
-        <td class="column5 style45 n">18</td>
+        <td class="column5 style45 n">30</td>
         <td class="column6 style57 null style58" colspan="7"></td>
         <td class="column13 style9 null"></td>
         <td class="column14 style59 s style57" colspan="4"></td>

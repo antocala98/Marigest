@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\IncorporandiVfp1;
 use App\Models\Allievo;
 use Barryvdh\DomPDF\Facade as PDF;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
+use Carbon\Carbon;
 
 
 class AdminCorsiController extends Controller
@@ -136,9 +138,11 @@ class AdminCorsiController extends Controller
      
     }
 
-    public function downloadSchedaIndividuale($matricola){
-      $pdf = PDF::loadView('allegatoD');
-      return $pdf->download('test.pdf');
+    public function downloadSchedaIndividuale($id){
+      $allievo=Allievo::where('id',$id)->first();
+      $allievo->data_nascita=Carbon::parse($allievo->data_nascita)->format('d/m/Y');
+      $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo]);
+      return $pdf->download('Scheda Individuale-'.$allievo->cognome.$allievo->nome.'.pdf');
     }
 
 }
