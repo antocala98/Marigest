@@ -49,6 +49,12 @@
                     id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts"
                     aria-selected="false">Schede Riepilogative</a>
             </li>
+            <li role="presentation">
+                <a href="{{url('corsi/22-nmrs/admin/modifica-dati-allievi')}}"
+                    class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
+                    id="contacts-tab" data-tabs-target="#contacts" type="button"
+                    aria-selected="false">Modifica dati Allievi</a>
+            </li>
         </ul>
     </div>
 
