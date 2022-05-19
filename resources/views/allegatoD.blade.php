@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="generator" content="PhpSpreadsheet, https://github.com/PHPOffice/PhpSpreadsheet">
   <title>Report</title>
-  <meta name="author" content="Spadavecchia Paolo - C.1.CL." />
+  <meta name="author" content="" />
   <meta name="title" content="Report" />
   <meta name="subject" content="Report" />
   <meta name="company" content="Stimulsoft Reports 2018.2.2 from 27 April 2018" />
