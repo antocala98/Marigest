@@ -50,7 +50,7 @@ Route::prefix('/corsi')->group(function(){
             Route::post('aggiungi-dati-corsi', [AdminJuniorCorsiController::class, 'inserimentoDati'])->middleware('auth')->name('inserimentoDatiAdminJunior22NMRS');
             Route::get('schede-individuali', [AdminJuniorCorsiController::class,'schedeIndividualiAllievi'])->middleware('auth')->name('schedeIndividuali22NMRS');
             Route::get('/schede-riepilogative', function (){
-                return view('corsi.admin.schederiepilogative');
+                return view('corsi.admin_jr.schederiepilogative');
             })->middleware('auth')->name('schederiepilogative');
         });
     });
