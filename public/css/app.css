@@ -1374,6 +1374,9 @@ input[type="range"]::-ms-fill-lower {
 .bg-cover {
   background-size: cover;
 }
+.bg-contain {
+  background-size: contain;
+}
 .bg-fixed {
   background-attachment: fixed;
 }
