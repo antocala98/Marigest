@@ -21,7 +21,7 @@
         <div class="relative overflow-hidden bg-no-repeat bg-cover" style="
         background-position: 100%;
         background-image: url('../img/sfondo2.png');
-        height: 650px;
+        height: 628px;
         ">
 
             <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed">
