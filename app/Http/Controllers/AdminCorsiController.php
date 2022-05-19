@@ -24,7 +24,7 @@ class AdminCorsiController extends Controller
       $user = Auth::user();
 
       $userAdmin= new User(['tipo_utente' => '1']);
-       
+
       if ($user->can('view', $userAdmin)) {
         return view('corsi.admin.home');
       } else {
@@ -50,13 +50,13 @@ class AdminCorsiController extends Controller
         }
 
         $userAdmin= new User(['tipo_utente' => '1']);
-        
+
         if ($user->can('view', $userAdmin)) {
             return view('corsi.admin.gestionepersonalecorsi',['users'=>$users]);
           } else {
             abort(403, 'Azione non autorizzata.');
           }
-       
+
     }
 
     public function aggiungiDatiCorsi(){
@@ -65,16 +65,16 @@ class AdminCorsiController extends Controller
         $users=User::where('sezione_appartenenza','corsi')->get();
 
         $userAdmin= new User(['tipo_utente' => '1']);
-        
+
         if ($user->can('view', $userAdmin)) {
             return view('corsi.admin.aggiungidaticorsi');
           } else {
             abort(403, 'Azione non autorizzata.');
           }
-       
-        
+
+
     }
-    
+
     public function inserimentoDati(Request $request){
         IncorporandiNMRSController::import($request);
         return view('corsi.admin.aggiungidaticorsi')->with(['feedback_utente' => "File Excel inserito con successo nel database!"]);
@@ -84,7 +84,7 @@ class AdminCorsiController extends Controller
 
         } */
 
-    
+
     }
     public function modificaPermessi(Request $request){
         $user = Auth::user();
@@ -129,14 +129,24 @@ class AdminCorsiController extends Controller
       $allievi=Allievo::where('corso', $user->comando_appartenenza)->get();
 
       $userAdminJunior= new User(['tipo_utente' => '1']);
-      
+
       if ($user->can('view', $userAdminJunior)) {
           return view('corsi.admin.schedeIndividuali',['allievi'=>$allievi]);
         } else {
           abort(403, 'Azione non autorizzata.');
         }
-     
+
     }
+
+    public function ricercaSchedaIndividuale(Request $request){
+        $user = Auth::user();
+        $allievi=Allievo::where('corso', $user->comando_appartenenza)->where('cognome', $request->cerca)->orwhere('nome',$request->cerca)->get();
+
+        return view ('corsi.admin.schedeIndividuali',['allievi'=>$allievi]);
+
+
+    }
+
 
     public function downloadSchedaIndividuale($id){
       $allievo=Allievo::where('id',$id)->first();
@@ -153,5 +163,5 @@ class AdminCorsiController extends Controller
         $allievo=Allievo::where('id', $id)->first();
         return view('corsi.admin.modificaDatiAllievo')->with(['allievo' => $allievo]);
       }
-    }  
+    }
 }
