@@ -31,7 +31,7 @@ class ImportIncorporandiNMRS implements ToModel, WithHeadingRow
         $row['COGNOME']=strtolower($row['COGNOME']);
         $row['COGNOME']=ucwords($row['COGNOME']);
         
-        return new Allievo([
+        $allievo = new Allievo([
             'matricola_militare' => $row['MATRICOLA'],
             'nome' => $row['NOME'],
             'cognome' => $row['COGNOME'],
@@ -44,8 +44,33 @@ class ImportIncorporandiNMRS implements ToModel, WithHeadingRow
             'titolo_studio' => $row['STUDIO'],
             'corso' => Auth::user()->comando_appartenenza,
             'data_incorporamento' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject((int)$row['DATATTOARR'])),
-            'residenza' => $row['LUOGO_RESI'],
+            'data_giuridica' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject((int)$row['DATAGIUR'])),
+            'data_arrivo' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject((int)$row['DATAARRIVO'])),
+            'status_attuale' => $row['MOTIVAZIONE'],
+            'lavoro_precedente' => $row['LAVORO'],
+            'provincia_residenza' => $row['PROV_RESI'],
+            'luogo_residenza' => $row['LUOGO_RESI'],
+            'cap_residenza' => $row['CAP'],
+            'indirizzo_residenza' => $row['INDIRIZZO'],
+            'scalo_ferroviario' => $row['SCALO_FERR'],
+            'comando_carabinieri' => $row['COM_CARAB'],
+            'tribunale' => $row['TRIBUNA'],
+            'motivo_arruolamento' => $row['MOTI_ARRUO'],
+            'sport_praticato' => $row['SPORT'],
+            'livello_sport_praticato' => $row['LIVE_SPORT'],
+            'livello_lingue' => $row['LIV_LINGUE'],
+            'lingue' => $row['LINGUE'],
+            'altro_titolo_studio' => $row['ALTROTITSTUDIO'],
+            'studio_2' => $row['Studio2'],
+            'scuola_militare' => $row['ScuolaMilitare'],
+            'freq_accademia' => $row['Freq_accademia'],
+            'provincia_domicilio' => $row['Prov_dom'],
+            'luogo_domicilio' => $row['CittàDomicilio'],
+            'cap_domicilio' => $row['Cap_dom'],
+            'indirizzo_domicilio' => $row['IndirDomicilio'],
         ]);
+
+        $allievo->save();
 
     }
 	

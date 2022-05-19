@@ -17,6 +17,7 @@ class CreateDatiFamiliariAllieviTable extends Migration
             $table->id();
             $table->string('grado_parentela');
             $table->string('citta_residenza');
+            $table->string('provincia_residenza');
             $table->string('cap_residenza');
             $table->string('indirizzo_residenza');
             $table->string('recapito_telefonico');

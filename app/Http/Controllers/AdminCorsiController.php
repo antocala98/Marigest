@@ -144,6 +144,7 @@ class AdminCorsiController extends Controller
             ->orwhere('nome',$request->cerca)
             ->orwhere('sesso',$request->cerca)
             ->orwhere('categoria',$request->cerca)
+            ->orwhere('matricola_militare',$request->cerca)
             ->get();
 
         return view ('corsi.admin.schedeIndividuali',['allievi'=>$allievi]);

@@ -15,8 +15,10 @@ class CreatePosizioniMilitariTable extends Migration
     {
         Schema::create('posizioni_militari', function (Blueprint $table) {
             $table->id();
-            $table->boolean('ex_militare');
-            $table->boolean('spe');
+            $table->boolean('ex_militare')->nullable(true);
+            $table->boolean('in_servizio')->nullable(true);
+            $table->boolean('in_congedo')->nullable(true);
+            $table->boolean('spe')->nullable(true);
             $table->string('grado')->nullable(true);
             $table->string('categoria')->nullable(true);
             $table->string('specialita')->nullable(true);
@@ -25,12 +27,14 @@ class CreatePosizioniMilitariTable extends Migration
             $table->string('comando_provenienza')->nullable(true);
             $table->string('data_arruolamento')->nullable(true);
             $table->string('anzianta_grado')->nullable(true);
-            $table->string('stato_civile');
+            $table->string('stato_civile')->nullable(true);
             $table->string('num_figli')->default(0);
+            $table->string('num_fratelli')->default(0);
             $table->string('compamare_ascrizione');
             $table->boolean('pendenze_giudiziarie')->default(0);
-            $table->string('data_visite_periodiche');
-            $table->string('data_pef');
+            $table->string('data_visite_periodiche')->nullable(true);
+            $table->string('data_pef')->nullable(true);
+            $table->string('giuramento')->nullable(true);
             $table->string('matricola_allievo');
             $table->timestamps();
         });
