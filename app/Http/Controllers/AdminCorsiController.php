@@ -145,4 +145,13 @@ class AdminCorsiController extends Controller
       return $pdf->download('Scheda Individuale-'.$allievo->cognome.$allievo->nome.'.pdf');
     }
 
+    public function modificaDatiAllievi($id = null){
+      if($id == null){
+        $allievi=Allievo::where('corso', Auth::user()->comando_appartenenza)->get();
+        return view('corsi.admin.modificaDatiAllievo')->with(['allievi' => $allievi]);
+      } else {
+        $allievo=Allievo::where('id', $id)->first();
+        return view('corsi.admin.modificaDatiAllievo')->with(['allievo' => $allievo]);
+      }
+    }  
 }

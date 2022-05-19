@@ -42,6 +42,7 @@ Route::prefix('/corsi')->group(function(){
             Route::get('/schede-riepilogative', function (){
                 return view('corsi.admin.schederiepilogative');
             })->middleware('auth')->name('schederiepilogative');
+            Route::get('modifica-dati-allievi/{id?}', [AdminCorsiController::class, 'modificaDatiAllievi'])->middleware('auth')->name('modificaDati22NMRS');
         });
         Route::prefix('/adminJ')->group(function () {
             Route::get('home', [AdminJuniorCorsiController::class, 'view'])->middleware('auth')->name('homeCorsiAdminJunior22NMRS');
