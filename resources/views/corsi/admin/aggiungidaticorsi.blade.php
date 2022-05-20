@@ -10,7 +10,7 @@
 @section('body')
     <div id="myTabContent" class="flex justify-center">
 
-        <div class="border h-auto my-10 w-9/12 p-4 border-4 rounded-lg shadow-xl">
+        <div class="h-auto my-10 w-9/12 p-4 border-4 rounded-lg shadow-xl">
 
             <form action="{{ route('inserimentoDatiAdmin22NMRS')}}" method="POST" enctype="multipart/form-data">
                 @csrf

@@ -1,4 +1,4 @@
-@extends('layouts.layoutAdminCorsi')
+@extends('layouts.layoutAdminJuniorCorsi')
 @section('breadc')
     <li>
         <div class="flex items-center">
