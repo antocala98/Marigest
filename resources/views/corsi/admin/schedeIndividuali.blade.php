@@ -8,7 +8,7 @@
     </li>
 @endsection
 @section('body')
-<div id="myTabContent">
+<div class="overflow-auto " id="myTabContent">
    <!-- Barra di ricerca -->
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="p-4">
@@ -24,10 +24,10 @@
             </div>
         </div>
 
-    <div class="p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel"
+    <div class="p-4 pb-14 bg-gray-50 rounded-lg dark:bg-gray-800 " id="profile" role="tabpanel"
         aria-labelledby="profile-tab">
         <div id="accordion-collapse" data-accordion="collapse" class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full table-fixed text-sm text-left text-gray-500 dark:text-gray-400">
+            <table class="w-full table-fixed pb-12 overflow-auto text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -49,7 +49,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="">
                     @foreach ($allievi as $allievo)
                         <tr id="accordion-collapse" data-accordion="collapse" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">

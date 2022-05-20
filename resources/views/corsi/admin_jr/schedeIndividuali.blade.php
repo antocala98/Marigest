@@ -8,9 +8,9 @@
     </li>
 @endsection
 @section('body')
-<div id="myTabContent">
+<div class="overflow-auto " id="myTabContent">
    <!-- Barra di ricerca -->
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative overflow-auto shadow-md sm:rounded-lg">
         <div class="p-4">
             <label for="table-search" class="sr-only">Cerca</label>
             <div class="relative mt-1">
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-    <div class="p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel"
+    <div class="p-4 pb-14 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel"
         aria-labelledby="profile-tab">
         <div id="accordion-collapse" data-accordion="collapse" class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full table-fixed text-sm text-left text-gray-500 dark:text-gray-400">
