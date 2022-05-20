@@ -20,7 +20,7 @@ class Allievo extends Model
         'luogo_nascita',
         'provincia_nascita',
         'nazione_nascita',
-        'matricola_universitaria',
+        'matricola_universita',
         'categoria',
         'foto',
         'corso',

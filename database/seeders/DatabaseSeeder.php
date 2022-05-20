@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Allievo::factory(10)->create();
+        \App\Models\Corso::factory(5)->create();
+        \App\Models\Allievo::factory(50)->create();
     }
 }
