@@ -4365,7 +4365,7 @@
         <td class="column3 style132 s style132" colspan="12">SCUOLE SOTTUFFICIALI M.M. TARANTO</td>
         <td class="column15 style128 null style128" colspan="3" rowspan="6">
           <div style="position: relative;">
-            <img style="position: absolute; z-index: 1; left: 4px; top: 1px; width: 121px; height: 139px;" src="..\public\img\f1.jpg" border="0" />
+            <img style="position: absolute; z-index: 1; left: 4px; top: 1px; width: 121px; height: 139px;" src="..\public\img\{{$allievo->foto}}" border="0" />
           </div>
         </td>
         <td class="column18">&nbsp;</td>

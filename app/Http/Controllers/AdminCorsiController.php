@@ -9,7 +9,9 @@ use App\Models\IncorporandiVfp1;
 use App\Models\Allievo;
 use Barryvdh\DomPDF\Facade as PDF;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+
 
 
 class AdminCorsiController extends Controller
@@ -192,6 +194,60 @@ class AdminCorsiController extends Controller
     else {
       abort(403, 'Azione non autorizzata.');
     }
+  }
+
+  public function aggiornaDatiAllievo(Request $request)
+  {
+    $allievo = Allievo::find($request->id);
+
+
+    $allievo->matricola_militare = $request->matricola_militare;
+    $allievo->nome = $request->nome;
+    $allievo->cognome = $request->cognome;
+    $allievo->sesso = $request->sesso;
+    $allievo->codice_fiscale = $request->codice_fiscale;
+    $allievo->data_nascita = $request->data_nascita;
+    $allievo->luogo_nascita = $request->luogo_nascita;
+    $allievo->provincia_nascita = $request->provincia_nascita;
+    $allievo->nazione_nascita = $request->nazione_nascita;
+    $allievo->matricola_universita = $request->matricola_universita;
+    $allievo->categoria = $request->categoria;
+    $allievo->corso = $request->corso;
+    $allievo->foto= $request->foto;
+    $allievo->titolo_studio = $request->titolo_studio;
+    $allievo->voto_diploma = $request->voto_diploma;
+    $allievo->data_incorporamento = $request->data_incorporamento;
+    $allievo->data_giuridica = $request->data_giuridica;
+    $allievo->data_arrivo = $request->data_arrivo;
+    $allievo->status_attuale = $request->status_attuale;
+    $allievo->lavoro_precedente = $request->lavoro_precedente;
+    $allievo->provincia_residenza = $request->provincia_residenza;
+    $allievo->cap_residenza = $request->cap_residenza;
+    $allievo->indirizzo_residenza = $request->indirizzo_residenza;
+    $allievo->luogo_residenza = $request->luogo_residenza;
+    $allievo->scalo_ferroviario = $request->scalo_ferroviario;
+    $allievo->comando_carabinieri = $request->comando_carabinieri;
+    $allievo->tribunale = $request->tribunale;
+    $allievo->motivo_arruolamento = $request->motivo_arruolamento;
+    $allievo->sport_praticato = $request->sport_praticato;
+    $allievo->livello_sport_praticato = $request->livello_sport_praticato;
+    $allievo->livello_lingue = $request->livello_lingue;
+    $allievo->lingue = $request->lingue;
+    $allievo->altro_titolo_studio = $request->altro_titolo_studio;
+    $allievo->studio_2 = $request->studio_2;
+    $allievo->scuola_militare = $request->scuola_militare;
+    $allievo->freq_accademia = $request->freq_accademia;
+    $allievo->ruolo_normale = $request->ruolo_normale;
+    $allievo->provincia_domicilio = $request->provincia_domicilio;
+    $allievo->cap_domicilio = $request->cap_domicilio;
+    $allievo->indirizzo_domicilio = $request->indirizzo_domicilio;
+    $allievo->luogo_domicilio = $request->luogo_domicilio;
+
+
+    $allievo->save();
+
+    return view('corsi.admin.modificaDatiAllievo', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->cognome." "."$request->nome"]);
+
   }
 
   /**
