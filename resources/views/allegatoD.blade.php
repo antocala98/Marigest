@@ -3934,7 +3934,7 @@
       border-right: none #000000;
       color: #000000;
       font-family: 'Times New Roman';
-      font-size: 9pt;
+      font-size: 6pt;
       background-color: #FFFFFF
     }
 
@@ -3947,7 +3947,7 @@
       border-right: none #000000;
       color: #000000;
       font-family: 'Times New Roman';
-      font-size: 9pt;
+      font-size: 7pt;
       background-color: #FFFFFF
     }
 
@@ -4365,7 +4365,7 @@
         <td class="column3 style132 s style132" colspan="12">SCUOLE SOTTUFFICIALI M.M. TARANTO</td>
         <td class="column15 style128 null style128" colspan="3" rowspan="6">
           <div style="position: relative;">
-            <img style="position: absolute; z-index: 1; left: 4px; top: 1px; width: 121px; height: 139px;" src="..\public\img\{{$allievo->foto}}" border="0" />
+            <img style="position: absolute; z-index: 1; left: 4px; top: 1px; width: 121px; height: 139px;" src="..\public\img\f1.jpg" border="0" />
           </div>
         </td>
         <td class="column18">&nbsp;</td>
@@ -4377,12 +4377,12 @@
         <td class="column2 style25 null"></td>
         <td class="column3 style133 s style133" colspan="12">Direzione Corsi Allievi Marescialli</td>
         <td class="column18">&nbsp;</td>
-        <td class="column19">&nbsp;</td>
+        <td class="column19"></td>
       </tr>
       <tr class="row4">
         <td class="column0 style12 null"></td>
-        <td class="column1 style21 s">Allievo {{$allievo['corso']}}:</td>
-        <td class="column2 style139 s style139" colspan="2">{{$allievo['categoria']}}</td>
+        <td class="column1 style21 s">Allievo {{$allievo['corso']}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td class="column2 style139 s style139" colspan="2">{{$allievo['categoria']}}&nbsp;&nbsp;</td>
         <td class="column4 style124 s style124" colspan="5">{{$allievo['cognome']}} {{$allievo['nome']}}</td>
         <td class="column9 style125 s style125" colspan="4">matricola: </td>
         <td class="column13 style126 s style127" colspan="2"> {{$allievo['matricola_militare']}}</td>
