@@ -205,9 +205,8 @@ class AdminCorsiController extends Controller
     $allievo = Allievo::find($request->id);
 
     
-    $filePath = Storage::disk('s3')->putFile('foto', $request->file('foto'));
-    return Storage::download('foto.jpg');
-    /*
+    $filePath = Storage::disk('local')->putFile('foto', $request->file('foto'));
+
     $allievo->matricola_militare = $request->matricola_militare;
     $allievo->nome = $request->nome;
     $allievo->cognome = $request->cognome;
@@ -254,7 +253,7 @@ class AdminCorsiController extends Controller
     $allievo->save();
 
     return view('corsi.admin.modificaDatiAllievo', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->cognome." "."$request->nome"]);
-    */
+    
   }
 
   /**
