@@ -206,7 +206,6 @@ class AdminCorsiController extends Controller
 
     
     $filePath = Storage::disk('local')->putFile('foto', $request->file('foto'));
-
     $allievo->matricola_militare = $request->matricola_militare;
     $allievo->nome = $request->nome;
     $allievo->cognome = $request->cognome;
