@@ -8,7 +8,7 @@
     </li>
 @endsection
 @section('body')
-<div class="overflow-auto " id="myTabContent">
+<div class="overflow-auto mb-32" id="myTabContent">
    <!-- Barra di ricerca -->
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="p-4">

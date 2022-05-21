@@ -47,7 +47,7 @@ class AuthenticatedSessionController extends Controller
                                 $request->session()->regenerate();
                                 return redirect()->intended(route('homeCorsiAdmin22NMRS'));
                             case 'vfp4': 
-                                return redirect(route('standby'));
+                                return redirect(('standby'));
                             case 'vfp1': 
                                 return redirect(route('standby'));
                         } 

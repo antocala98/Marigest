@@ -141,7 +141,7 @@ class AdminCorsiController extends Controller
   {
     $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->get();
 
-    if ($this->user->can('view', $this->getUserAdmin())) {
+    if ($this->getUser()->can('view', $this->getUserAdmin())) {
       return view('corsi.admin.schedeIndividuali', ['allievi' => $allievi]);
     }
     else {
@@ -175,13 +175,17 @@ class AdminCorsiController extends Controller
 
   public function modificaDatiAllievi($id = null)
   {
-    if ($id == null) {
-      $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->get();
-      return view('corsi.admin.modificaDatiAllievo')->with(['allievi' => $allievi]);
-    }
-    else {
-      $allievo = Allievo::where('id', $id)->first();
-      return view('corsi.admin.modificaDatiAllievo')->with(['allievo' => $allievo]);
+    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+      if ($id == null) {
+        $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->get();
+        return view('corsi.admin.modificaDatiAllievo')->with(['allievi' => $allievi]);
+      }
+      else {
+        $allievo = Allievo::where('id', $id)->first();
+        return view('corsi.admin.modificaDatiAllievo')->with(['allievo' => $allievo]);
+      }
+    } else {
+      abort(403, 'Azione non autorizzata.');
     }
   }
 
@@ -200,7 +204,10 @@ class AdminCorsiController extends Controller
   {
     $allievo = Allievo::find($request->id);
 
-
+    
+    $filePath = Storage::disk('s3')->putFile('foto', $request->file('foto'));
+    return Storage::download('foto.jpg');
+    /*
     $allievo->matricola_militare = $request->matricola_militare;
     $allievo->nome = $request->nome;
     $allievo->cognome = $request->cognome;
@@ -213,7 +220,7 @@ class AdminCorsiController extends Controller
     $allievo->matricola_universita = $request->matricola_universita;
     $allievo->categoria = $request->categoria;
     $allievo->corso = $request->corso;
-    $allievo->foto= $request->foto;
+    $allievo->foto=$filePath;
     $allievo->titolo_studio = $request->titolo_studio;
     $allievo->voto_diploma = $request->voto_diploma;
     $allievo->data_incorporamento = $request->data_incorporamento;
@@ -247,7 +254,7 @@ class AdminCorsiController extends Controller
     $allievo->save();
 
     return view('corsi.admin.modificaDatiAllievo', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->cognome." "."$request->nome"]);
-
+    */
   }
 
   /**
