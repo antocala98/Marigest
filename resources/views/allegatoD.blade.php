@@ -4402,7 +4402,7 @@
         <td class="column1 style23 s">Titolo di Studio :</td>
         <td class="column2 style54 s style54" colspan="7">{{$allievo['titolo_studio']}}</td>
         <td class="column9 style129 s style129" colspan="2">Voto:</td>
-        <td class="column11 style136 n style136" colspan="2">0</td>
+        <td class="column11 style136 n style136" colspan="2">{{$allievo['voto_diploma']}}</td>
         <td class="column13 style20 s">su: <span
             style="text-decoration:underline; color:#000000; font-family:'Times New Roman'; font-size:8pt">100</span>
         </td>

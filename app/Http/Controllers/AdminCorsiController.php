@@ -161,7 +161,6 @@ class AdminCorsiController extends Controller
 
     return view('corsi.admin.schedeIndividuali', ['allievi' => $allievi]);
 
-
   }
 
 
@@ -204,8 +203,11 @@ class AdminCorsiController extends Controller
   {
     $allievo = Allievo::find($request->id);
 
+    if($request->foto != null){
+      $request->foto = Storage::disk('local')->putFile('foto', $request->file('foto'));
+      $allievo->foto=$request->foto;
+    }
     
-    $filePath = Storage::disk('local')->putFile('foto', $request->file('foto'));
     $allievo->matricola_militare = $request->matricola_militare;
     $allievo->nome = $request->nome;
     $allievo->cognome = $request->cognome;
@@ -218,7 +220,6 @@ class AdminCorsiController extends Controller
     $allievo->matricola_universita = $request->matricola_universita;
     $allievo->categoria = $request->categoria;
     $allievo->corso = $request->corso;
-    $allievo->foto=$filePath;
     $allievo->titolo_studio = $request->titolo_studio;
     $allievo->voto_diploma = $request->voto_diploma;
     $allievo->data_incorporamento = $request->data_incorporamento;
@@ -253,6 +254,18 @@ class AdminCorsiController extends Controller
 
     return view('corsi.admin.modificaDatiAllievo', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->cognome." "."$request->nome"]);
     
+  }
+
+  public function sezioneDisciplinare(){
+    return view('corsi.admin.sezioneDisciplinare');
+  }
+
+  public function sezioneSanitaria(){
+    return view('corsi.admin.sezioneSanitaria');
+  }
+
+  public function sezioneStudi(){
+    return view('corsi.admin.sezioneStudi');
   }
 
   /**
