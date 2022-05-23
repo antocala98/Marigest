@@ -260,6 +260,18 @@ class AdminCorsiController extends Controller
     return view('corsi.admin.sezioneDisciplinare');
   }
 
+  public function inserisciDisciplinare(){
+    return view('corsi.admin.inserisciProvDisciplinare');
+  }
+
+  public function modificaDisciplinare(){
+    return view('corsi.admin.modificaProvDisciplinare');
+  }
+
+  public function visualizzaDisciplinare(){
+    return view('corsi.admin.visualizzaProvDisciplinare');
+  }
+
   public function sezioneSanitaria(){
     return view('corsi.admin.sezioneSanitaria');
   }

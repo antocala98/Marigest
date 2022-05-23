@@ -43,7 +43,13 @@ Route::prefix('/corsi')->group(function(){
             Route::get('/schede-riepilogative', [AdminCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative22NMRS');
             Route::get('modifica-dati-allievi/{id?}', [AdminCorsiController::class, 'modificaDatiAllievi'])->middleware('auth')->name('modificaDatiAdmin22NMRS');
             Route::post('modifica-dati-allievi/', [AdminCorsiController::class, 'aggiornaDatiAllievo'])->middleware('auth')->name('aggiornaDatiAllievoAdmin');
-            Route::get('sezione-disciplinare', [AdminCorsiController::class, 'sezioneDisciplinare'])->middleware('auth')->name('disciplinareAdmin');
+            Route::prefix('/sezione-disciplinare')->group(function () {
+                Route::get('/', [AdminCorsiController::class, 'sezioneDisciplinare'])->middleware('auth')->name('disciplinareAdmin');
+                Route::get('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'inserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
+                Route::get('modifica-provvedimento-disciplinare', [AdminCorsiController::class, 'modificaDisciplinare'])->middleware('auth')->name('modificaDisciplinareAdmin');
+                Route::get('visualizza-provvedimento-disciplinare', [AdminCorsiController::class, 'visualizzaDisciplinare'])->middleware('auth')->name('visualizzaDisciplinareAdmin');
+            });
+
             Route::get('sezione-sanitaria', [AdminCorsiController::class, 'sezioneSanitaria'])->middleware('auth')->name('sanitariaAdmin');
             Route::get('sezione-studi', [AdminCorsiController::class, 'sezioneStudi'])->middleware('auth')->name('studiAdmin');
         });

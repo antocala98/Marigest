@@ -378,10 +378,6 @@
                         value="{{ $allievo->freq_accademia }}">
                 </div>
             </div>
-
-
-
-
         </div>
         <div class="flex justify-center">
             <x-button element="button" class="mb-32" type="submit">Aggiorna</x-button>
