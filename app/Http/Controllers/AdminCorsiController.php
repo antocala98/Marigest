@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -149,7 +150,6 @@ class AdminCorsiController extends Controller
     else {
       abort(403, 'Azione non autorizzata.');
     }
-
   }
 
   public function ricercaSchedaIndividuale(Request $request)
@@ -319,7 +319,6 @@ public function inserisciDisciplinare(Request $request){
             abort(403, 'Azione non autorizzata.');
         }
     }
-
     public function inserisciSanitaria(Request $request){
         $request->validate([
             'data_provvedimento' => ['required'],
@@ -338,9 +337,14 @@ public function inserisciDisciplinare(Request $request){
     public function paginaModificaSanitaria(){
         return view('corsi.admin.funzioniSanitarie.modificaProvSanitario');
     }
+
     public function paginaVisualizzaSanitaria(){
-        return view('corsi.admin.funzioniSanitarie.visualizzaProvSanitario');
+        $provvedimentiSanitari = ProvvedimentoSanitario::orderBy('data_provvedimento')->get();
+
+        return view('corsi.admin.funzioniSanitarie.visualizzaProvSanitario')
+                    ->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
     }
+
 
 
   public function sezioneStudi(){

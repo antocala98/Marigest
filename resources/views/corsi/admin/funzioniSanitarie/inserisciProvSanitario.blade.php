@@ -53,10 +53,10 @@
                 <div class="mt-4">
                     <label for="tipo_provvedimento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo provvedimento</label>
                     <select id="tipo_provvedimento" name="tipo_provvedimento" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <option value="esenza_aga">Esenza A.G.A.</option>
-                        <option value="esenza_totale">Esenza totale</option>
-                        <option value="ricovero">Ricovero in infermeria</option>
-                        <option value="degenza-convalescenza">Rip.domiciliare/Convalescenza</option>
+                        <option value="Esenza AGA">Esenza A.G.A.</option>
+                        <option value="Esenza Totale">Esenza totale</option>
+                        <option value="Ricovero infermeria">Ricovero in infermeria</option>
+                        <option value="Degenza-Convalescenza">Rip.domiciliare/Convalescenza</option>
                     </select>
                 </div>
                 <div class="mt-4">
