@@ -208,7 +208,7 @@ class AdminCorsiController extends Controller
       $request->foto = Storage::disk('local')->putFile('foto', $request->file('foto'));
       $allievo->foto=$request->foto;
     }
-    
+
     $allievo->matricola_militare = $request->matricola_militare;
     $allievo->nome = $request->nome;
     $allievo->cognome = $request->cognome;
@@ -254,14 +254,14 @@ class AdminCorsiController extends Controller
     $allievo->save();
 
     return view('corsi.admin.modificaDatiAllievo', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->cognome." "."$request->nome"]);
-    
+
   }
 
   public function sezioneDisciplinare(){
     return view('corsi.admin.sezioneDisciplinare');
   }
-
-  public function paginaInserisciDisciplinare(){
+  
+public function paginaInserisciDisciplinare(){
     $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
     if ($this->getUser()->can('view', $this->getUserAdmin())) {
@@ -270,9 +270,9 @@ class AdminCorsiController extends Controller
     else {
       abort(403, 'Azione non autorizzata.');
     }
-  }
+}
 
-  public function inserisciDisciplinare(Request $request){
+public function inserisciDisciplinare(Request $request){
     $request->validate([
       'n_protocollo' => ['required', 'string', 'max:255'],
       'data_provvedimento' => ['required'],
@@ -295,7 +295,7 @@ class AdminCorsiController extends Controller
 
     return view('corsi.admin.inserisciProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
   }
-
+  
   public function paginaModificaDisciplinare(){
     return view('corsi.admin.modificaProvDisciplinare');
   }
@@ -304,16 +304,29 @@ class AdminCorsiController extends Controller
     return view('corsi.admin.visualizzaProvDisciplinare');
   }
 
+
   public function sezioneSanitaria(){
     return view('corsi.admin.sezioneSanitaria');
   }
+    public function paginaInserisciSanitataria(){
+    return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario');
+    }
+    public function inserisciSanitaria(Request $request){
+    }
+    public function paginaModificaSanitaria(){
+        return view('corsi.admin.funzioniSanitarie.modificaProvSanitario');
+    }
+    public function paginaVisualizzaSanitaria(){
+        return view('corsi.admin.funzioniSanitarie.visualizzaProvSanitario');
+    }
+
 
   public function sezioneStudi(){
     return view('corsi.admin.sezioneStudi');
   }
 
   /**
-   * 
+   *
    * @return mixed
    */
   function getUser()
@@ -323,7 +336,7 @@ class AdminCorsiController extends Controller
   }
 
   /**
-   * 
+   *
    * @return mixed
    */
   function getUserAdmin()
