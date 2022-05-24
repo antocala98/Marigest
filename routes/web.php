@@ -45,9 +45,10 @@ Route::prefix('/corsi')->group(function(){
             Route::post('modifica-dati-allievi/', [AdminCorsiController::class, 'aggiornaDatiAllievo'])->middleware('auth')->name('aggiornaDatiAllievoAdmin');
             Route::prefix('/sezione-disciplinare')->group(function () {
                 Route::get('/', [AdminCorsiController::class, 'sezioneDisciplinare'])->middleware('auth')->name('disciplinareAdmin');
-                Route::get('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'inserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
-                Route::get('modifica-provvedimento-disciplinare', [AdminCorsiController::class, 'modificaDisciplinare'])->middleware('auth')->name('modificaDisciplinareAdmin');
-                Route::get('visualizza-provvedimento-disciplinare', [AdminCorsiController::class, 'visualizzaDisciplinare'])->middleware('auth')->name('visualizzaDisciplinareAdmin');
+                Route::get('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'paginaInserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
+                Route::post('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'inserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
+                Route::get('modifica-provvedimento-disciplinare', [AdminCorsiController::class, 'paginaModificaDisciplinare'])->middleware('auth')->name('modificaDisciplinareAdmin');
+                Route::get('visualizza-provvedimento-disciplinare', [AdminCorsiController::class, 'paginaVisualizzaDisciplinare'])->middleware('auth')->name('visualizzaDisciplinareAdmin');
             });
 
             Route::get('sezione-sanitaria', [AdminCorsiController::class, 'sezioneSanitaria'])->middleware('auth')->name('sanitariaAdmin');
