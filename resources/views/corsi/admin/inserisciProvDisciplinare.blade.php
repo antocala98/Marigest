@@ -99,14 +99,14 @@
 </form>
 <?php } ?>
 <script>
-    document.getElementById("tipo_provvedimento").onchange = function () {
-        document.getElementById("num_giorni").setAttribute("disabled", "disabled");
-        if (this.value == 'consegna_semplice' || this.value == 'consegna_rigore'){
-            document.getElementById("num_giorni").removeAttribute("disabled");
-            document.getElementById("num_giorni").setAttribute("required", "required");
+    document.getElementById('tipo_provvedimento').onchange = function () {
+        document.getElementById('num_giorni').setAttribute("disabled", "disabled");
+        if (this.value == 'consegna semplice' || this.value == 'consegna rigore'){
+            document.getElementById('num_giorni').removeAttribute("disabled");
         }
     };
 </script> 
 @endsection
+
 
  
