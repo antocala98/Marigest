@@ -281,9 +281,13 @@ class AdminCorsiController extends Controller
     return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario');
     }
     public function inserisciSanitaria(Request $request){
-
     }
-
+    public function paginaModificaSanitaria(){
+        return view('corsi.admin.funzioniSanitarie.modificaProvSanitario');
+    }
+    public function paginaVisualizzaSanitaria(){
+        return view('corsi.admin.funzioniSanitarie.visualizzaProvSanitario');
+    }
 
 
   public function sezioneStudi(){
