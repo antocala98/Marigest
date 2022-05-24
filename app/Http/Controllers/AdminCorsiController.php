@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\IncorporandiVfp1;
 use App\Models\Allievo;
+use App\Models\ProvvedimentoDisciplinare;
 use Barryvdh\DomPDF\Facade as PDF;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
 use Illuminate\Support\Facades\Storage;
@@ -261,12 +262,38 @@ class AdminCorsiController extends Controller
   }
 
   public function paginaInserisciDisciplinare(){
-    
-    return view('corsi.admin.inserisciProvDisciplinare');
+    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
+
+    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+      return view('corsi.admin.inserisciProvDisciplinare')->with(['allievi' => $allievi]);
+    }
+    else {
+      abort(403, 'Azione non autorizzata.');
+    }
   }
 
   public function inserisciDisciplinare(Request $request){
+    $request->validate([
+      'n_protocollo' => ['required', 'string', 'max:255'],
+      'data_provvedimento' => ['required'],
+      'data_notifica' => ['required'],
+    ]);
+    if($request->tipo_provvedimento == 'consegna semplice' || $request->tipo_provvedimento == 'consegna rigore'){
+      $request->validate(['num_giorni' => ['required']]);
+    }
+    $provvedimentoDisciplinare=new ProvvedimentoDisciplinare();
 
+    $provvedimentoDisciplinare->num_protocollo=$request->n_protocollo;
+    $provvedimentoDisciplinare->tipo_provvedimento=$request->tipo_provvedimento;
+    $provvedimentoDisciplinare->num_giorni_provvedimento=$request->num_giorni;
+    $provvedimentoDisciplinare->data_provvedimento=$request->data_provvedimento;
+    $provvedimentoDisciplinare->data_notifica=$request->data_notifica;
+    $provvedimentoDisciplinare->matricola_allievo=$request->allievo;
+    $provvedimentoDisciplinare->id_user_committente=Auth::user()->id;
+
+    $provvedimentoDisciplinare->save();
+
+    return view('corsi.admin.inserisciProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
   }
 
   public function paginaModificaDisciplinare(){
