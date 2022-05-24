@@ -23,7 +23,48 @@
           </h2>
           <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
             <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-              <p class="mb-2 text-gray-500 dark:text-gray-400"></p>
+                <div class="pb-12 relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Anno di nascita
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    totale Allievi
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Percentuale 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                @foreach ($Anni as $anno)
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                    {{$anno->year}}
+                                </th>
+                                @endforeach
+                            </tr>
+                            <tr>
+                                @foreach ($totale as $tot)
+                                <td class="px-6 py-4">
+                                    {{$tot}}
+                                </td>
+                                @endforeach
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4">
+                                    Laptop
+                                </td>
+                            </tr>
+                                
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
               
             </div>
           </div>
