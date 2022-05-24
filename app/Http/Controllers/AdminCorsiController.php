@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\IncorporandiVfp1;
 use App\Models\Allievo;
 use App\Models\ProvvedimentoDisciplinare;
+use App\Models\ProvvedimentoSanitario;
 use Barryvdh\DomPDF\Facade as PDF;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
 use Illuminate\Support\Facades\Storage;
@@ -260,7 +261,7 @@ class AdminCorsiController extends Controller
   public function sezioneDisciplinare(){
     return view('corsi.admin.sezioneDisciplinare');
   }
-  
+
 public function paginaInserisciDisciplinare(){
     $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
@@ -295,7 +296,7 @@ public function inserisciDisciplinare(Request $request){
 
     return view('corsi.admin.inserisciProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
   }
-  
+
   public function paginaModificaDisciplinare(){
     return view('corsi.admin.modificaProvDisciplinare');
   }
@@ -309,9 +310,31 @@ public function inserisciDisciplinare(Request $request){
     return view('corsi.admin.sezioneSanitaria');
   }
     public function paginaInserisciSanitataria(){
-    return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario');
+        $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
+
+        if ($this->getUser()->can('view', $this->getUserAdmin())) {
+            return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario')->with(['allievi' => $allievi]);
+        }
+        else {
+            abort(403, 'Azione non autorizzata.');
+        }
     }
+
     public function inserisciSanitaria(Request $request){
+        $request->validate([
+            'n_protocollo' => ['required', 'string', 'max:255'],
+            'data_provvedimento' => ['required'],
+        ]);
+        $provvedimentoSanitario=new ProvvedimentoSanitario();
+
+        $provvedimentoSanitario->tipo_provvedimento=$request->tipo_provvedimento;
+        $provvedimentoSanitario->num_giorni_provvedimento=$request->num_giorni;
+        $provvedimentoSanitario->data_provvedimento=$request->data_provvedimento;
+        $provvedimentoSanitario->matricola_allievo_paziente=$request->allievo;
+        $provvedimentoSanitario->id_user_infermeria=Auth::user()->id;
+
+        $provvedimentoSanitario->save();
+        return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
     }
     public function paginaModificaSanitaria(){
         return view('corsi.admin.funzioniSanitarie.modificaProvSanitario');
