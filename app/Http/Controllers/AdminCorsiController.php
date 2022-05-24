@@ -322,7 +322,6 @@ public function inserisciDisciplinare(Request $request){
 
     public function inserisciSanitaria(Request $request){
         $request->validate([
-            'n_protocollo' => ['required', 'string', 'max:255'],
             'data_provvedimento' => ['required'],
         ]);
         $provvedimentoSanitario=new ProvvedimentoSanitario();
