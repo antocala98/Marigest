@@ -45,8 +45,8 @@ Route::prefix('/corsi')->group(function(){
             Route::prefix('/schede-riepilogative')->group(function () {
                 Route::get('/', [AdminCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative22NMRS');
                 Route::get('/Relazione-fine-incorporamento',[relazioneIncorporamentoController::class,'relazioneAnno'])->middleware('auth')->name('relazioneFineIncorpormaneto');
-                    
-                
+
+
             });
                 Route::get('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'inserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
             Route::get('modifica-dati-allievi/{id?}', [AdminCorsiController::class, 'modificaDatiAllievi'])->middleware('auth')->name('modificaDatiAdmin22NMRS');
@@ -64,6 +64,9 @@ Route::prefix('/corsi')->group(function(){
                 Route::get('/', [AdminCorsiController::class, 'sezioneSanitaria'])->middleware('auth')->name('sanitariaAdmin');
                 Route::get('inserisci-provvedimento-sanitario', [AdminCorsiController::class, 'paginaInserisciSanitataria'])->middleware('auth')->name('inserisciSanitariaAdmin');
                 Route::post('inserisci-provvedimento-sanitario', [AdminCorsiController::class, 'inserisciSanitaria'])->middleware('auth')->name('inserisciSanitariaAdmin');
+                Route::get('modifica-provvedimento-sanitario', [AdminCorsiController::class, 'paginaModificaSanitaria'])->middleware('auth')->name('modificaSanitariaAdmin');
+                Route::get('visualizza-provvedimento-sanitario', [AdminCorsiController::class, 'paginaVisualizzaSanitaria'])->middleware('auth')->name('visualizzaSanitariaAdmin');
+
             });
             Route::get('sezione-studi', [AdminCorsiController::class, 'sezioneStudi'])->middleware('auth')->name('studiAdmin');
         });
