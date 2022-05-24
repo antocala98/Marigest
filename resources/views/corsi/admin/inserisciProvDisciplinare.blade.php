@@ -49,7 +49,7 @@
     @csrf
     <div class="m-11 grid gap-6 mb-24 lg:grid-cols-2">
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <x-auth-validation-errors class="ml-96" :errors="$errors" />
+            <x-auth-validation-errors class="ml-20" :errors="$errors" />
             <div class="mt-4">
                 <label for="tipo_provvedimento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo provvedimento</label>
                 <select id="tipo_provvedimento" name="tipo_provvedimento" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
@@ -77,11 +77,7 @@
         <div class="w-full pl-6 sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <div class="mt-4">
                 <label for="allievo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Allievo</label>
-                <select id="allievo" name="allievo" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    @foreach ($allievi as $allievo)
-                        <option value="{{$allievo->matricola_militare}}">{{$allievo->cognome}} {{$allievo->nome}}-{{$allievo->matricola_militare}}</option>
-                    @endforeach
-                </select>
+                <input list="allievi" type="text" id="allievo" name="allievo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">    
             </div>
             <div class="mt-4">
                 <label for="n_protocollo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Numero di protocollo</label>
@@ -97,6 +93,11 @@
         </div>
         
 </form>
+<datalist id="allievi">
+    @foreach ($allievi as $allievo)
+        <option value="{{$allievo->matricola_militare}}">{{$allievo->cognome}} {{$allievo->nome}}-{{$allievo->matricola_militare}}</option>
+    @endforeach
+</datalist>
 <?php } ?>
 <script>
     document.getElementById('tipo_provvedimento').onchange = function () {
