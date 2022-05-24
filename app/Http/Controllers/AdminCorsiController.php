@@ -207,7 +207,7 @@ class AdminCorsiController extends Controller
       $request->foto = Storage::disk('local')->putFile('foto', $request->file('foto'));
       $allievo->foto=$request->foto;
     }
-    
+
     $allievo->matricola_militare = $request->matricola_militare;
     $allievo->nome = $request->nome;
     $allievo->cognome = $request->cognome;
@@ -253,40 +253,45 @@ class AdminCorsiController extends Controller
     $allievo->save();
 
     return view('corsi.admin.modificaDatiAllievo', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->cognome." "."$request->nome"]);
-    
+
   }
 
   public function sezioneDisciplinare(){
     return view('corsi.admin.sezioneDisciplinare');
   }
-
   public function paginaInserisciDisciplinare(){
-    
+
     return view('corsi.admin.inserisciProvDisciplinare');
   }
-
   public function inserisciDisciplinare(Request $request){
 
   }
-
   public function paginaModificaDisciplinare(){
     return view('corsi.admin.modificaProvDisciplinare');
   }
-
   public function paginaVisualizzaDisciplinare(){
     return view('corsi.admin.visualizzaProvDisciplinare');
   }
 
+
   public function sezioneSanitaria(){
     return view('corsi.admin.sezioneSanitaria');
   }
+    public function paginaInserisciSanitataria(){
+    return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario');
+    }
+    public function inserisciSanitaria(Request $request){
+
+    }
+
+
 
   public function sezioneStudi(){
     return view('corsi.admin.sezioneStudi');
   }
 
   /**
-   * 
+   *
    * @return mixed
    */
   function getUser()
@@ -296,7 +301,7 @@ class AdminCorsiController extends Controller
   }
 
   /**
-   * 
+   *
    * @return mixed
    */
   function getUserAdmin()
