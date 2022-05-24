@@ -8,6 +8,7 @@ use App\Http\Controllers\ListaPersonaleCorsiController;
 use App\Http\Controllers\GestionePersonaleCorsiController;
 use App\Http\Controllers\AdminJuniorCorsiController;
 use App\Http\Controllers\AdminCorsiController;
+use App\Http\Controllers\relazioneIncorporamentoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +44,9 @@ Route::prefix('/corsi')->group(function(){
             Route::get('/', [AdminCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative22NMRS');
             Route::prefix('/schede-riepilogative')->group(function () {
                 Route::get('/', [AdminCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative22NMRS');
-                Route::get('/Relazione-fine-incorporamento', function(){
-                    return view('corsi.admin.relazioneFineIncorporamento');
-                });
+                Route::get('/Relazione-fine-incorporamento',[relazioneIncorporamentoController::class,'relazioneAnno'])->middleware('auth')->name('relazioneFineIncorpormaneto');
+                    
+                
             });
                 Route::get('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'inserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
             Route::get('modifica-dati-allievi/{id?}', [AdminCorsiController::class, 'modificaDatiAllievi'])->middleware('auth')->name('modificaDatiAdmin22NMRS');
