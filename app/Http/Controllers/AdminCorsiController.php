@@ -142,7 +142,7 @@ class AdminCorsiController extends Controller
 
   public function schedeIndividualiAllievi()
   {
-    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->get();
+    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
     if ($this->getUser()->can('view', $this->getUserAdmin())) {
       return view('corsi.admin.schedeIndividuali', ['allievi' => $allievi]);
@@ -178,7 +178,7 @@ class AdminCorsiController extends Controller
   {
     if ($this->getUser()->can('view', $this->getUserAdmin())) {
       if ($id == null) {
-        $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->get();
+        $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
         return view('corsi.admin.modificaDatiAllievo')->with(['allievi' => $allievi]);
       }
       else {
