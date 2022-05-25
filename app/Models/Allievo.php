@@ -52,7 +52,6 @@ class Allievo extends Model
         'cap_domicilio',
         'indirizzo_domicilio',
         'luogo_domicilio',
-
     ];
 
 

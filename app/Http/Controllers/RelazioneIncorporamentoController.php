@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Collection;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB; 
 use App\Models\Allievo;
@@ -10,38 +11,32 @@ use Illuminate\Support\Facades\Auth;
 class relazioneIncorporamentoController extends Controller
 {
     public function relazioneAnno(){
-      $totale=DB::table('allievi')->count();
-      $annoMinimo=DB::table('allievi')->min('data_nascita');
-      $annoMassimo=DB::table('allievi')->max('data_nascita');
-      $annoMassimoCarbon= new Carbon($annoMassimo);
       
-      $anno0= new Carbon($annoMinimo);
-      $j=0;
-      $array=array($j=>$anno0);
-      $i = $anno0->year;
-      for($i = $anno0->year; $i < $annoMassimoCarbon->year; $i++) {
-        $anno1= new Carbon($annoMinimo);
-        $j++;
-        $anno1->addyear($j);
-        $myarray= array_merge($array,array($j=>$anno1));
-        $array=array_merge($myarray,array('$j'=>$anno0));
-      }
-      $allievi=DB::table('allievi')->get();
-      $j=0;
-      $count=0;
-      $countMyArray=array($j=>0);
-      foreach($myarray as $mydate){
-        $contenitoredataarray= new Carbon($mydate);
+      
+      $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->select('id','data_nascita','voto_diploma as totale','voto_diploma as percentuale')->orderBy('data_nascita','asc')->get();
+      $totale=$allievi->count();
+      
+      
+      /**foreach($allievi as $allievo){
+        $data=new Carbon($allievo->data_nascita);
+        $allievo->data_nascita=$data->year;
+        $allievo->totale=$allievi->where('data_nascita','=',$allievo->data_nascita)->count('data_nascita');
+        $allievo->percentuale=($allievo->totale/$totale)*100;
+        $count=0;
+        //$allievi->data_nascita=$data->year;
+        
+        }*/
         foreach($allievi as $allievo){
-          
-          $contenitoredataallievi= new Carbon($allievo->data_nascita);
-          if($contenitoredataallievi->year==$contenitoredataarray->year);
-          $count++;
+          $data=new Carbon($allievo->data_nascita);
+          $allievo->data_nascita=$data->year;
+          $allievo->totale= Allievo::where('corso', Auth::user()->comando_appartenenza)->whereYear('data_nascita', $allievo->data_nascita)->select('id','data_nascita','voto_diploma as totale')->orderBy('data_nascita','asc')->count('data_nascita');
+          $allievo->percentuale=($allievo->totale/Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
         }
-        $countMyArray=array_merge($countMyArray,array($j=>$count));
-        $j++;
-      }
+        $allievi=$allievi->unique('data_nascita');
+        
+        
+      
       $prova='ciao mondo';
-        return view('corsi.admin.relazioneFineIncorporamento',['Anni'=>$myarray,'totale'=>$countMyArray,]);
+        return view('corsi.admin.relazioneFineIncorporamento',['Anni'=>$allievi]);
       }
 }
