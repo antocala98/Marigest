@@ -22,6 +22,7 @@ class relazioneIncorporamentoController extends Controller
           $allievo->percentuale=($allievo->totale/Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
           $allievo->eta=$current-$allievo->data_nascita;
         }
+        
         $allievi=$allievi->unique('data_nascita');
       $prova='ciao mondo';
         return view('corsi.admin.relazioneFineIncorporamento',['Anni'=>$allievi]);

@@ -43,9 +43,7 @@
                                     Totale Allievi
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Percentuale % 
-                                        
-                                    @endauth
+                                    Percentuale
                                 </th>
                             </tr>
                         </thead>
