@@ -34,31 +34,30 @@
                                     totale Allievi
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Percentuale 
+                                    Percentuale %
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 @foreach ($Anni as $anno)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    {{$anno->year}}
+                                    {{$anno->data_nascita}}
                                 </th>
-                                @endforeach
-                            </tr>
-                            <tr>
-                                @foreach ($totale as $tot)
                                 <td class="px-6 py-4">
-                                    {{$tot}}
+                                    {{$anno->totale}}
                                 </td>
-                                @endforeach
-                            </tr>
-                            <tr>
                                 <td class="px-6 py-4">
-                                    Laptop
+                                    @php
+                                        echo round($anno->percentuale, 2) ; 
+                                    @endphp
+                                    
                                 </td>
                             </tr>
+                                @endforeach
+                            
+                                
+                            
                                 
                             
                             
