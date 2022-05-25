@@ -64,7 +64,8 @@ Route::prefix('/corsi')->group(function(){
                 Route::get('/', [AdminCorsiController::class, 'sezioneSanitaria'])->middleware('auth')->name('sanitariaAdmin');
                 Route::get('inserisci-provvedimento-sanitario', [AdminCorsiController::class, 'paginaInserisciSanitataria'])->middleware('auth')->name('inserisciSanitariaAdmin');
                 Route::post('inserisci-provvedimento-sanitario', [AdminCorsiController::class, 'inserisciSanitaria'])->middleware('auth')->name('inserisciSanitariaAdmin');
-                Route::get('modifica-provvedimento-sanitario', [AdminCorsiController::class, 'paginaModificaSanitaria'])->middleware('auth')->name('modificaSanitariaAdmin');
+                Route::get('modifica-provvedimento-sanitario/{id?}', [AdminCorsiController::class, 'paginaModificaSanitaria'])->middleware('auth')->name('modificaProvAdmin');
+                Route::post('modifica-provvedimento-sanitario/', [AdminCorsiController::class, 'aggiornaProvvedimento'])->middleware('auth')->name('aggiornaProvAdmin22NMRS');
                 Route::get('visualizza-provvedimento-sanitario', [AdminCorsiController::class, 'paginaVisualizzaSanitaria'])->middleware('auth')->name('visualizzaSanitariaAdmin');
 
             });

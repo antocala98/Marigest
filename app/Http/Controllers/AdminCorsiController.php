@@ -334,8 +334,30 @@ public function inserisciDisciplinare(Request $request){
         $provvedimentoSanitario->save();
         return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
     }
-    public function paginaModificaSanitaria(){
-        return view('corsi.admin.funzioniSanitarie.modificaProvSanitario');
+    public function paginaModificaSanitaria($id = null)
+    {
+        if ($this->getUser()->can('view', $this->getUserAdmin())) {
+            if ($id == null) {
+                $provvedimentiSanitari = ProvvedimentoSanitario::orderBy('data_provvedimento')->get();
+                return view('corsi.admin.funzioniSanitarie.modificaProvSanitario')
+                    ->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
+            } else {
+                $provvedimento = ProvvedimentoSanitario::where('id', $id)->first();
+                return view('corsi.admin.funzioniSanitarie.modificaProvSanitario')->with(['provvedimento' => $provvedimento]);
+            }
+        }
+    }
+    public function aggiornaProvvedimento(Request $request){
+        $provvedimentoSanitario= ProvvedimentoSanitario::find($request->id);
+
+        $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
+        $provvedimentoSanitario->num_giorni_provvedimento=$request->num_giorni;
+        $provvedimentoSanitario->data_provvedimento=$request->data_provvedimento;
+        $provvedimentoSanitario->save();
+
+        return view('corsi.admin.funzioniSanitarie.modificaProvSanitario', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->matricola_allievo_paziente ]);
+
+
     }
 
     public function paginaVisualizzaSanitaria(){
