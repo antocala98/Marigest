@@ -44,14 +44,15 @@
                         <th scope="col" class="px-6 py-3">
                             Nome
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 hidden lg:block">
                            Sesso
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Matricola
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 hidden lg:block">
                             Categoria
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Download</span>
                         </th>
@@ -66,14 +67,17 @@
                             <td class="px-6 py-4">
                                 {{$allievo->nome}}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 hidden lg:block">
                                 {{$allievo->sesso}}
                             </td>
                             <td class="px-6 py-4">
                                 {{$allievo->matricola_militare}}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 hidden lg:block">
                                 {{$allievo->categoria}}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{{ route('visualizzaScheda22NMRS', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Visualizza PDF</a>
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('downloadScheda22NMRS', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Scarica PDF</a>

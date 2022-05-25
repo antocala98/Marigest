@@ -41,14 +41,14 @@ Route::prefix('/corsi')->group(function(){
             Route::get('schede-individuali', [AdminCorsiController::class,'schedeIndividualiAllievi'])->middleware('auth')->name('schedeIndividuali22NMRS');
             Route::post('schede-individuali', [AdminCorsiController::class,'ricercaSchedaIndividuale'])->middleware('auth')->name('schedeIndividuali22NMRS');
             Route::get('scheda-allievo/{id}', [AdminCorsiController::class, 'downloadSchedaIndividuale'])->middleware('auth')->name('downloadScheda22NMRS');
+            Route::get('visualizza-scheda-allievo/{id}', [AdminCorsiController::class, 'visualizzaSchedaIndividuale'])->middleware('auth')->name('visualizzaScheda22NMRS');
             Route::get('/', [AdminCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative22NMRS');
             Route::prefix('/schede-riepilogative')->group(function () {
                 Route::get('/', [AdminCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative22NMRS');
                 Route::get('/Relazione-fine-incorporamento',[relazioneIncorporamentoController::class,'relazioneAnno'])->middleware('auth')->name('relazioneFineIncorpormaneto');
 
-
             });
-                Route::get('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'inserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
+            Route::get('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'inserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
             Route::get('modifica-dati-allievi/{id?}', [AdminCorsiController::class, 'modificaDatiAllievi'])->middleware('auth')->name('modificaDatiAdmin22NMRS');
             Route::post('modifica-dati-allievi/', [AdminCorsiController::class, 'aggiornaDatiAllievo'])->middleware('auth')->name('aggiornaDatiAllievoAdmin');
 

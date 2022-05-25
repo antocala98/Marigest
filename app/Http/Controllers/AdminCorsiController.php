@@ -174,6 +174,15 @@ class AdminCorsiController extends Controller
     return $pdf->download('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
   }
 
+  public function visualizzaSchedaIndividuale($id)
+  {
+    $allievo = Allievo::where('id', $id)->first();
+    $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
+    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo]);
+    return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
+  }
+
+
   public function modificaDatiAllievi($id = null)
   {
     if ($this->getUser()->can('view', $this->getUserAdmin())) {
