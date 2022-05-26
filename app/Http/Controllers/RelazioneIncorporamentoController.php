@@ -52,5 +52,4 @@ class relazioneIncorporamentoController extends Controller
         $area=collect(['nord'=>$areaNord,'centro'=> $areaCentro,'sud'=> $areaSud]);
         return view('corsi.admin.resoconti.relazioneFineIncorporamento',['Anni'=>$allievi,'area'=>$area]);
       }
-    
 }
