@@ -92,10 +92,10 @@
             <div id="accordion-collapse-body-3" class="hidden " aria-labelledby="accordion-collapse-heading-3">
                 <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                     <div class="hidden">
-                        {{$area}}
+                        {{$regione}}
                     </div>
                    <!--Includo una Sub Vista. Il div di prima serve a passare la variabile alla vista di sotto --> 
-                @include('corsi.admin.resoconti.relazioneFineIncorporamentoperRegioni',['area'=> $area])
+                @include('corsi.admin.resoconti.relazioneFineIncorporamentoperRegioni',['regione'=> $regione])
                 </div>
         </div>
         
