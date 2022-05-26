@@ -23,6 +23,7 @@ class CreateProvvedimentiDisciplinariTable extends Migration
             $table->string('matricola_allievo');
             $table->string('id_user_committente');
             $table->timestamps();
+            $table->foreign('matricola_allievo')->references('matricola_militare')->on('allievi');
         });
     }
 

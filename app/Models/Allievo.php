@@ -56,7 +56,7 @@ class Allievo extends Model
 
 
     public function provvedimentiDisciplinari(){
-        return $this->hasMany(ProvvedimentoDisciplinare::class);
+        return $this->hasMany(ProvvedimentoDisciplinare::class,  'matricola_allievo', 'matricola_militare');
     }
 
     public function provvedimentiSanitari(){
