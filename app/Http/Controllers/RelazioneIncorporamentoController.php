@@ -52,6 +52,7 @@ class relazioneIncorporamentoController extends Controller
         //prova di modifica
         //prova modifica 2
         //prova modifica 3
+        //prova modifica 4
         $percentualeNord=$totaleNord/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
         $areaNord = collect(['nomeNord'=>$nomeNord, 'totaleNord'=>$totaleNord,'percentualeNord'=> $percentualeNord]);
         $area=collect(['nord'=>$areaNord,'centro'=> $areaCentro,'sud'=> $areaSud]);
