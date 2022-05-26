@@ -324,7 +324,25 @@ public function inserisciDisciplinare(Request $request){
   }
 
   public function paginaModificaDisciplinare(){
-    return view('corsi.admin.modificaProvDisciplinare');
+
+    
+
+   /* $provvedimenti_disciplinari = ProvvedimentoDisciplinare::select('*')->with('allievo')->get();
+
+    foreach ($provvedimenti_disciplinari as $provvedimento) {
+      echo $provvedimento->allievo['cognome'];
+
+    } /*
+
+   // $provvedimenti_disciplinari = $allievo->provvedimentiDisciplinari()->get();
+
+    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+      return view('corsi.admin.modificaProvDisciplinare')->with(['provvedimenti_disciplinari' => $provvedimenti_disciplinari]);
+    }
+    else {
+      abort(403, 'Azione non autorizzata.');
+    }
+    */
   }
 
   public function paginaVisualizzaDisciplinare(){

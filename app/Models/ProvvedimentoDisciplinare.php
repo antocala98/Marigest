@@ -21,6 +21,6 @@ class ProvvedimentoDisciplinare extends Model
     ];
 
     public function allievo(){
-        return $this->belongsTo(Allievo::class);
+        return $this->belongsTo(Allievo::class, 'matricola_allievo')->withDefault(['nome' => 'nome non trovato']);
     }
 }

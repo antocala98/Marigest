@@ -40,7 +40,7 @@ class ImportIncorporandiNMRS implements ToModel, WithHeadingRow
             'matricola_militare' => $row['MATRICOLA'],
             'nome' => $row['NOME'],
             'cognome' => $row['COGNOME'],
-            'sesso' => $row['Sesso'],
+            'sesso' => strtolower($row['Sesso']),
             'codice_fiscale' => $row['Codfisc'],
             'data_nascita' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject((int)$row['DATNASC'])),
             'luogo_nascita' => $row['LUOGO_NASC'],

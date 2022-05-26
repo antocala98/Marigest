@@ -15,7 +15,7 @@ class CreateAllieviTable extends Migration
     {
         Schema::create('allievi', function (Blueprint $table) {
             $table->id();
-            $table->string('matricola_militare');
+            $table->string('matricola_militare')->unique();
             $table->string('nome');
             $table->string('cognome');
             $table->char('sesso');
