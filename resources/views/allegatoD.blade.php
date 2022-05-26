@@ -4608,6 +4608,7 @@
         <td class="column18 style8 null"></td>
         <td class="column19 style2 null"></td>
       </tr>
+
       <tr class="row27">
         <td class="column0 style1 null"></td>
         <td class="column1 style55 s style56" colspan="4">Inglese 2ª sessione</td>
