@@ -49,14 +49,11 @@ class relazioneIncorporamentoController extends Controller
         ->count();
         
         
-        
-        
-        
-        
+
+        //prova di modifica
         $percentualeNord=$totaleNord/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
         $areaNord = collect(['nomeNord'=>$nomeNord, 'totaleNord'=>$totaleNord,'percentualeNord'=> $percentualeNord]);
         $area=collect(['nord'=>$areaNord,'centro'=> $areaCentro,'sud'=> $areaSud]);
         return view('corsi.admin.resoconti.relazioneFineIncorporamento',['Anni'=>$allievi,'area'=>$area]);
       }
-    
 }
