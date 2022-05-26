@@ -22,22 +22,17 @@ class relazioneIncorporamentoController extends Controller
           $allievo->percentuale=($allievo->totale/Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
           $allievo->eta=$current-$allievo->data_nascita;
         }
-        
-        
         $allievi=$allievi->unique('data_nascita');
         
 
         $totaleNord=100;
         $percentualeNord=0;
         $nomeNord='Nord';
-        //$areaNord = collect(['nomeNord'=>$nomeNord, 'totaleNord'=>$totaleNord,'percentualeNord'=> $percentualeNord]);
-        //$nord=$areaNord->get('totaleNord');
         
         $totaleCentro=0;
         $percentualeCentro=0;
         $nomeCentro='Centro';
         
-
         $totaleSud=0;
         $percentualeSud=0;
         $nomeSud='Sud';
@@ -193,6 +188,11 @@ class relazioneIncorporamentoController extends Controller
         $areaCentro = collect(['nomeCentro'=>$nomeCentro, 'totaleCentro'=>$totaleCentro,'percentualeCentro'=> $percentualeCentro]);
         $areaSud = collect(['nomeSud'=>$nomeSud,'totaleSud'=> $totaleSud,'percentualeSud'=> $percentualeSud]);
         $area=collect(['nord'=>$areaNord,'centro'=> $areaCentro,'sud'=> $areaSud]);
+
+
+
+
+
         return view('corsi.admin.resoconti.relazioneFineIncorporamento',['Anni'=>$allievi,'area'=>$area]);
       }
 }
