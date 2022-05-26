@@ -46,9 +46,8 @@ class relazioneIncorporamentoController extends Controller
         $totaleNord= Allievo::where('corso', Auth::user()->comando_appartenenza)
         ->where('provincia_residenza','CT')
         ->orwhere('provincia_residenza','BR')
+        ->orwhere('provincia_residenza','BA')
         ->count();
-        
-        
 
         //prova di modifica
         $percentualeNord=$totaleNord/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
