@@ -182,6 +182,7 @@ class AdminCorsiController extends Controller
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
 
 
+
           foreach ($provvedimentiSanitari as $provvedimento) {
             $matricola = ($provvedimento->matricola_allievo_paziente);
               if ($allievo->matricola_militare == $matricola) {
