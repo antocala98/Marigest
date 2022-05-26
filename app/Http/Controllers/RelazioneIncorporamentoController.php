@@ -191,8 +191,285 @@ class relazioneIncorporamentoController extends Controller
 
 
 
+        $totaleAbruzzo=0;
+        $percentualeAbruzzo=0;
 
+        $totaleBasilicata=0;
+        $percentuaBasilicata=0;
 
-        return view('corsi.admin.resoconti.relazioneFineIncorporamento',['Anni'=>$allievi,'area'=>$area]);
+        $totaleCalabria=0;
+        $percentualeCalabria=0;
+
+        $totaleCampania=0;
+        $percentualeCampania=0;
+
+        $totaleEmilia=0;
+        $percentualeEmilia=0;
+
+        $totaleFriuli=0;
+        $percentualeFriuli=0;
+
+        $totaleLazio=0;
+        $percentualeLazio=0;
+
+        $totaleLiguria=0;
+        $percentualeLiguria=0;
+
+        $totaleLombardia=0;
+        $percentualeLombardia=0;
+
+        $totaleMarche=0;
+        $percentualeMarche=0;
+
+        $totaleMolise=0;
+        $percentualeMolise=0;
+
+        $totalePiemonte=0;
+        $percentualePiemonte=0;
+
+        $totalePuglia=0;
+        $percentualePuglia=0;
+
+        $totaleSardegna=0;
+        $percentualeSardegna=0;
+
+        $totaleSicilia=0;
+        $percentualeSicilia=0;
+
+        $totaleToscana=0;
+        $percentualeToscana=0;
+
+        $totaleTrentino=0;
+        $percentualeTrentino=0;
+
+        $totaleUmbria=0;
+        $percentualeUmbria=0;
+
+        $totaleValle=0;
+        $percentualeValle=0;
+
+        $totaleVeneto=0;
+        $percentualeVeneto=0;
+
+        $totaleAbruzzo= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Abruzzo
+        ->where('provincia_residenza','AQ')
+        ->orwhere('provincia_residenza','CH')
+        ->orwhere('provincia_residenza','PE')
+        ->orwhere('provincia_residenza','TE')->count();
+
+        $totaleBasilicata= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Basilicata
+        ->where('provincia_residenza','MT')
+        ->orwhere('provincia_residenza','PZ')->count();
+
+        $totaleCalabria= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Calabria
+        ->where('provincia_residenza','CS')
+        ->orwhere('provincia_residenza','CZ')
+        ->orwhere('provincia_residenza','KR')
+        ->orwhere('provincia_residenza','RC')
+        ->orwhere('provincia_residenza','VV')->count();
+        $totaleCampania= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Campania
+        ->where('provincia_residenza','AV')
+        ->orwhere('provincia_residenza','BN')
+        ->orwhere('provincia_residenza','CE')
+        ->orwhere('provincia_residenza','NA')
+        ->orwhere('provincia_residenza','SA')->count();
+        $totaleEmilia= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Emilia Romagna
+        ->where('provincia_residenza','BO')
+        ->orwhere('provincia_residenza','FC')
+        ->orwhere('provincia_residenza','FE')
+        ->orwhere('provincia_residenza','MO')
+        ->orwhere('provincia_residenza','PC')
+        ->orwhere('provincia_residenza','PR')
+        ->orwhere('provincia_residenza','RA')
+        ->orwhere('provincia_residenza','RE')
+        ->orwhere('provincia_residenza','RN')->count();
+        $totaleFriuli= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //friuli veneia Giulia
+        ->where('provincia_residenza','GO')
+        ->orwhere('provincia_residenza','PN')
+        ->orwhere('provincia_residenza','TS')
+        ->orwhere('provincia_residenza','UD')->count();
+        $totaleLazio= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Lazio
+        ->where('provincia_residenza','FR')
+        ->orwhere('provincia_residenza','LT')
+        ->orwhere('provincia_residenza','RI')
+        ->orwhere('provincia_residenza','RO')
+        ->orwhere('provincia_residenza','Roma')
+        ->orwhere('provincia_residenza','VT')->count();
+        $totaleLiguria= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Liguria
+        ->where('provincia_residenza','GE')
+        ->orwhere('provincia_residenza','IM')
+        ->orwhere('provincia_residenza','SP')
+        ->orwhere('provincia_residenza','SV')->count();
+        $totaleLombardia= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Lombardia
+        ->where('provincia_residenza','BG')
+        ->orwhere('provincia_residenza','BS')
+        ->orwhere('provincia_residenza','CO')
+        ->orwhere('provincia_residenza','CR')
+        ->orwhere('provincia_residenza','LC')
+        ->orwhere('provincia_residenza','LO')
+        ->orwhere('provincia_residenza','MB')
+        ->orwhere('provincia_residenza','MI')
+        ->orwhere('provincia_residenza','MN')
+        ->orwhere('provincia_residenza','PV')
+        ->orwhere('provincia_residenza','SO')
+        ->orwhere('provincia_residenza','VA')->count();
+        $totaleMarche= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Marche
+        ->where('provincia_residenza','AN')
+        ->orwhere('provincia_residenza','AP')
+        ->orwhere('provincia_residenza','FM')
+        ->orwhere('provincia_residenza','MC')
+        ->orwhere('provincia_residenza','PU')->count();
+        $totaleMolise= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Molise
+        ->where('provincia_residenza','CB')
+        ->orwhere('provincia_residenza','IS')->count();
+        $totalePiemonte= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //Piemonte
+        ->where('provincia_residenza','AL')
+        ->orwhere('provincia_residenza','AT')
+        ->orwhere('provincia_residenza','BI')
+        ->orwhere('provincia_residenza','CN')
+        ->orwhere('provincia_residenza','NO')
+        ->orwhere('provincia_residenza','TO')
+        ->orwhere('provincia_residenza','VB')
+        ->orwhere('provincia_residenza','VC')->count();
+        $totalePuglia= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //pUGLIA
+        ->where('provincia_residenza','BR')
+        ->orwhere('provincia_residenza','BA')
+        ->orwhere('provincia_residenza','BT')
+        ->orwhere('provincia_residenza','FG')
+        ->orwhere('provincia_residenza','LE')
+        ->orwhere('provincia_residenza','TA')->count();
+        $totaleSardegna= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //SARDEGNA
+        ->where('provincia_residenza','CA')
+        ->orwhere('provincia_residenza','CI')
+        ->orwhere('provincia_residenza','NU')
+        ->orwhere('provincia_residenza','OG')
+        ->orwhere('provincia_residenza','OR')
+        ->orwhere('provincia_residenza','OT')
+        ->orwhere('provincia_residenza','SS')
+        ->orwhere('provincia_residenza','vs')->count();
+        $totaleSardegna= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //SICILIA
+        ->where('provincia_residenza','AG')
+        ->orwhere('provincia_residenza','CL')
+        ->orwhere('provincia_residenza','CT')
+        ->orwhere('provincia_residenza','EN')
+        ->orwhere('provincia_residenza','ME')
+        ->orwhere('provincia_residenza','PA')
+        ->orwhere('provincia_residenza','RG')
+        ->orwhere('provincia_residenza','SR')
+        ->orwhere('provincia_residenza','TP')->count();
+        $totaleToscana= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //TOSCANA
+        ->where('provincia_residenza','AR')
+        ->orwhere('provincia_residenza','FI')
+        ->orwhere('provincia_residenza','GR')
+        ->orwhere('provincia_residenza','LI')
+        ->orwhere('provincia_residenza','LU')
+        ->orwhere('provincia_residenza','MS')
+        ->orwhere('provincia_residenza','PI')
+        ->orwhere('provincia_residenza','PO')
+        ->orwhere('provincia_residenza','PT')
+        ->orwhere('provincia_residenza','SI')->count();
+        $totaleTrentino= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //TRENTINO
+        ->where('provincia_residenza','BZ')
+        ->orwhere('provincia_residenza','TN')->count();
+        $totaleUmbria= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //UMBRIA
+        ->where('provincia_residenza','PG')
+        ->orwhere('provincia_residenza','TR')->count();
+        $totaleValle= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //VALLE D'AOSTA
+        ->where('provincia_residenza','AO')->count();
+        $totaleVeneto= Allievo::where('corso', Auth::user()->comando_appartenenza)
+        //VENETO
+        ->where('provincia_residenza','BL')
+        ->orwhere('provincia_residenza','PD')
+        ->orwhere('provincia_residenza','RO')
+        ->orwhere('provincia_residenza','TV')
+        ->orwhere('provincia_residenza','VE')
+        ->orwhere('provincia_residenza','VI')
+        ->orwhere('provincia_residenza','VR')->count();
+
+        $percentualeAbruzzo=$totaleAbruzzo/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentuaBasilicata=$totaleBasilicata/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeCalabria=$totaleCalabria/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeCampania=$totaleCampania/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeEmilia=$totaleEmilia/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeFriuli=$totaleFriuli/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeLazio=$totaleLazio/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeLiguria=$totaleLiguria/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeLombardia=$totaleLombardia/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeMarche=$totaleMarche/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeMolise=$totaleMolise/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualePiemonte=$totalePiemonte/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualePuglia=$totalePuglia/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeSardegna=$totaleSardegna/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeSicilia=$totaleSicilia/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeToscana=$totaleToscana/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeTrentino=$totaleTrentino/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeUmbria=$totaleUmbria/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeValle=$totaleValle/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+        $percentualeVeneto=$totaleVeneto/(Allievo::where('corso', Auth::user()->comando_appartenenza)->count())*100;
+
+        $regioneAbruzzo = collect(['totaleAbruzzo'=>$totaleAbruzzo,'percentualeAbruzzo'=> $percentualeAbruzzo]);
+        $regioneBasilicata = collect(['totaleBasilicata'=>$totaleBasilicata,'percentualeBasilicata'=> $percentuaBasilicata]);
+        $regioneCalabria = collect(['totaleCalabria'=>$totaleCalabria,'percentualeCalabria'=> $percentualeCalabria]);
+        $regioneCampania = collect(['totaleCampania'=>$totaleCampania,'percentualeCampania'=> $percentualeCampania]);
+        $regioneEmilia = collect(['totaleEmilia'=>$totaleEmilia,'percentualeEmilia'=> $percentualeEmilia]);
+        $regioneFriuli = collect(['totaleFriuli'=>$totaleFriuli,'percentualeEFriuli'=> $percentualeFriuli]);
+        $regioneLazio = collect(['totaleLazio'=>$totaleLazio,'percentualeLazio'=> $percentualeLazio]);
+        $regioneLiguria = collect(['totaleLiguria'=>$totaleLiguria,'percentualeLiguria'=> $percentualeLiguria]);
+        $regioneLombardia = collect(['totaleLombardia'=>$totaleLombardia,'percentualeLombardia'=> $percentualeLombardia]);
+        $regioneMarche = collect(['totaleMarche'=>$totaleMarche,'percentualeMarche'=> $percentualeMarche]);
+        $regioneMolise = collect(['totaleMolise'=>$totaleMolise,'percentualeMolise'=> $percentualeMolise]);
+        $regionePiemonte = collect(['totalePiemonte'=>$totalePiemonte,'percentualePiemonte'=> $percentualePiemonte]);
+        $regionePuglia = collect(['totalePuglia'=>$totalePuglia,'percentualePuglia'=> $percentualePuglia]);
+        $regioneSardegna = collect(['totaleSardegna'=>$totaleSardegna,'percentualeSardegna'=> $percentualeSardegna]);
+        $regioneSicilia = collect(['totaleSicilia'=>$totaleSicilia,'percentualeSicilia'=> $percentualeSicilia]);
+        $regioneToscana = collect(['totaleToscana'=>$totaleToscana,'percentualeToscana'=> $percentualeToscana]);
+        $regioneTrentino = collect(['totaleTrentino'=>$totaleTrentino,'percentualeTrentino'=> $percentualeTrentino]);
+        $regioneUmbria = collect(['totaleUmbria'=>$totaleUmbria,'percentualeUmbria'=> $percentualeUmbria]);
+        $regioneValle = collect(['totaleValle'=>$totaleValle,'percentualeValle'=> $percentualeValle]);
+        $regioneVeneto = collect(['totaleVeneto'=>$totaleVeneto,'percentualeVeneto'=> $percentualeVeneto]);
+        
+        $regione=collect([
+          'abruzzo'=>$regioneAbruzzo,
+          'basilicata'=> $regioneBasilicata,
+          'calabria'=> $regioneCalabria,
+          'campania'=> $regioneCampania,
+          'emilia'=> $regioneEmilia,
+          'friuli'=> $regioneFriuli,
+          'lazio'=> $regioneLazio,
+          'liguria'=> $regioneLiguria,
+          'lombardia'=> $regioneLombardia,
+          'marche'=> $regioneMarche,
+          'molise'=> $regioneMolise,
+          'piemonte'=> $regionePiemonte,
+          'puglia'=> $regionePuglia,
+          'sardegna'=> $regioneSardegna,
+          'sicilia'=> $regioneSicilia,
+          'toscana'=> $regioneToscana,
+          'trentino'=> $regioneTrentino,
+          'umbria'=> $regioneUmbria,
+          'valle'=> $regioneValle,
+          'veneto'=> $regioneVeneto,
+        ]);
+
+        return view('corsi.admin.resoconti.relazioneFineIncorporamento',['Anni'=>$allievi,'area'=>$area,'regione'=>$regione]);
       }
 }
