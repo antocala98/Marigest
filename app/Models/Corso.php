@@ -16,5 +16,6 @@ class Corso extends Model
         'nome',
         'anno_inizio',
         'anno_fine',
+        'classe',
     ];
 }

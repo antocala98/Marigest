@@ -9,6 +9,8 @@ use App\Http\Controllers\GestionePersonaleCorsiController;
 use App\Http\Controllers\AdminJuniorCorsiController;
 use App\Http\Controllers\AdminCorsiController;
 use App\Http\Controllers\relazioneIncorporamentoController;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,11 @@ use App\Http\Controllers\relazioneIncorporamentoController;
 */
 
 Route::get('/', function(){
-    return view('welcome');
+    if(!Auth::user()){
+        return view('welcome');
+    } else {
+        return RouteServiceProvider::HOME(Auth::user(),null);
+    }
 });
 
 Route::get('/standby', function (){
