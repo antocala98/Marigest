@@ -1,1 +1,0 @@
-sei in attesa di essere registrato!
