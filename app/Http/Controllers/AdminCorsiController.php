@@ -169,17 +169,33 @@ class AdminCorsiController extends Controller
   public function downloadSchedaIndividuale($id)
   {
     $allievo = Allievo::where('id', $id)->first();
+    $provvedimentiSanitari = ProvvedimentoSanitario::get();
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
-    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo]);
+    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo], ['provvedimentiSanitari' => $provvedimentiSanitari]);
     return $pdf->download('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
   }
 
   public function visualizzaSchedaIndividuale($id)
   {
     $allievo = Allievo::where('id', $id)->first();
+    $provvedimentiSanitari = ProvvedimentoSanitario::get();
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
-    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo]);
-    return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
+
+          foreach ($provvedimentiSanitari as $provvedimento) {
+            $matricola = ($provvedimento->matricola_allievo_paziente);
+              if ($allievo->matricola_militare == $matricola) {
+                  $esenzaTot = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza Totale')->where('matricola_allievo_paziente' , $matricola)->select('num_giorni_provvedimento')->sum('num_giorni_provvedimento');
+                  $esenzaAGA = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza AGA')->where('matricola_allievo_paziente' , $matricola)->select('num_giorni_provvedimento')->sum('num_giorni_provvedimento');
+                  $ricovero = ProvvedimentoSanitario::where('tipo_provvedimento', 'Ricovero infermeria')->where('matricola_allievo_paziente' , $matricola)->select('num_giorni_provvedimento')->sum('num_giorni_provvedimento');
+                  $degCov = ProvvedimentoSanitario::where('tipo_provvedimento', 'Degenza-Convalescenza')->where('matricola_allievo_paziente' , $matricola)->select('num_giorni_provvedimento')->sum('num_giorni_provvedimento');
+
+                break;
+              }
+          }
+
+      $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTot' => $esenzaTot, 'esenzaAGA' => $esenzaAGA, 'ricovero' => $ricovero, 'degCov' => $degCov, 'matricola' => $matricola]);
+
+      return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
   }
 
 

@@ -4838,6 +4838,9 @@
         <td class="column18 style17 s">xx</td>
         <td class="column19 style41 null"></td>
       </tr>
+
+
+
       <tr class="row51">
         <td class="column0 style1 null"></td>
         <td class="column1 style81 s style83" colspan="12">QUADRO SANITARIO E DISCIPLINARE</td>
@@ -4862,7 +4865,7 @@
       <tr class="row53">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Esenza A.G.A.</td>
-        <td class="column3 style14 n">6</td>
+        <td class="column3 style14 n">{{$esenzaAGA}}</td>
         <td class="column4 style29 null"></td>
         <td class="column5 style30 null"></td>
         <td class="column6 style13 s">Rimprovero</td>
@@ -4877,7 +4880,7 @@
       <tr class="row54">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Esenza totale</td>
-        <td class="column3 style14 n">7</td>
+        <td class="column3 style14 n">{{$esenzaTot}}</td>
         <td class="column4 style31 null"></td>
         <td class="column5 style30 null"></td>
         <td class="column6 style13 s">consegna Semplice</td>
@@ -4889,7 +4892,7 @@
       <tr class="row55">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Ricovero in infermeria</td>
-        <td class="column3 style38 n">0</td>
+        <td class="column3 style38 n">{{$ricovero}}</td>
         <td class="column4 style31 null"></td>
         <td class="column5 style30 null"></td>
         <td class="column6 style13 s">Consegna di Rigore</td>
@@ -4907,7 +4910,7 @@
       <tr class="row56">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Rip. Dom. / Convalescenza</td>
-        <td class="column3 style38 n">3</td>
+        <td class="column3 style38 n">{{$degCov}}</td>
         <td class="column4 style31 null"></td>
         <td class="column5 style30 null"></td>
         <td class="column6 style13 s">Elogio / T.P.S.</td>
