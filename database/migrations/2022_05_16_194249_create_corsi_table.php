@@ -20,6 +20,7 @@ class CreateCorsiTable extends Migration
             $table->string('nome')->nullable(true);
             $table->year('anno_inizio')->nullable(true);
             $table->year('anno_fine')->nullable(true);
+            $table->string('classe')->nullable(true);
             $table->timestamps();
         });
     }

@@ -9,6 +9,8 @@ use App\Http\Controllers\GestionePersonaleCorsiController;
 use App\Http\Controllers\AdminJuniorCorsiController;
 use App\Http\Controllers\AdminCorsiController;
 use App\Http\Controllers\relazioneIncorporamentoController;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,11 @@ use App\Http\Controllers\relazioneIncorporamentoController;
 */
 
 Route::get('/', function(){
-    return view('welcome');
+    if(!Auth::user()){
+        return view('welcome');
+    } else {
+        return RouteServiceProvider::HOME(Auth::user(),null);
+    }
 });
 
 Route::get('/standby', function (){
@@ -46,7 +52,7 @@ Route::prefix('/corsi')->group(function(){
             Route::prefix('/schede-riepilogative')->group(function () {
                 Route::get('/', [AdminCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative22NMRS');
                 Route::get('/Relazione-fine-incorporamento',[relazioneIncorporamentoController::class,'relazioneAnno'])->middleware('auth')->name('relazioneFineIncorpormaneto');
-
+                //Route::get('/Relazione-fine-incorporamento-per-area',[relazioneIncorporamentoController::class,'relazioneArea'])->middleware('auth')->name('relazioneFineIncorpormanetoperArea');
             });
             Route::get('inserisci-provvedimento-disciplinare', [AdminCorsiController::class, 'inserisciDisciplinare'])->middleware('auth')->name('inserisciDisciplinareAdmin');
             Route::get('modifica-dati-allievi/{id?}', [AdminCorsiController::class, 'modificaDatiAllievi'])->middleware('auth')->name('modificaDatiAdmin22NMRS');
