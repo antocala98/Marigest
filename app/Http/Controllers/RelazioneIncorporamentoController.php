@@ -23,6 +23,7 @@ class relazioneIncorporamentoController extends Controller
           $allievo->eta=$current-$allievo->data_nascita;
         }
         
+        
         $allievi=$allievi->unique('data_nascita');
       $prova='ciao mondo';
         return view('corsi.admin.relazioneFineIncorporamento',['Anni'=>$allievi]);

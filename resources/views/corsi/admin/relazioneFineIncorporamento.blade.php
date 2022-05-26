@@ -13,6 +13,7 @@
         </div>
     </li>
 @endsection
+
 @section('body')
     <div id="accordion-collapse" data-accordion="collapse">
         <h2 id="accordion-collapse-heading-1">
