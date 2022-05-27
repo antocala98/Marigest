@@ -75,7 +75,7 @@
     </div>
     </div>
     <?php } else if(!isset($provvedimentiSanitari) && !isset($feedback_utente)){   ?>
-    <form method="POST" action="{{ route('aggiornaProvAdmin22NMRS') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('aggiornaProvAdmin') }}" enctype="multipart/form-data">
     @csrf
 
 <div class="flex justify-center"

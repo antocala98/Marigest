@@ -72,7 +72,7 @@
                                 {{$allievo->categoria}}
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('downloadScheda22NMRS', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Scarica PDF</a>
+                                <a href="{{ route('downloadScheda', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Scarica PDF</a>
                             </td>
                         </tr>
                     @endforeach

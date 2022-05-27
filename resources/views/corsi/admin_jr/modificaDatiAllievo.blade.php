@@ -50,7 +50,7 @@
                                     {{ $allievo->matricola_militare }}
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('modificaDati22NMRS', ['id' => $allievo->id]) }} "
+                                    <a href="{{ route('modificaDati', ['id' => $allievo->id]) }} "
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Modifica
                                         dati</a>
                                 </td>

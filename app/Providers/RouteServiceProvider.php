@@ -67,14 +67,14 @@ class RouteServiceProvider extends ServiceProvider
                             $request->authenticate();
                             $request->session()->regenerate();
                         }
-                        return redirect()->intended(route('homeCorsiAdmin22NMRS'));
-                        
+                        return redirect()->intended(route('homeCorsiAdmin'));
+
                     case '2': 
                         if(!Auth::user()){
                             $request->authenticate();
                             $request->session()->regenerate();
                         }
-                        return redirect()->intended(route('homeCorsiAdminJunior22NMRS'));
+                        return redirect()->intended(route('homeCorsiAdminJunior'));
                          
                     case '3': break;
                 }

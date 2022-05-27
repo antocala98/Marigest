@@ -83,7 +83,7 @@
     </div>
     </div>
     <?php } else if(!isset($provvedimentoDisciplinare) && !isset($feedback_utente)){   ?>
-    <form method="POST" action="{{ route('aggiornaProvDAdmin22NMRS') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('aggiornaProvDAdmin') }}" enctype="multipart/form-data">
     @csrf
         <div class="flex justify-center"
         <div class="m-11 grid gap-6 mb-24 lg:grid-cols-2">

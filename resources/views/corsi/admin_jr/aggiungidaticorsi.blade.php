@@ -12,7 +12,7 @@
 
         <div class="h-auto my-10 w-9/12 p-4 border-4 rounded-lg shadow-xl">
 
-            <form action="{{ route('inserimentoDatiAdminJunior22NMRS')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('inserimentoDatiAdminJunior')}}" method="POST" enctype="multipart/form-data">
                 @csrf
             <label class="block mb-2 text-lg text-center font-medium text-gray-900 dark:text-gray-300" for="user_avatar">Importa File</label>
             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50
