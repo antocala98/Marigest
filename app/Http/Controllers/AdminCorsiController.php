@@ -375,7 +375,7 @@ public function paginaInserisciDisciplinare(){
     $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
     if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin.inserisciProvDisciplinare')->with(['allievi' => $allievi]);
+      return view('corsi.admin.funzioniDisciplinare.inserisciProvDisciplinare')->with(['allievi' => $allievi]);
     }
     else {
       abort(403, 'Azione non autorizzata.');
@@ -403,7 +403,7 @@ public function inserisciDisciplinare(Request $request){
 
     $provvedimentoDisciplinare->save();
 
-    return view('corsi.admin.inserisciProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
+    return view('corsi.admin.funzioniDisciplinare.inserisciProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
   }
 
   public function paginaModificaDisciplinare(){
@@ -435,7 +435,7 @@ public function inserisciDisciplinare(Request $request){
           $provvedimentoD->data_notifica = Carbon::parse($provvedimentoD->data_notifica)->format('d/m/Y');
 
       }
-    return view('corsi.admin.visualizzaProvDisciplinare')->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
+    return view('corsi.admin.funzioniDisciplinare.visualizzaProvDisciplinare')->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
 
   }
 
