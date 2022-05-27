@@ -7,7 +7,7 @@
                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                     clip-rule="evenodd"></path>
             </svg>
-            <a href="{{ url('corsi/22-nmrs/admin/modifica-dati-allievi') }}"
+            <a href="{{ url('corsi/marescialli/admin/modifica-dati-allievi') }}"
                 class="inline-flex items-center text-sm font-medium text-white hover:scale-110 dark:text-gray-400 dark:hover:text-white">Modifica dati Allievi</a>
         </div>
     </li>

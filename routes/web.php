@@ -37,7 +37,7 @@ Route::get('/standby', function (){
 
 
 Route::prefix('/corsi')->group(function(){
-    Route::prefix('/22-nmrs')->group(function() {
+    Route::prefix('/marescialli')->group(function() {
         Route::prefix('/admin')->group(function () {
             Route::get('home', [AdminCorsiController::class, 'view'])->middleware('auth')->name('homeCorsiAdmin22NMRS');
             Route::get('/gestione-personale-corsi', [AdminCorsiController::class,'gestionePersonale'])->middleware('auth')->name('gestionePersonale22NMRS');

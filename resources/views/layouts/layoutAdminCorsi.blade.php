@@ -4,7 +4,7 @@
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3 ml-3">
                     <li class="inline-flex items-center">
-                        <a href="{{url('corsi/22-nmrs/admin/home')}}"
+                        <a href="{{url('corsi/marescialli/admin/home')}}"
                         class="inline-flex items-center text-sm font-medium text-white hover:scale-110 dark:text-gray-400 dark:hover:text-white">
                         <svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -31,27 +31,27 @@
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent"
             role="tablist">
             <li class="mr-2" role="presentation">
-                <a href="{{url('corsi/22-nmrs/admin/gestione-personale-corsi')}}"
+                <a href="{{url('corsi/marescialli/admin/gestione-personale-corsi')}}"
                 class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     aria-selected="true">Gestione Personale</a>
             </li>
             <li class="mr-2" role="presentation">
-                <a href="{{url('corsi/22-nmrs/admin/aggiungi-dati-corsi')}}"
+                <a href="{{url('corsi/marescialli/admin/aggiungi-dati-corsi')}}"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     aria-selected="false">Acquisisci dati incorporamento</a>
             </li>
             <li class="mr-2" role="presentation">
-                <a href="{{url('corsi/22-nmrs/admin/schede-individuali')}}"
+                <a href="{{url('corsi/marescialli/admin/schede-individuali')}}"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     aria-selected="false">Schede individuali allievi</a>
             </li>
             <li role="presentation">
-                <a href="{{url('corsi/22-nmrs/admin/schede-riepilogative')}}"
+                <a href="{{url('corsi/marescialli/admin/schede-riepilogative')}}"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     aria-selected="false">Schede Riepilogative</a>
             </li>
             <li role="presentation">
-                <a href="{{url('corsi/22-nmrs/admin/modifica-dati-allievi')}}"
+                <a href="{{url('corsi/marescialli/admin/modifica-dati-allievi')}}"
                     class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                     aria-selected="false">Modifica dati Allievi</a>
             </li>

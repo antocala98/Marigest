@@ -63,41 +63,19 @@ class RouteServiceProvider extends ServiceProvider
                     case '0':
                         return view('auth.register')->with(["standby" => "Il tuo account non è stato ancora attivato."]);
                     case '1':
-                        switch($user->comando_appartenenza){
-                            case '24_NMRS': 
-                                return redirect(route('standby'));
-                            case '23_NMRS': 
-                                return redirect(route('standby'));
-                            case '22_NMRS':
-                                if(!Auth::user()){
-                                    $request->authenticate();
-                                    $request->session()->regenerate();
-                                }
-                                return redirect()->intended(route('homeCorsiAdmin22NMRS'));
-                            case 'vfp4': 
-                                return redirect(('standby'));
-                            case 'vfp1': 
-                                return redirect(route('standby'));
-                        } 
-                    case '2': 
-                        switch($user->comando_appartenenza){
-                            case '24_NMRS': 
-                                return redirect(route('standby'));
-                            case '23_NMRS': 
-                                return redirect(route('standby'));
-                            case '22_NMRS':
-                                if(!Auth::user()){
-                                    $request->authenticate();
-                                    $request->session()->regenerate();
-                                }
-                                return redirect()->intended(route('homeCorsiAdminJunior22NMRS'));
-                            case 'vfp4': 
-                                return redirect(route('standby'));
-                            case 'vfp1': 
-                                return redirect(route('standby'));
-                        } 
+                        if(!Auth::user()){
+                            $request->authenticate();
+                            $request->session()->regenerate();
+                        }
+                        return redirect()->intended(route('homeCorsiAdmin22NMRS'));
                         
-
+                    case '2': 
+                        if(!Auth::user()){
+                            $request->authenticate();
+                            $request->session()->regenerate();
+                        }
+                        return redirect()->intended(route('homeCorsiAdminJunior22NMRS'));
+                         
                     case '3': break;
                 }
                 //admin
