@@ -356,7 +356,7 @@ class AdminCorsiController extends Controller
       }
     }
     //da qua inizia il lavoro di giorgio
-    
+
 
 
 
@@ -631,9 +631,14 @@ class AdminCorsiController extends Controller
 
   public function sezioneStudi()
   {
+
     return view('corsi.admin.sezioneStudi');
   }
-
+public function inserisciVerbaliEsami()
+  {
+    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
+    return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['allievi'=>$allievi]);
+  }
   /**
    *
    * @return mixed
