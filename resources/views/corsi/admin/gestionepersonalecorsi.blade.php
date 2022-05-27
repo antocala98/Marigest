@@ -22,6 +22,9 @@
                                 Cognome
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Grado
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Tipo di utente
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -40,6 +43,9 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     {{$user->tipo_utente}}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{$user->grado}}
                                 </td>
                                 <td>
                                     <h2  id="accordion-collapse-heading-{{$user->id}}">

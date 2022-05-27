@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'tipo_utente',
         'img_profilo',
+        'grado',
         'remember_token',
     ];
 

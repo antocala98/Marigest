@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('img_profilo')->nullable(true);
+            $table->string('grado')->nullable(true);
             $table->string('tipo_utente')->default(0);
             $table->string('sezione_appartenenza')->nullable(true);
             $table->string('comando_appartenenza')->nullable(true);
