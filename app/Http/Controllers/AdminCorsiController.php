@@ -169,7 +169,6 @@ class AdminCorsiController extends Controller
 
   public function downloadSchedaIndividuale($id)
   {
-
       $allievo = Allievo::where('id', $id)->first();
       $provvedimentiSanitari = ProvvedimentoSanitario::get();
       $provvedimenti_disciplinari = ProvvedimentoDisciplinare::get();
@@ -425,28 +424,31 @@ public function inserisciDisciplinare(Request $request){
     return view('corsi.admin.funzioniDisciplinare.inserisciProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
   }
 
-  public function paginaModificaDisciplinare(){
-
-
-
-   /* $provvedimenti_disciplinari = ProvvedimentoDisciplinare::select('*')->with('allievo')->get();
-
-    foreach ($provvedimenti_disciplinari as $provvedimento) {
-      echo $provvedimento->allievo['cognome'];
-
-    } /*
-
-   // $provvedimenti_disciplinari = $allievo->provvedimentiDisciplinari()->get();
-
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin.modificaProvDisciplinare')->with(['provvedimenti_disciplinari' => $provvedimenti_disciplinari]);
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-    */
+  public function paginaModificaDisciplinare($id = null){
+      if ($this->getUser()->can('view', $this->getUserAdmin())) {
+          if ($id == null) {
+              $provvedimentoDisciplinare = ProvvedimentoDisciplinare::orderBy('data_provvedimento')->get();
+              return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare')
+                  ->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
+          } else {
+              $provvedimentoD = ProvvedimentoDisciplinare::where('id', $id)->first();
+              return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare')->with(['provvedimentoD' => $provvedimentoD]);
+          }
+      }
   }
+    public function aggiornaProvvedimentoD(Request $request){
+        $provvedimentoDisciplinare= ProvvedimentoDisciplinare::find($request->id);
 
+        $provvedimentoDisciplinare->tipo_provvedimento = $request->tipo_provvedimento;
+        $provvedimentoDisciplinare->num_giorni_provvedimento=$request->num_giorni;
+        $provvedimentoDisciplinare->data_provvedimento=$request->data_provvedimento;
+        $provvedimentoDisciplinare->num_protocollo=$request->n_protocollo;
+
+        $provvedimentoDisciplinare->save();
+
+        return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->matricola_allievo]);
+
+    }
   public function paginaVisualizzaDisciplinare(){
       $provvedimentoDisciplinare = ProvvedimentoDisciplinare::orderBy('data_provvedimento')->get();
       foreach ($provvedimentoDisciplinare as $provvedimentoD) {
