@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\IncorporandiVfp1;
+use App\Models\Materia;
 use App\Models\Allievo;
 use App\Models\ProvvedimentoDisciplinare;
 use App\Models\ProvvedimentoSanitario;
@@ -636,8 +637,10 @@ class AdminCorsiController extends Controller
   }
 public function inserisciVerbaliEsami()
   {
-    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
-    return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['allievi'=>$allievi]);
+    $userRedattore=Auth::user();
+    $materie = Materia::where('id','>',0)->get();
+    $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
+    return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['allievi'=>$allievi,'materie'=>$materie,'userRedattore'=>$userRedattore]);
   }
   /**
    *
