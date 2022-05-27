@@ -18,9 +18,10 @@ class CreateProvvedimentiDisciplinariTable extends Migration
             $table->string('num_protocollo');
             $table->string('tipo_provvedimento');
             $table->string('num_giorni_provvedimento')->nullable(true);
-            $table->string('data_provvedimento');
-            $table->string('data_notifica');
-            $table->string('matricola_allievo');
+            $table->string('data_provvedimento')->nullable(true);
+            $table->string('data_notifica')->nullable(true);
+            $table->string('matricola_allievo')->nullable(true);
+            $table->string('classe_allievo')->nullable(true);
             $table->string('id_user_committente');
             $table->timestamps();
             $table->foreign('matricola_allievo')->references('matricola_militare')->on('allievi');

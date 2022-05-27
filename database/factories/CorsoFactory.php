@@ -18,31 +18,42 @@ class CorsoFactory extends Factory
         $numero_corso=null;
         $classe=null;
         $tipo_corso=$this->faker->randomElement(array('NMRS','Vfp1','Vfp4'));
-        do{
-            $anno_inizio=$this->faker->date();
-        } while ($anno_inizio < Carbon::now()->year-3 || $anno_inizio > Carbon::now()->year);
-        if($tipo_corso == "NMRS"){
-            $anno_fine=$anno_inizio + 3;
+        
+       
+   
+        $data_inizio=$this->faker->date();
+        
+        
+        
+        $date = Carbon::parse($data_inizio); 
+        $now = Carbon::now(); 
+        $diff = $date->diffInDays($now); 
+            
+       
+        if($tipo_corso == 'NMRS'){
             $numero_corso = $this->faker->unique()->randomElement(array(18,19,20,21,22,23,24));
-            if($anno_fine == Carbon::now()->year ){
-                $classe="terza";
-            } else if ($anno_fine == Carbon::now()->year + 1){
-                $classe="seconda";
-            } else if ($anno_fine == Carbon::now()->year + 2){
-                $classe="prima";
-            }
-        } else {
-            $anno_fine=$anno_inizio;
-        }
 
+            if($diff < 365){
+                $classe='prima';
+            } else if($diff >= 365 && $diff < 730){
+                $classe='seconda';
+            } else if($diff >= 730){
+                $classe='terza';
+            }
+
+            do{
+                $data_inizio=$this->faker->date();
+            }while(Carbon::parse($data_inizio)->year < Carbon::now()->year - 3 || Carbon::parse($data_inizio)->year > Carbon::now()->year || Carbon::parse($data_inizio)->month != 9 );
+            
+    
+        }
         
 
         return [
             'numero_corso' => $numero_corso,
             'tipo_corso' => $tipo_corso,
             'nome' => $this->faker->lastName(),
-            'anno_inizio' => $anno_inizio,
-            'anno_fine' => $anno_fine,
+            'data_inizio' => $data_inizio,
             'classe' => $classe,
         ];
     }
