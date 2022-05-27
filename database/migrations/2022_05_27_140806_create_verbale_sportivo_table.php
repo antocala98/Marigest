@@ -13,7 +13,7 @@ class CreateVerbaleSportivoTable extends Migration
      */
     public function up()
     {
-        Schema::create('verbale_sportivo', function (Blueprint $table) {
+        Schema::create('verbali_sportivi', function (Blueprint $table) {
             $table->id();
             $table->string('codice_verbale');
             $table->string('disciplina')->nullable(true);

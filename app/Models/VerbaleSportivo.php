@@ -9,7 +9,7 @@ class VerbaleSportivo extends Model
 {
     use HasFactory;
 
-    protected $table="VerbaleSportivo";
+    protected $table="verbali_sportivi";
 
     protected $fillable=[
         'codice_verbale',
