@@ -4866,13 +4866,13 @@
       <tr class="row53">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Esenza A.G.A.</td>
-        <td class="column3 style14 n">{{$esenzaAGA}}</td>
-        <td class="column4 style29 null"></td>
-        <td class="column5 style30 null"></td>
+        <td class="column3 style14 n">{{$esenzaAGAPrimaClasse}}</td>
+        <td class="column4 style29 null">{{$esenzaAGASecondaClasse}}</td>
+        <td class="column5 style30 null">{{$esenzaAGATerzaClasse}}</td>
         <td class="column6 style13 s">Rimprovero</td>
-        <td class="column7 style60 n style61" colspan="2">{{$rimprovero}}</td>
-        <td class="column9 style62 null style63" colspan="2"></td>
-        <td class="column11 style64 null style65" colspan="2"></td>
+        <td class="column7 style60 n style61" colspan="2">{{$rimproveroPrimaClasse}}</td>
+        <td class="column9 style62 null style63" colspan="2">{{$rimproveroSecondaClasse}}</td>
+        <td class="column11 style64 null style65" colspan="2">{{$rimproveroTerzaClasse}}</td>
         <td class="column13 style66 null style66" colspan="2" rowspan="2"></td>
         <td class="column15 style67 null style70" colspan="2" rowspan="2"></td>
         <td class="column17 style71 null style70" colspan="2" rowspan="2"></td>
@@ -4881,25 +4881,25 @@
       <tr class="row54">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Esenza totale</td>
-        <td class="column3 style14 n">{{$esenzaTot}}</td>
-        <td class="column4 style31 null"></td>
-        <td class="column5 style30 null"></td>
+        <td class="column3 style14 n">{{$esenzaTotPrimaClasse}}</td>
+        <td class="column4 style31 null">{{$esenzaTotSecondaClasse}}</td>
+        <td class="column5 style30 null">{{$esenzaTotTerzaClasse}}</td>
         <td class="column6 style13 s">consegna Semplice</td>
-        <td class="column7 style60 n style61" colspan="2">{{$conSemp}}</td>
-        <td class="column9 style62 null style63" colspan="2"></td>
-        <td class="column11 style64 null style65" colspan="2"></td>
+        <td class="column7 style60 n style61" colspan="2">{{$conSempPrimaClasse}}</td>
+        <td class="column9 style62 null style63" colspan="2">{{$conSempSecondaClasse}}</td>
+        <td class="column11 style64 null style65" colspan="2">{{$conSempTerzaClasse}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row55">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Ricovero in infermeria</td>
-        <td class="column3 style38 n">{{$ricovero}}</td>
-        <td class="column4 style31 null"></td>
-        <td class="column5 style30 null"></td>
+        <td class="column3 style38 n">{{$ricoveroPrimaClasse}}</td>
+        <td class="column4 style31 null">{{$ricoveroSecondaClasse}}</td>
+        <td class="column5 style30 null">{{$ricoveroTerzaClasse}}</td>
         <td class="column6 style13 s">Consegna di Rigore</td>
-        <td class="column7 style100 n style101" colspan="2">{{$conRig}}</td>
-        <td class="column9 style64 null style65" colspan="2"></td>
-        <td class="column11 style64 null style65" colspan="2"></td>
+        <td class="column7 style100 n style101" colspan="2">{{$conRigPrimaClasse}}</td>
+        <td class="column9 style64 null style65" colspan="2">{{$conRigSecondaClasse}}</td>
+        <td class="column11 style64 null style65" colspan="2">{{$conRigTerzaClasse}}</td>
         <td class="column13 style19 s">TIA/RI</td>
         <td class="column14 style19 s">TIC/RC</td>
         <td class="column15 style19 s">TIA/RI</td>
@@ -4911,16 +4911,16 @@
       <tr class="row56">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Rip. Dom. / Convalescenza</td>
-        <td class="column3 style38 n">{{$degCov}}</td>
-        <td class="column4 style31 null"></td>
-        <td class="column5 style30 null"></td>
+        <td class="column3 style38 n">{{$degCovPrimaClasse}}</td>
+        <td class="column4 style31 null">{{$degCovSecondaClasse}}</td>
+        <td class="column5 style30 null">{{$degCovTerzaClasse}}</td>
         <td class="column6 style13 s">Elogio / T.P.S.</td>
-        <td class="column7 style38 n">{{$elogio}}</td>
-        <td class="column8 style39 n">{{$tps}}</td>
-        <td class="column9 style37 null"></td>
-        <td class="column10 style37 null"></td>
-        <td class="column11 style37 null"></td>
-        <td class="column12 style31 null"></td>
+        <td class="column7 style38 n">{{$elogioPrimaClasse}}</td>
+        <td class="column8 style39 n">{{$tpsPrimaClasse}}</td>
+        <td class="column9 style37 null">{{$elogioSecondaClasse}}</td>
+        <td class="column10 style37 null">{{$tpsSecondaClasse}}</td>
+        <td class="column11 style37 null">{{$elogioTerzaClasse}}</td>
+        <td class="column12 style31 null">{{$tpsTerzaClasse}}</td>
         <td class="column13 style66 null style94" colspan="2" rowspan="2"></td>
         <td class="column15 style67 null style96" colspan="2" rowspan="2"></td>
         <td class="column17 style71 null style96" colspan="2" rowspan="2"></td>

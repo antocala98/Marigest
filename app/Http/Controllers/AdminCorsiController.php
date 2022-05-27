@@ -14,6 +14,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\Corso;
 
 
 
@@ -169,68 +170,68 @@ class AdminCorsiController extends Controller
 
   public function downloadSchedaIndividuale($id)
   {
-      $allievo = Allievo::where('id', $id)->first();
-      $provvedimentiSanitari = ProvvedimentoSanitario::get();
-      $provvedimenti_disciplinari = ProvvedimentoDisciplinare::get();
-      $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
-      $esenzaTot=0;
-      $esenzaAGA=0;
-      $ricovero=0;
-      $degCov=0;
-      $rimprovero=0;
-      $conSemp=0;
-      $conRig=0;
-      $elogio=0;
-      $tps=0;
-      $matricola=0;
-      foreach ($provvedimentiSanitari as $provvedimento) {
-          $matricola = ($provvedimento->matricola_allievo_paziente);
-          if ($allievo->matricola_militare == $matricola) {
-              $esenzaTot = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza Totale')
-                  ->where('matricola_allievo_paziente', $matricola)
-                  ->select('num_giorni_provvedimento')
-                  ->sum('num_giorni_provvedimento');
-              $esenzaAGA = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza AGA')
-                  ->where('matricola_allievo_paziente', $matricola)
-                  ->select('num_giorni_provvedimento')
-                  ->sum('num_giorni_provvedimento');
-              $ricovero = ProvvedimentoSanitario::where('tipo_provvedimento', 'Ricovero infermeria')
-                  ->where('matricola_allievo_paziente', $matricola)
-                  ->select('num_giorni_provvedimento')
-                  ->sum('num_giorni_provvedimento');
-              $degCov = ProvvedimentoSanitario::where('tipo_provvedimento', 'Degenza-Convalescenza')
-                  ->where('matricola_allievo_paziente', $matricola)
-                  ->select('num_giorni_provvedimento')
-                  ->sum('num_giorni_provvedimento');
+    $allievo = Allievo::where('id', $id)->first();
+    $provvedimentiSanitari = ProvvedimentoSanitario::get();
+    $provvedimenti_disciplinari = ProvvedimentoDisciplinare::get();
+    $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
+    $esenzaTot = 0;
+    $esenzaAGA = 0;
+    $ricovero = 0;
+    $degCov = 0;
+    $rimprovero = 0;
+    $conSemp = 0;
+    $conRig = 0;
+    $elogio = 0;
+    $tps = 0;
+    $matricola = 0;
+    foreach ($provvedimentiSanitari as $provvedimento) {
+      $matricola = ($provvedimento->matricola_allievo_paziente);
+      if ($allievo->matricola_militare == $matricola) {
+        $esenzaTot = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza Totale')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $esenzaAGA = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza AGA')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $ricovero = ProvvedimentoSanitario::where('tipo_provvedimento', 'Ricovero infermeria')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $degCov = ProvvedimentoSanitario::where('tipo_provvedimento', 'Degenza-Convalescenza')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
 
-              $rimprovero = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
-                  ->where('matricola_allievo', $matricola)
-                  ->select('tipo_provvedimento')
-                  ->count('tipo_provvedimento');
-              $conSemp = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Semplice')
-                  ->where('matricola_allievo', $matricola)
-                  ->select('num_giorni_provvedimento')
-                  ->sum('num_giorni_provvedimento');
-              $conRig = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Rigore')
-                  ->where('matricola_allievo', $matricola)
-                  ->select('num_giorni_provvedimento')
-                  ->sum('num_giorni_provvedimento');
-              $elogio = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Elogio')
-                  ->where('matricola_allievo', $matricola)
-                  ->select('tipo_provvedimento')
-                  ->count('tipo_provvedimento');
-              $tps = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'TPS')
-                  ->where('matricola_allievo', $matricola)
-                  ->select('tipo_provvedimento')
-                  ->count('tipo_provvedimento');
+        $rimprovero = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
+          ->where('matricola_allievo', $matricola)
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+        $conSemp = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Semplice')
+          ->where('matricola_allievo', $matricola)
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $conRig = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Rigore')
+          ->where('matricola_allievo', $matricola)
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $elogio = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Elogio')
+          ->where('matricola_allievo', $matricola)
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+        $tps = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'TPS')
+          ->where('matricola_allievo', $matricola)
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
 
-              break;
-          }
+        break;
       }
-      $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTot' => $esenzaTot, 'esenzaAGA' => $esenzaAGA,
-          'ricovero' => $ricovero, 'degCov' => $degCov, 'matricola' => $matricola, 'conSemp' => $conSemp, 'rimprovero' => $rimprovero,
-          'conRig' => $conRig, 'elogio' => $elogio, 'tps' => $tps]);
-     return $pdf->download('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
+    }
+    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTot' => $esenzaTot, 'esenzaAGA' => $esenzaAGA,
+      'ricovero' => $ricovero, 'degCov' => $degCov, 'matricola' => $matricola, 'conSemp' => $conSemp, 'rimprovero' => $rimprovero,
+      'conRig' => $conRig, 'elogio' => $elogio, 'tps' => $tps]);
+    return $pdf->download('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
   }
 
   public function visualizzaSchedaIndividuale($id)
@@ -239,65 +240,190 @@ class AdminCorsiController extends Controller
     $provvedimentiSanitari = ProvvedimentoSanitario::get();
     $provvedimenti_disciplinari = ProvvedimentoDisciplinare::get();
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
-      $esenzaTot=0;
-      $esenzaAGA=0;
-      $ricovero=0;
-      $degCov=0;
-      $rimprovero=0;
-      $conSemp=0;
-      $conRig=0;
-      $elogio=0;
-      $tps=0;
-      $matricola=0;
-          foreach ($provvedimentiSanitari as $provvedimento) {
-              $matricola = ($provvedimento->matricola_allievo_paziente);
-              if ($allievo->matricola_militare == $matricola) {
-                  $esenzaTot = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza Totale')
-                      ->where('matricola_allievo_paziente', $matricola)
-                      ->select('num_giorni_provvedimento')
-                      ->sum('num_giorni_provvedimento');
-                  $esenzaAGA = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza AGA')
-                      ->where('matricola_allievo_paziente', $matricola)
-                      ->select('num_giorni_provvedimento')
-                      ->sum('num_giorni_provvedimento');
-                  $ricovero = ProvvedimentoSanitario::where('tipo_provvedimento', 'Ricovero infermeria')
-                      ->where('matricola_allievo_paziente', $matricola)
-                      ->select('num_giorni_provvedimento')
-                      ->sum('num_giorni_provvedimento');
-                  $degCov = ProvvedimentoSanitario::where('tipo_provvedimento', 'Degenza-Convalescenza')
-                      ->where('matricola_allievo_paziente', $matricola)
-                      ->select('num_giorni_provvedimento')
-                      ->sum('num_giorni_provvedimento');
+    $esenzaTotPrimaClasse = 0;
+    $esenzaTotSecondaClasse = 0;
+    $esenzaTotTerzaClasse = 0;
+    $esenzaAGAPrimaClasse = 0;
+    $esenzaAGASecondaClasse = 0;
+    $esenzaAGATerzaClasse = 0;
+    $ricoveroPrimaClasse = 0;
+    $ricoveroSecondaClasse = 0;
+    $ricoveroTerzaClasse = 0;
+    $degCovPrimaClasse = 0;
+    $degCovSecondaClasse = 0;
+    $degCovTerzaClasse = 0;
+    $rimproveroPrimaClasse = 0;
+    $rimproveroSecondaClasse = 0;
+    $rimproveroTerzaClasse = 0;
+    $conSempPrimaClasse = 0;
+    $conSempSecondaClasse = 0;
+    $conSempTerzaClasse = 0;
+    $conRigPrimaClasse = 0;
+    $conRigSecondaClasse = 0;
+    $conRigTerzaClasse = 0;
+    $elogioPrimaClasse = 0;
+    $elogioSecondaClasse = 0;
+    $elogioTerzaClasse = 0;
+    $tpsPrimaClasse = 0;
+    $tpsSecondaClasse = 0;
+    $tpsTerzaClasse = 0;
+    $matricola = 0;
+    foreach ($provvedimentiSanitari as $provvedimento) {
+      $matricola = ($provvedimento->matricola_allievo_paziente);
+      if ($allievo->matricola_militare == $matricola) {
+        $esenzaTotPrimaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza Totale')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $esenzaTotSecondaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza Totale')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $esenzaTotTerzaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza Totale')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $esenzaAGAPrimaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza AGA')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $esenzaAGASecondaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza AGA')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $esenzaAGATerzaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza AGA')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $ricoveroPrimaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Ricovero infermeria')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $ricoveroSecondaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Ricovero infermeria')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $ricoveroTerzaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Ricovero infermeria')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
 
+        $degCovPrimaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Degenza-Convalescenza')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $degCovSecondaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Degenza-Convalescenza')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $degCovTerzaClasse = ProvvedimentoSanitario::where('tipo_provvedimento', 'Degenza-Convalescenza')
+          ->where('matricola_allievo_paziente', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
 
-                  $rimprovero = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
-                      ->where('matricola_allievo', $matricola)
-                      ->select('tipo_provvedimento')
-                      ->count('tipo_provvedimento');
-                  $conSemp = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Semplice')
-                      ->where('matricola_allievo', $matricola)
-                      ->select('num_giorni_provvedimento')
-                      ->sum('num_giorni_provvedimento');
-                  $conRig = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Rigore')
-                      ->where('matricola_allievo', $matricola)
-                      ->select('num_giorni_provvedimento')
-                      ->sum('num_giorni_provvedimento');
-                  $elogio = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Elogio')
-                      ->where('matricola_allievo', $matricola)
-                      ->select('tipo_provvedimento')
-                      ->count('tipo_provvedimento');
-                  $tps = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'TPS')
-                      ->where('matricola_allievo', $matricola)
-                      ->select('tipo_provvedimento')
-                      ->count('tipo_provvedimento');
+        $rimproveroPrimaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+        $rimproveroSecondaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+        $rimproveroTerzaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
 
-                  break;
-              }
-          }
-      $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTot' => $esenzaTot, 'esenzaAGA' => $esenzaAGA,
-          'ricovero' => $ricovero, 'degCov' => $degCov, 'matricola' => $matricola, 'conSemp' => $conSemp, 'rimprovero' => $rimprovero,
-          'conRig' => $conRig, 'elogio' => $elogio, 'tps' => $tps]);
-      return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
+        $conSempPrimaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Semplice')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $conSempSecondaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Semplice')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $conSempTerzaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Semplice')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+
+        $conRigPrimaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Rigore')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $conRigSecondaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Rigore')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+        $conRigTerzaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Rigore')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('num_giorni_provvedimento')
+          ->sum('num_giorni_provvedimento');
+
+        $elogioPrimaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Elogio')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+        $elogioSecondaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Elogio')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+        $elogioTerzaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Elogio')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+
+        $tpsPrimaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'TPS')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'prima')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+        $tpsSecondaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'TPS')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'seconda')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+        $tpsTerzaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'TPS')
+          ->where('matricola_allievo', $matricola)
+          ->where('classe_allievo', 'terza')
+          ->select('tipo_provvedimento')
+          ->count('tipo_provvedimento');
+
+        break;
+      }
+    }
+    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
+      'ricoveroPrimaClasse' => $ricoveroPrimaClasse, 'degCovPrimaClasse' => $degCovPrimaClasse, 'matricola' => $matricola, 'conSempPrimaClasse' => $conSempPrimaClasse, 'rimproveroPrimaClasse' => $rimproveroPrimaClasse,
+      'conRigPrimaClasse' => $conRigPrimaClasse, 'elogioPrimaClasse' => $elogioPrimaClasse, 'tpsPrimaClasse' => $tpsPrimaClasse, 'esenzaTotSecondaClasse' => $esenzaTotSecondaClasse, 'esenzaAGASecondaClasse' => $esenzaAGASecondaClasse,
+      'ricoveroSecondaClasse' => $ricoveroSecondaClasse, 'degCovSecondaClasse' => $degCovSecondaClasse, 'conSempSecondaClasse' => $conSempSecondaClasse, 'rimproveroSecondaClasse' => $rimproveroSecondaClasse,
+      'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
+      'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
+      'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse]);
+    return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
   }
 
 
@@ -312,7 +438,8 @@ class AdminCorsiController extends Controller
         $allievo = Allievo::where('id', $id)->first();
         return view('corsi.admin.modificaDatiAllievo')->with(['allievo' => $allievo]);
       }
-    } else {
+    }
+    else {
       abort(403, 'Azione non autorizzata.');
     }
   }
@@ -332,9 +459,9 @@ class AdminCorsiController extends Controller
   {
     $allievo = Allievo::find($request->id);
 
-    if($request->foto != null){
+    if ($request->foto != null) {
       $request->foto = Storage::disk('local')->putFile('foto', $request->file('foto'));
-      $allievo->foto=$request->foto;
+      $allievo->foto = $request->foto;
     }
 
     $allievo->matricola_militare = $request->matricola_militare;
@@ -381,15 +508,16 @@ class AdminCorsiController extends Controller
 
     $allievo->save();
 
-    return view('corsi.admin.modificaDatiAllievo', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->cognome." "."$request->nome"]);
+    return view('corsi.admin.modificaDatiAllievo', ['id' => $request->id])->with(['feedback_utente' => "Hai modificato con successo i dati di " . $request->cognome . " " . "$request->nome"]);
 
   }
 
-  public function sezioneDisciplinare(){
+  public function sezioneDisciplinare()
+  {
     return view('corsi.admin.sezioneDisciplinare');
   }
-
-public function paginaInserisciDisciplinare(){
+  public function paginaInserisciDisciplinare()
+  {
     $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
     if ($this->getUser()->can('view', $this->getUserAdmin())) {
@@ -398,134 +526,155 @@ public function paginaInserisciDisciplinare(){
     else {
       abort(403, 'Azione non autorizzata.');
     }
-}
-
-public function inserisciDisciplinare(Request $request){
+  }
+  public function inserisciDisciplinare(Request $request)
+  {
     $request->validate([
       'n_protocollo' => ['required', 'string', 'max:255'],
       'data_provvedimento' => ['required'],
       'data_notifica' => ['required'],
     ]);
-    if($request->tipo_provvedimento == 'consegna semplice' || $request->tipo_provvedimento == 'consegna rigore'){
+
+
+    $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
+
+    if ($request->tipo_provvedimento == 'consegna semplice' || $request->tipo_provvedimento == 'consegna rigore') {
       $request->validate(['num_giorni' => ['required']]);
     }
-    $provvedimentoDisciplinare=new ProvvedimentoDisciplinare();
+    $provvedimentoDisciplinare = new ProvvedimentoDisciplinare();
 
-    $provvedimentoDisciplinare->num_protocollo=$request->n_protocollo;
-    $provvedimentoDisciplinare->tipo_provvedimento=$request->tipo_provvedimento;
-    $provvedimentoDisciplinare->num_giorni_provvedimento=$request->num_giorni;
-    $provvedimentoDisciplinare->data_provvedimento=$request->data_provvedimento;
-    $provvedimentoDisciplinare->data_notifica=$request->data_notifica;
-    $provvedimentoDisciplinare->matricola_allievo=$request->allievo;
-    $provvedimentoDisciplinare->id_user_committente=Auth::user()->id;
+    $provvedimentoDisciplinare->num_protocollo = $request->n_protocollo;
+    $provvedimentoDisciplinare->tipo_provvedimento = $request->tipo_provvedimento;
+    $provvedimentoDisciplinare->num_giorni_provvedimento = $request->num_giorni;
+    $provvedimentoDisciplinare->data_provvedimento = $request->data_provvedimento;
+    $provvedimentoDisciplinare->data_notifica = $request->data_notifica;
+    $provvedimentoDisciplinare->matricola_allievo = $request->allievo;
+    $provvedimentoDisciplinare->classe_allievo = $corso->classe;
+    $provvedimentoDisciplinare->id_user_committente = Auth::user()->id;
+
 
     $provvedimentoDisciplinare->save();
 
-    return view('corsi.admin.funzioniDisciplinare.inserisciProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
+    return view('corsi.admin.funzioniDisciplinare.inserisciProvDisciplinare', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
   }
 
-  public function paginaModificaDisciplinare($id = null){
-      if ($this->getUser()->can('view', $this->getUserAdmin())) {
-          if ($id == null) {
-              $provvedimentoDisciplinare = ProvvedimentoDisciplinare::orderBy('data_provvedimento')->get();
-              return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare')
-                  ->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
-          } else {
-              $provvedimentoD = ProvvedimentoDisciplinare::where('id', $id)->first();
-              return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare')->with(['provvedimentoD' => $provvedimentoD]);
-          }
+  public function paginaModificaDisciplinare($id = null)
+  {
+    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+      if ($id == null) {
+        $provvedimentoDisciplinare = ProvvedimentoDisciplinare::orderBy('data_provvedimento')->get();
+        return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare')
+          ->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
       }
+      else {
+        $provvedimentoD = ProvvedimentoDisciplinare::where('id', $id)->first();
+        return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare')->with(['provvedimentoD' => $provvedimentoD]);
+      }
+    }
   }
-    public function aggiornaProvvedimentoD(Request $request){
-        $provvedimentoDisciplinare= ProvvedimentoDisciplinare::find($request->id);
+  public function aggiornaProvvedimentoD(Request $request)
+  {
+    $provvedimentoDisciplinare = ProvvedimentoDisciplinare::find($request->id);
 
-        $provvedimentoDisciplinare->tipo_provvedimento = $request->tipo_provvedimento;
-        $provvedimentoDisciplinare->num_giorni_provvedimento=$request->num_giorni;
-        $provvedimentoDisciplinare->data_provvedimento=$request->data_provvedimento;
-        $provvedimentoDisciplinare->num_protocollo=$request->n_protocollo;
+    $provvedimentoDisciplinare->tipo_provvedimento = $request->tipo_provvedimento;
+    $provvedimentoDisciplinare->num_giorni_provvedimento = $request->num_giorni;
+    $provvedimentoDisciplinare->data_provvedimento = $request->data_provvedimento;
+    $provvedimentoDisciplinare->num_protocollo = $request->n_protocollo;
 
-        $provvedimentoDisciplinare->save();
+    $provvedimentoDisciplinare->save();
 
-        return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->matricola_allievo]);
+    return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare', ['id' => $request->id])->with(['feedback_utente' => "Hai modificato con successo i dati di " . $request->matricola_allievo]);
+
+  }
+  public function paginaVisualizzaDisciplinare()
+  {
+    $provvedimentoDisciplinare = ProvvedimentoDisciplinare::orderBy('data_provvedimento')->get();
+    foreach ($provvedimentoDisciplinare as $provvedimentoD) {
+      $provvedimentoD->data_provvedimento = Carbon::parse($provvedimentoD->data_provvedimento)->format('d/m/Y');
+      $provvedimentoD->data_notifica = Carbon::parse($provvedimentoD->data_notifica)->format('d/m/Y');
 
     }
-  public function paginaVisualizzaDisciplinare(){
-      $provvedimentoDisciplinare = ProvvedimentoDisciplinare::orderBy('data_provvedimento')->get();
-      foreach ($provvedimentoDisciplinare as $provvedimentoD) {
-          $provvedimentoD->data_provvedimento = Carbon::parse($provvedimentoD->data_provvedimento)->format('d/m/Y');
-          $provvedimentoD->data_notifica = Carbon::parse($provvedimentoD->data_notifica)->format('d/m/Y');
-
-      }
     return view('corsi.admin.funzioniDisciplinare.visualizzaProvDisciplinare')->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
 
   }
 
 
-  public function sezioneSanitaria(){
+  public function sezioneSanitaria()
+  {
     return view('corsi.admin.sezioneSanitaria');
   }
-    public function paginaInserisciSanitataria(){
-        $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
+  public function paginaInserisciSanitataria()
+  {
+    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
-        if ($this->getUser()->can('view', $this->getUserAdmin())) {
-            return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario')->with(['allievi' => $allievi]);
-        }
-        else {
-            abort(403, 'Azione non autorizzata.');
-        }
+    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+      return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario')->with(['allievi' => $allievi]);
     }
-    public function inserisciSanitaria(Request $request){
-        $request->validate([
-            'data_provvedimento' => ['required'],
-        ]);
-        $provvedimentoSanitario=new ProvvedimentoSanitario();
-
-        $provvedimentoSanitario->tipo_provvedimento=$request->tipo_provvedimento;
-        $provvedimentoSanitario->num_giorni_provvedimento=$request->num_giorni;
-        $provvedimentoSanitario->data_provvedimento=$request->data_provvedimento;
-        $provvedimentoSanitario->matricola_allievo_paziente=$request->allievo;
-        $provvedimentoSanitario->id_user_infermeria=Auth::user()->id;
-
-        $provvedimentoSanitario->save();
-        return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario', ['id' => $request->id ])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
+    else {
+      abort(403, 'Azione non autorizzata.');
     }
-    public function paginaModificaSanitaria($id = null)
-    {
-        if ($this->getUser()->can('view', $this->getUserAdmin())) {
-            if ($id == null) {
-                $provvedimentiSanitari = ProvvedimentoSanitario::orderBy('data_provvedimento')->get();
-                return view('corsi.admin.funzioniSanitarie.modificaProvSanitario')
-                    ->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
-            } else {
-                $provvedimento = ProvvedimentoSanitario::where('id', $id)->first();
-                return view('corsi.admin.funzioniSanitarie.modificaProvSanitario')->with(['provvedimento' => $provvedimento]);
-            }
-        }
-    }
-    public function aggiornaProvvedimento(Request $request){
-        $provvedimentoSanitario= ProvvedimentoSanitario::find($request->id);
+  }
+  public function inserisciSanitaria(Request $request)
+  {
+    $request->validate([
+      'data_provvedimento' => ['required'],
+    ]);
 
-        $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
-        $provvedimentoSanitario->num_giorni_provvedimento=$request->num_giorni;
-        $provvedimentoSanitario->data_provvedimento=$request->data_provvedimento;
-        $provvedimentoSanitario->save();
+    $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
 
-        return view('corsi.admin.funzioniSanitarie.modificaProvSanitario', ['id' => $request->id ])->with(['feedback_utente' => "Hai modificato con successo i dati di ".$request->matricola_allievo_paziente ]);
+    $provvedimentoSanitario = new ProvvedimentoSanitario();
 
+    $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
+    $provvedimentoSanitario->num_giorni_provvedimento = $request->num_giorni;
+    $provvedimentoSanitario->data_provvedimento = $request->data_provvedimento;
+    $provvedimentoSanitario->matricola_allievo_paziente = $request->allievo;
+    $provvedimentoSanitario->classe_allievo = $corso->classe;
+    $provvedimentoSanitario->id_user_infermeria = Auth::user()->id;
 
-    }
-
-    public function paginaVisualizzaSanitaria(){
+    $provvedimentoSanitario->save();
+    return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
+  }
+  public function paginaModificaSanitaria($id = null)
+  {
+    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+      if ($id == null) {
         $provvedimentiSanitari = ProvvedimentoSanitario::orderBy('data_provvedimento')->get();
-        foreach ($provvedimentiSanitari as $provvedimento) {
-            $provvedimento->data_provvedimento = Carbon::parse($provvedimento->data_provvedimento)->format('d/m/Y');
-        }
-        return view('corsi.admin.funzioniSanitarie.visualizzaProvSanitario')->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
+        return view('corsi.admin.funzioniSanitarie.modificaProvSanitario')
+          ->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
+      }
+      else {
+        $provvedimento = ProvvedimentoSanitario::where('id', $id)->first();
+        return view('corsi.admin.funzioniSanitarie.modificaProvSanitario')->with(['provvedimento' => $provvedimento]);
+      }
     }
+  }
+  public function aggiornaProvvedimento(Request $request)
+  {
+    $provvedimentoSanitario = ProvvedimentoSanitario::find($request->id);
+
+    $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
+    $provvedimentoSanitario->num_giorni_provvedimento = $request->num_giorni;
+    $provvedimentoSanitario->data_provvedimento = $request->data_provvedimento;
+    $provvedimentoSanitario->save();
+
+    return view('corsi.admin.funzioniSanitarie.modificaProvSanitario', ['id' => $request->id])->with(['feedback_utente' => "Hai modificato con successo i dati di " . $request->matricola_allievo_paziente]);
+
+
+  }
+
+  public function paginaVisualizzaSanitaria()
+  {
+    $provvedimentiSanitari = ProvvedimentoSanitario::orderBy('data_provvedimento')->get();
+    foreach ($provvedimentiSanitari as $provvedimento) {
+      $provvedimento->data_provvedimento = Carbon::parse($provvedimento->data_provvedimento)->format('d/m/Y');
+    }
+    return view('corsi.admin.funzioniSanitarie.visualizzaProvSanitario')->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
+  }
 
 
 
-  public function sezioneStudi(){
+  public function sezioneStudi()
+  {
     return view('corsi.admin.sezioneStudi');
   }
 
