@@ -19,7 +19,7 @@ class CorsoFactory extends Factory
         $classe=null;
         $tipo_corso=$this->faker->randomElement(array('NMRS','Vfp1','Vfp4'));
         do{
-            $anno_inizio=$this->faker->year();
+            $anno_inizio=$this->faker->date();
         } while ($anno_inizio < Carbon::now()->year-3 || $anno_inizio > Carbon::now()->year);
         if($tipo_corso == "NMRS"){
             $anno_fine=$anno_inizio + 3;
