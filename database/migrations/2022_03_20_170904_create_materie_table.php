@@ -21,6 +21,7 @@ class CreateMaterieTable extends Migration
             $table->string('anno_accademico');
             $table->string('facolta');
             $table->string('sessione');
+            $table->string('classe');
             $table->timestamps();
         });
     }

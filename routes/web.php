@@ -76,7 +76,9 @@ Route::prefix('/corsi')->group(function(){
                 Route::get('visualizza-provvedimento-sanitario', [AdminCorsiController::class, 'paginaVisualizzaSanitaria'])->middleware('auth')->name('visualizzaSanitariaAdmin');
 
             });
-            Route::get('sezione-studi', [AdminCorsiController::class, 'sezioneStudi'])->middleware('auth')->name('studiAdmin');
+            Route::prefix('/sezione-studi', [AdminCorsiController::class, 'sezioneStudi'])->group(function(){
+                Route::get('/', [AdminCorsiController::class, 'sezioneStudi'])->middleware('auth')->name('sezioneStudi');
+            });
         });
         Route::prefix('/adminJ')->group(function () {
             Route::get('home', [AdminJuniorCorsiController::class, 'view'])->middleware('auth')->name('homeCorsiAdminJunior');
