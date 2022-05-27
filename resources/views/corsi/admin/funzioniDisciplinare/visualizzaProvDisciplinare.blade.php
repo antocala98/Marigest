@@ -38,6 +38,9 @@
                         Giorni
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Numero Protocollo
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Data Provvedimento
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -57,6 +60,9 @@
                         </td>
                         <td class="px-6 py-4">
                             {{$provvedimentoD->num_giorni_provvedimento}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{$provvedimentoD->num_protocollo}}
                         </td>
                         <td class="px-6 py-4">
                             {{$provvedimentoD->data_provvedimento}}
