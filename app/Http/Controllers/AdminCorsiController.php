@@ -171,74 +171,13 @@ class AdminCorsiController extends Controller
   public function downloadSchedaIndividuale($id)
   {
     $allievo = Allievo::where('id', $id)->first();
-    $provvedimentiSanitari = ProvvedimentoSanitario::get();
-    $provvedimenti_disciplinari = ProvvedimentoDisciplinare::get();
-    $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
-    $esenzaTot = 0;
-    $esenzaAGA = 0;
-    $ricovero = 0;
-    $degCov = 0;
-    $rimprovero = 0;
-    $conSemp = 0;
-    $conRig = 0;
-    $elogio = 0;
-    $tps = 0;
-    $matricola = 0;
-    foreach ($provvedimentiSanitari as $provvedimento) {
-      $matricola = ($provvedimento->matricola_allievo_paziente);
-      if ($allievo->matricola_militare == $matricola) {
-        $esenzaTot = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza Totale')
-          ->where('matricola_allievo_paziente', $matricola)
-          ->select('num_giorni_provvedimento')
-          ->sum('num_giorni_provvedimento');
-        $esenzaAGA = ProvvedimentoSanitario::where('tipo_provvedimento', 'Esenza AGA')
-          ->where('matricola_allievo_paziente', $matricola)
-          ->select('num_giorni_provvedimento')
-          ->sum('num_giorni_provvedimento');
-        $ricovero = ProvvedimentoSanitario::where('tipo_provvedimento', 'Ricovero infermeria')
-          ->where('matricola_allievo_paziente', $matricola)
-          ->select('num_giorni_provvedimento')
-          ->sum('num_giorni_provvedimento');
-        $degCov = ProvvedimentoSanitario::where('tipo_provvedimento', 'Degenza-Convalescenza')
-          ->where('matricola_allievo_paziente', $matricola)
-          ->select('num_giorni_provvedimento')
-          ->sum('num_giorni_provvedimento');
-
-        $rimprovero = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
-          ->where('matricola_allievo', $matricola)
-          ->select('tipo_provvedimento')
-          ->count('tipo_provvedimento');
-        $conSemp = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Semplice')
-          ->where('matricola_allievo', $matricola)
-          ->select('num_giorni_provvedimento')
-          ->sum('num_giorni_provvedimento');
-        $conRig = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Consegna Rigore')
-          ->where('matricola_allievo', $matricola)
-          ->select('num_giorni_provvedimento')
-          ->sum('num_giorni_provvedimento');
-        $elogio = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Elogio')
-          ->where('matricola_allievo', $matricola)
-          ->select('tipo_provvedimento')
-          ->count('tipo_provvedimento');
-        $tps = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'TPS')
-          ->where('matricola_allievo', $matricola)
-          ->select('tipo_provvedimento')
-          ->count('tipo_provvedimento');
-
-        break;
-      }
-    }
-    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTot' => $esenzaTot, 'esenzaAGA' => $esenzaAGA,
-      'ricovero' => $ricovero, 'degCov' => $degCov, 'matricola' => $matricola, 'conSemp' => $conSemp, 'rimprovero' => $rimprovero,
-      'conRig' => $conRig, 'elogio' => $elogio, 'tps' => $tps]);
+    $pdf=$this->schedaIndividuale($id);
     return $pdf->download('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
   }
 
-  public function visualizzaSchedaIndividuale($id)
-  {
+  public function schedaIndividuale($id){
     $allievo = Allievo::where('id', $id)->first();
     $provvedimentiSanitari = ProvvedimentoSanitario::get();
-    $provvedimenti_disciplinari = ProvvedimentoDisciplinare::get();
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
     $esenzaTotPrimaClasse = 0;
     $esenzaTotSecondaClasse = 0;
@@ -423,7 +362,17 @@ class AdminCorsiController extends Controller
       'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
       'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse]);
+    return $pdf;
+  }
+
+  public function visualizzaSchedaIndividuale($id)
+  {
+
+    $allievo = Allievo::where('id', $id)->first();
+    $pdf=$this->schedaIndividuale($id);
+
     return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
+    
   }
 
 
