@@ -4870,7 +4870,7 @@
         <td class="column4 style29 null"></td>
         <td class="column5 style30 null"></td>
         <td class="column6 style13 s">Rimprovero</td>
-        <td class="column7 style60 n style61" colspan="2">0</td>
+        <td class="column7 style60 n style61" colspan="2">{{$rimprovero}}</td>
         <td class="column9 style62 null style63" colspan="2"></td>
         <td class="column11 style64 null style65" colspan="2"></td>
         <td class="column13 style66 null style66" colspan="2" rowspan="2"></td>
@@ -4885,7 +4885,7 @@
         <td class="column4 style31 null"></td>
         <td class="column5 style30 null"></td>
         <td class="column6 style13 s">consegna Semplice</td>
-        <td class="column7 style60 n style61" colspan="2">21</td>
+        <td class="column7 style60 n style61" colspan="2">{{$conSemp}}</td>
         <td class="column9 style62 null style63" colspan="2"></td>
         <td class="column11 style64 null style65" colspan="2"></td>
         <td class="column19 style2 null"></td>
@@ -4897,7 +4897,7 @@
         <td class="column4 style31 null"></td>
         <td class="column5 style30 null"></td>
         <td class="column6 style13 s">Consegna di Rigore</td>
-        <td class="column7 style100 n style101" colspan="2">1</td>
+        <td class="column7 style100 n style101" colspan="2">{{$conRig}}</td>
         <td class="column9 style64 null style65" colspan="2"></td>
         <td class="column11 style64 null style65" colspan="2"></td>
         <td class="column13 style19 s">TIA/RI</td>
@@ -4915,8 +4915,8 @@
         <td class="column4 style31 null"></td>
         <td class="column5 style30 null"></td>
         <td class="column6 style13 s">Elogio / T.P.S.</td>
-        <td class="column7 style38 n">0</td>
-        <td class="column8 style39 n">0</td>
+        <td class="column7 style38 n">{{$elogio}}</td>
+        <td class="column8 style39 n">{{$tps}}</td>
         <td class="column9 style37 null"></td>
         <td class="column10 style37 null"></td>
         <td class="column11 style37 null"></td>
