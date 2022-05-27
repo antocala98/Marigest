@@ -652,7 +652,7 @@
       font-weight: bold;
       color: #000000;
       font-family: 'Times New Roman';
-      font-size: 8pt;
+      font-size: 7pt;
       background-color: #FFFFFF
     }
 
@@ -4403,16 +4403,14 @@
         <td class="column2 style54 s style54" colspan="7">{{$allievo['titolo_studio']}}</td>
         <td class="column9 style129 s style129" colspan="2">Voto:</td>
         <td class="column11 style136 n style136" colspan="2">{{$allievo['voto_diploma']}}</td>
-        <td class="column13 style20 s">su: <span
-            style="text-decoration:underline; color:#000000; font-family:'Times New Roman'; font-size:8pt">100</span>
-        </td>
+        <td class="column13 style20 s">su:100</td>
         <td class="column14 style24 null"></td>
         <td class="column18">&nbsp;</td>
         <td class="column19">&nbsp;</td>
       </tr>
       <tr class="row7">
         <td class="column0 style12 null"></td>
-        <td class="column1 style134 s style135" colspan="5">Graduatorie Cat. App. : - Concorso : 41</td>
+        <td class="column1 style134 s style135" colspan="5">Graduatorie Cat. App. : - Concorso : </td>
         <td class="column6 style130 s style130" colspan="2">1° Classe :</td>
         <td class="column8 style130 s style130" colspan="5">2° Classe :</td>
         <td class="column13 style130 s style131" colspan="2">3° Classe :</td>
