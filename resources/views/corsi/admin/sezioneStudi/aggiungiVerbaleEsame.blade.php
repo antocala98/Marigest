@@ -40,8 +40,8 @@
 <?php } else { ?>-->
     <form method="POST" action="#" id="form" enctype="multipart/form-data">
         @csrf
-        <div class="flex justify-center ">
-            <div class="w-full mx-8 sm:max-w-md mt-12 px-2 py-2 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <div class=" block md:flex md:justify-center">
+            <div class="w-full md:w-2/6  sm:mx-1 mt-12 px-6 py-2 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <x-auth-validation-errors class="ml-2" :errors="$errors" />
                 <!--<div class="mt-4">
                     <label for="tipo_provvedimento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo provvedimento</label>
@@ -54,11 +54,11 @@
                     </select>
                 </div>-->
                 <div class="mt-4">
-                    <label for="cod_verb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Codice Verbale</label>
+                    <label for="cod_verb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Protocollo Verbale</label>
                     <input type="number" id="codiceVerbale" name="codiceVerbale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
                 </div>
                 <div class="mt-4">
-                    <label for="materie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Materie</label>
+                    <label for="materie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Codice Materia</label>
                     <input list="materie" type="text" name="materie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mt-4">
@@ -66,8 +66,7 @@
                     <input type="date" id="dataVerbale" name="dataVerbale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
             </div>
-    
-            <div class="w-full p-2 mx-8 sm:max-w-md mt-12 px-6 py-2 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full md:w-2/6 sm:mx-1 mt-12 px-6 py-2 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <div class="mt-4">
                     <label for="allievo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Allievo</label>
                     <input list="allievi" type="text" id="allievo" name="allievo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
