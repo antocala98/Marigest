@@ -1054,6 +1054,15 @@ input[type="range"]::-ms-fill-lower {
 .ml-4 {
   margin-left: 1rem;
 }
+.ml-auto {
+  margin-left: auto;
+}
+.mb-24 {
+  margin-bottom: 6rem;
+}
+.ml-20 {
+  margin-left: 5rem;
+}
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -1066,12 +1075,6 @@ input[type="range"]::-ms-fill-lower {
 .-mt-px {
   margin-top: -1px;
 }
-.ml-auto {
-  margin-left: auto;
-}
-.mb-24 {
-  margin-bottom: 6rem;
-}
 .ml-96 {
   margin-left: 24rem;
 }
@@ -1080,9 +1083,6 @@ input[type="range"]::-ms-fill-lower {
 }
 .mb-32 {
   margin-bottom: 8rem;
-}
-.ml-20 {
-  margin-left: 5rem;
 }
 .mr-4 {
   margin-right: 1rem;
@@ -1193,6 +1193,25 @@ input[type="range"]::-ms-fill-lower {
 }
 .w-44 {
   width: 11rem;
+}
+.w-2\/6 {
+  width: 33.333333%;
+}
+.w-1\/5 {
+  width: 20%;
+}
+.w-2\/5 {
+  width: 40%;
+}
+.min-w-min {
+  min-width: -webkit-min-content;
+  min-width: -moz-min-content;
+  min-width: min-content;
+}
+.min-w-max {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
 }
 .max-w-sm {
   max-width: 24rem;
@@ -1700,6 +1719,10 @@ input[type="range"]::-ms-fill-lower {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(14 159 110 / var(--tw-text-opacity));
+}
 .text-gray-200 {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
@@ -1707,10 +1730,6 @@ input[type="range"]::-ms-fill-lower {
 .text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-.text-green-500 {
-  --tw-text-opacity: 1;
-  color: rgb(14 159 110 / var(--tw-text-opacity));
 }
 .text-green-600 {
   --tw-text-opacity: 1;
@@ -2131,6 +2150,11 @@ input[type="range"]::-ms-fill-lower {
 }
 @media (min-width: 640px) {
 
+  .sm\:mx-1 {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+
   .sm\:ml-6 {
     margin-left: 1.5rem;
   }
@@ -2155,8 +2179,19 @@ input[type="range"]::-ms-fill-lower {
     width: auto;
   }
 
+  .sm\:w-2\/6 {
+    width: 33.333333%;
+  }
+
   .sm\:max-w-md {
     max-width: 28rem;
+  }
+
+  @media (min-width: 640px) {
+
+    .sm\:sm\:max-w-md {
+      max-width: 28rem;
+    }
   }
 
   .sm\:flex-1 {
@@ -2222,12 +2257,20 @@ input[type="range"]::-ms-fill-lower {
     display: none;
   }
 
+  .md\:w-2\/6 {
+    width: 33.333333%;
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:items-center {
     align-items: center;
+  }
+
+  .md\:justify-center {
+    justify-content: center;
   }
 
   .md\:justify-between {
