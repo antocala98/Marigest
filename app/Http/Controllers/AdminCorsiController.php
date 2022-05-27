@@ -169,11 +169,21 @@ class AdminCorsiController extends Controller
 
   public function downloadSchedaIndividuale($id)
   {
+
       $allievo = Allievo::where('id', $id)->first();
       $provvedimentiSanitari = ProvvedimentoSanitario::get();
       $provvedimenti_disciplinari = ProvvedimentoDisciplinare::get();
       $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
-
+      $esenzaTot=0;
+      $esenzaAGA=0;
+      $ricovero=0;
+      $degCov=0;
+      $rimprovero=0;
+      $conSemp=0;
+      $conRig=0;
+      $elogio=0;
+      $tps=0;
+      $matricola=0;
       foreach ($provvedimentiSanitari as $provvedimento) {
           $matricola = ($provvedimento->matricola_allievo_paziente);
           if ($allievo->matricola_militare == $matricola) {
@@ -230,7 +240,16 @@ class AdminCorsiController extends Controller
     $provvedimentiSanitari = ProvvedimentoSanitario::get();
     $provvedimenti_disciplinari = ProvvedimentoDisciplinare::get();
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
-
+      $esenzaTot=0;
+      $esenzaAGA=0;
+      $ricovero=0;
+      $degCov=0;
+      $rimprovero=0;
+      $conSemp=0;
+      $conRig=0;
+      $elogio=0;
+      $tps=0;
+      $matricola=0;
           foreach ($provvedimentiSanitari as $provvedimento) {
               $matricola = ($provvedimento->matricola_allievo_paziente);
               if ($allievo->matricola_militare == $matricola) {
