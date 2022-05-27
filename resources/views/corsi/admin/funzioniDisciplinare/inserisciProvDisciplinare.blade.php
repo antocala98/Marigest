@@ -53,11 +53,11 @@
             <div class="mt-4">
                 <label for="tipo_provvedimento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo provvedimento</label>
                 <select id="tipo_provvedimento" name="tipo_provvedimento" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <option value="rimprovero">Rimprovero</option>
-                    <option value="consegna semplice">Consegna semplice</option>
-                    <option value="consegna rigore">Consegna di rigore</option>
-                    <option value="elogio">Elogio</option>
-                    <option value="tps">T.P.S.</option>
+                    <option value="Rimprovero">Rimprovero</option>
+                    <option value="Consegna Semplice">Consegna semplice</option>
+                    <option value="Consegna Rigore">Consegna di rigore</option>
+                    <option value="Elogio">Elogio</option>
+                    <option value="TPS">T.P.S.</option>
                 </select>
             </div>
             <div class="mt-4">
@@ -77,21 +77,21 @@
         <div class="w-full pl-6 sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <div class="mt-4">
                 <label for="allievo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Allievo</label>
-                <input list="allievi" type="text" id="allievo" name="allievo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">    
+                <input list="allievi" type="text" id="allievo" name="allievo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div class="mt-4">
                 <label for="n_protocollo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Numero di protocollo</label>
                 <input type="text" id="n_protocollo" name="n_protocollo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <label for="note_aggiutive" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Note aggiuntive</label>
-            <textarea name="note_aggiuntive" id="note_aggiuntive" form="form"></textarea>  
+            <textarea name="note_aggiuntive" id="note_aggiuntive" form="form"></textarea>
         </div>
     </div>
         <div class="flex justify-center">
             <x-button element="button" class="mb-24" type="submit">Inserisci</x-button>
-            
+
         </div>
-        
+
 </form>
 <datalist id="allievi">
     @foreach ($allievi as $allievo)
@@ -102,12 +102,12 @@
 <script>
     document.getElementById('tipo_provvedimento').onchange = function () {
         document.getElementById('num_giorni').setAttribute("disabled", "disabled");
-        if (this.value == 'consegna semplice' || this.value == 'consegna rigore'){
+        if (this.value == 'Consegna Semplice' || this.value == 'Consegna Rigore'){
             document.getElementById('num_giorni').removeAttribute("disabled");
         }
     };
-</script> 
+</script>
 @endsection
 
 
- 
+
