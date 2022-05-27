@@ -42,10 +42,10 @@
                                     {{$user->cognome}}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{$user->tipo_utente}}
+                                    {{$user->grado}}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{$user->grado}}
+                                    {{$user->tipo_utente}}
                                 </td>
                                 <td>
                                     <h2  id="accordion-collapse-heading-{{$user->id}}">
