@@ -631,15 +631,17 @@ class AdminCorsiController extends Controller
     return view('corsi.admin.funzioniSanitarie.visualizzaProvSanitario')->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
   }
 
+  public function sezioneStudi(){
+    return view('corsi.admin.sezioneStudi');
+  }
 
-
-  public function sezioneStudi()
+  public function paginaVerbaliEsami()
   {
     $userRedattore=Auth::user();
     $materie = Materia::where('id','>',0)->get();
     $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
     if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame')->with(['allievi' => $allievi])->with(['materie'=>$materie])->with(['userRedattore'=>$userRedattore]);
+      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi]);//->with(['feedback_utente' => "Hai inserito con successo il varbale con protocollo" . $request->codice_verbale]);
     }
     else {
       abort(403, 'Azione non autorizzata.');
