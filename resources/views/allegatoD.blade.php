@@ -4451,17 +4451,32 @@
         <td class="column1 style102 s style76" colspan="18">QUADRO DISCIPLINE UNIVERSITARIE (D.U.)</td>
         <td class="column19 style35 null"></td>
       </tr>
+      @for($i = 0; $i < $max; $i++)
       <tr class="row11">
         <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">{{$materia1PrimoAnno}}</td>
+        @if ($i<$maxprimoanno)
+        <td class="column1 style55 s style56" colspan="4">{{$materiePrimoAnno[$i]->nome}}</td>
+        @else
+        <td class="column1 style55 s style56" colspan="4"></td>
+        @endif
         <td class="column5 style45 n">30</td>
-        <td class="column6 style57 null style58" colspan="7"></td>
-        <td class="column13 style9 null"></td>
+        @if ($i<$maxsecondoanno)
+        <td class="column6 style55 s style57" colspan="7">{{$materieSecondoAnno[$i]->nome}}</td>
+        @else
+        <td class="column6 style55 s style57" colspan="7"></td>
+        @endif
+        <td class="column13 style9 null">30</td>
+        @if ($i<$maxsecondoanno)
+        <td class="column14 style59 s style57" colspan="4">{{$materieTerzoAnno[$i]->nome}}</td>
+        @else
         <td class="column14 style59 s style57" colspan="4"></td>
-        <td class="column18 style8 null"></td>
+        @endif
+        <td class="column18 style8 null">30</td>
         <td class="column19 style2 null"></td>
       </tr>
-      <tr class="row12">
+      @endfor
+      
+      <!--<tr class="row12">
         <td class="column0 style1 null"></td>
         <td class="column1 style55 s style56" colspan="4">Economia aziendale</td>
         <td class="column5 style45 n">29</td>
@@ -4530,7 +4545,7 @@
         <td class="column14 style59 s style57" colspan="4"></td>
         <td class="column18 style8 null"></td>
         <td class="column19 style2 null"></td>
-      </tr>
+      </tr>-->
       <tr class="row19">
         <td class="column0 style1 null"></td>
         <td class="column1 style55 null style56" colspan="4"></td>

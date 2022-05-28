@@ -369,21 +369,22 @@ class AdminCorsiController extends Controller
     
     $matricolaPerMaterie=$allievo->matricola_militare;
     
-    $materie=Materia::get();
+    $materie=Materia::select('nome','sessione','classe')->get();
     $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->select('codice_materia')->get();
-    $materia1PrimoAnno='ciao';
+    //$materia1PrimoAnno='ciao';
     //$materia1PrimoAnno=$materie->first()->nome;
     
     /**foreach($verbaliEsami as $verbaleEsame){
       $materia1PrimoAnno = Materia::where('codice','=',$verbaleEsame->codice_materia)->where('classe','=','prima')->select('nome')->get();
 
     }**/
+
+    $materiePrimoAnno=Materia::where('classe','prima')->orderby('nome')->get();
+    $materieSecondoAnno=Materia::where('classe','seconda')->orderby('nome')->get();
+    $materieTerzoAnno=Materia::where('classe','terza')->orderby('nome')->get();
+
+   
     
-    
-
-
-
-
 
     $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
       'ricoveroPrimaClasse' => $ricoveroPrimaClasse, 'degCovPrimaClasse' => $degCovPrimaClasse, 'matricola' => $matricola, 'conSempPrimaClasse' => $conSempPrimaClasse, 'rimproveroPrimaClasse' => $rimproveroPrimaClasse,
@@ -391,7 +392,9 @@ class AdminCorsiController extends Controller
       'ricoveroSecondaClasse' => $ricoveroSecondaClasse, 'degCovSecondaClasse' => $degCovSecondaClasse, 'conSempSecondaClasse' => $conSempSecondaClasse, 'rimproveroSecondaClasse' => $rimproveroSecondaClasse,
       'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
-      'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,'materia1PrimoAnno'=>$materia1PrimoAnno]);
+      'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'maxprimoanno'=>3,
+      'materieTerzoAnno'=>$materieTerzoAnno, 'maxterzoanno'=>1, 'maxsecondoanno'=>1,'max'=>4,
+    ]);
     return $pdf;
   }
 
