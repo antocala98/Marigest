@@ -216,7 +216,7 @@ class AdminCorsiController extends Controller
     $tpsSecondaClasse = 0;
     $tpsTerzaClasse = 0;
     $matricola = 0;
-      $verbaliSportiviPrimaClasse=0;
+    $verbaliSportiviPrimaClasse=0;
       $sommaVotiSportiviPrimaClasse=0;
       $verbaliSportiviSecondaClasse=0;
       $sommaVotiSportiviSecondaClasse=0;
