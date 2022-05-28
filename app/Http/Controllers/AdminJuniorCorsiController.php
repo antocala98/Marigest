@@ -16,8 +16,6 @@ class AdminJuniorCorsiController extends Controller
     public function create(){
         return view('corsi.admin_jr.aggiungidaticorsi');
     }
-
-
     public function view()
     {
       // get current logged in user
