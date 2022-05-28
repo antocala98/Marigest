@@ -371,20 +371,24 @@ class AdminCorsiController extends Controller
     
     $materie=Materia::select('nome','sessione','classe')->get();
     $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->select('codice_materia')->get();
-    //$materia1PrimoAnno='ciao';
-    //$materia1PrimoAnno=$materie->first()->nome;
-    
-    /**foreach($verbaliEsami as $verbaleEsame){
-      $materia1PrimoAnno = Materia::where('codice','=',$verbaleEsame->codice_materia)->where('classe','=','prima')->select('nome')->get();
-
-    }**/
 
     $materiePrimoAnno=Materia::where('classe','prima')->orderby('nome')->get();
     $materieSecondoAnno=Materia::where('classe','seconda')->orderby('nome')->get();
     $materieTerzoAnno=Materia::where('classe','terza')->orderby('nome')->get();
+    $maxprimoanno=Materia::where('classe','prima')->orderby('nome')->count();
+    $maxsecondoanno=Materia::where('classe','seconda')->orderby('nome')->count();
+    $maxterzoanno=Materia::where('classe','terza')->orderby('nome')->count();
+    if($maxprimoanno>$maxsecondoanno){
+      $max=$maxprimoanno;
+    }else{
+      $max=$maxsecondoanno;
+    }
+    if($max>$maxterzoanno){
+      $max=$max;
+    }else{
+      $max=$maxterzoanno;
+    }
 
-   
-    
 
     $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
       'ricoveroPrimaClasse' => $ricoveroPrimaClasse, 'degCovPrimaClasse' => $degCovPrimaClasse, 'matricola' => $matricola, 'conSempPrimaClasse' => $conSempPrimaClasse, 'rimproveroPrimaClasse' => $rimproveroPrimaClasse,
@@ -392,8 +396,9 @@ class AdminCorsiController extends Controller
       'ricoveroSecondaClasse' => $ricoveroSecondaClasse, 'degCovSecondaClasse' => $degCovSecondaClasse, 'conSempSecondaClasse' => $conSempSecondaClasse, 'rimproveroSecondaClasse' => $rimproveroSecondaClasse,
       'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
-      'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'maxprimoanno'=>3,
-      'materieTerzoAnno'=>$materieTerzoAnno, 'maxterzoanno'=>1, 'maxsecondoanno'=>1,'max'=>4,
+      'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,
+      'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'materieTerzoAnno'=>$materieTerzoAnno,
+      'maxprimoanno'=>$maxprimoanno, 'maxterzoanno'=>$maxterzoanno, 'maxsecondoanno'=>$maxsecondoanno,'max'=>$max,
     ]);
     return $pdf;
   }
@@ -407,8 +412,6 @@ class AdminCorsiController extends Controller
     return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
 
   }
-
-
   public function modificaDatiAllievi($id = null)
   {
     if ($this->getUser()->can('view', $this->getUserAdmin())) {
