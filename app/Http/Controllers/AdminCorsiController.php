@@ -388,6 +388,21 @@ class AdminCorsiController extends Controller
         break;
       }
     }
+    if($verbaliSportiviPrimaClasse > 0) {
+      $mediaSportTerrestriPrimaClasse = ($sommaVotiSportiviPrimaClasse / $verbaliSportiviPrimaClasse);
+  }else{
+      $mediaSportTerrestriPrimaClasse=0;
+  }
+  if($verbaliSportiviSecondaClasse > 0) {
+      $mediaSportTerrestriSecondaClasse = ($sommaVotiSportiviSecondaClasse / $verbaliSportiviSecondaClasse);
+  }else{
+      $mediaSportTerrestriSecondaClasse=0;
+  }
+  if($verbaliSportiviTerzaClasse> 0) {
+      $mediaSportTerrestriTerzaClasse = ($sommaVotiSportiviTerzaClasse / $verbaliSportiviTerzaClasse);
+  }else {
+      $mediaSportTerrestriTerzaClasse = 0;
+  }
     //da qua inizia il lavoro di giorgio
 
 
