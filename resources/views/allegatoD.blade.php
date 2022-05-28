@@ -4459,19 +4459,19 @@
         @else
         <td class="column1 style55 s style56" colspan="4"></td>
         @endif
-        <td class="column5 style45 n">30</td>
+        <td class="column5 style45 n">{{$votiPrimoAnno[$i]}}</td>
         @if ($i<$maxsecondoanno)
         <td class="column6 style55 s style57" colspan="7">{{$materieSecondoAnno[$i]->nome}}</td>
         @else
         <td class="column6 style55 s style57" colspan="7"></td>
         @endif
-        <td class="column13 style9 null">30</td>
+        <td class="column13 style9 null">{{$votiSecondoAnno[$i]}}</td>
         @if ($i<$maxterzoanno)
         <td class="column14 style59 s style57" colspan="4">{{$materieTerzoAnno[$i]->nome}}</td>
         @else
         <td class="column14 style59 s style57" colspan="4"></td>
         @endif
-        <td class="column18 style8 null">30</td>
+        <td class="column18 style8 null">{{$votiTerzoAnno[$i]}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       @endfor
