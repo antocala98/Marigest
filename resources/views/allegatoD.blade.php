@@ -4453,7 +4453,7 @@
       </tr>
       <tr class="row11">
         <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">Matematica</td>
+        <td class="column1 style55 s style56" colspan="4">{{$materia1PrimoAnno}}</td>
         <td class="column5 style45 n">30</td>
         <td class="column6 style57 null style58" colspan="7"></td>
         <td class="column13 style9 null"></td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 use App\Models\User;
 use App\Models\IncorporandiVfp1;
 use App\Models\Materia;
@@ -182,6 +183,10 @@ class AdminCorsiController extends Controller
   public function schedaIndividuale($id){
     $allievo = Allievo::where('id', $id)->first();
     $provvedimentiSanitari = ProvvedimentoSanitario::get();
+
+
+
+
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
     $esenzaTotPrimaClasse = 0;
     $esenzaTotSecondaClasse = 0;
@@ -360,7 +365,21 @@ class AdminCorsiController extends Controller
       }
     }
     //da qua inizia il lavoro di giorgio
+    
+    
+    $matricolaPerMaterie=$allievo->matricola_militare;
+    
+    $materie=Materia::get();
+    $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->select('codice_materia')->get();
+    $materia1PrimoAnno='ciao';
+    //$materia1PrimoAnno=$materie->first()->nome;
+    
+    /**foreach($verbaliEsami as $verbaleEsame){
+      $materia1PrimoAnno = Materia::where('codice','=',$verbaleEsame->codice_materia)->where('classe','=','prima')->select('nome')->get();
 
+    }**/
+    
+    
 
 
 
@@ -372,7 +391,7 @@ class AdminCorsiController extends Controller
       'ricoveroSecondaClasse' => $ricoveroSecondaClasse, 'degCovSecondaClasse' => $degCovSecondaClasse, 'conSempSecondaClasse' => $conSempSecondaClasse, 'rimproveroSecondaClasse' => $rimproveroSecondaClasse,
       'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
-      'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse]);
+      'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,'materia1PrimoAnno'=>$materia1PrimoAnno]);
     return $pdf;
   }
 
