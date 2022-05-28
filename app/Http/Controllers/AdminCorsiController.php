@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\IncorporandiVfp1;
 use App\Models\Materia;
 use App\Models\Allievo;
+use App\Models\VerbaleEsame;
 use App\Models\ProvvedimentoDisciplinare;
 use App\Models\ProvvedimentoSanitario;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -632,15 +633,33 @@ class AdminCorsiController extends Controller
 
   public function sezioneStudi()
   {
-
-    return view('corsi.admin.sezioneStudi');
-  }
-public function inserisciVerbaliEsami()
-  {
     $userRedattore=Auth::user();
     $materie = Materia::where('id','>',0)->get();
     $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
-    return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['allievi'=>$allievi,'materie'=>$materie,'userRedattore'=>$userRedattore]);
+    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame')->with(['allievi' => $allievi])->with(['materie'=>$materie])->with(['userRedattore'=>$userRedattore]);
+    }
+    else {
+      abort(403, 'Azione non autorizzata.');
+    }
+  }
+public function inserisciVerbaliEsami(Request $request)
+  {
+    $materie = Materia::where('id','>',0)->get();
+    $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
+    $userRedattore=Auth::user();
+    $verbaleEsame = new VerbaleEsame();
+
+    $verbaleEsame->codice_verbale=$request->codiceVerbale;
+    $verbaleEsame->codice_materia=$request->materie;
+    $verbaleEsame->data_verbale=$request->dataVerbale;
+    $verbaleEsame->voto=$request->voto;
+    $verbaleEsame->ufficiale_commissione=$request->ufficiale;
+    $verbaleEsame->matricola_allievo=$request->allievo;
+    $verbaleEsame->id_user_redattore=$request->idUserRedattore;
+    $verbaleEsame->save();
+
+    return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il varbale con protocollo" . $request->codice_verbale]);
   }
   /**
    *
