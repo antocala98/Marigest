@@ -216,6 +216,13 @@ class AdminCorsiController extends Controller
     $tpsSecondaClasse = 0;
     $tpsTerzaClasse = 0;
     $matricola = 0;
+    $verbaliSportiviPrimaClasse=0;
+    $sommaVotiSportiviPrimaClasse=0;
+    $verbaliSportiviSecondaClasse=0;
+    $sommaVotiSportiviSecondaClasse=0;
+    $verbaliSportiviTerzaClasse=0;
+    $sommaVotiSportiviTerzaClasse=0;
+
     foreach ($provvedimentiSanitari as $provvedimento) {
       $matricola = ($provvedimento->matricola_allievo_paziente);
       if ($allievo->matricola_militare == $matricola) {
@@ -361,14 +368,33 @@ class AdminCorsiController extends Controller
           ->select('tipo_provvedimento')
           ->count('tipo_provvedimento');
 
-        break;
+
+          $verbaliSportiviPrimaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
+              ->select('disciplina')
+              ->count('disciplina');
+          $sommaVotiSportiviPrimaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
+              ->select('voto')
+              ->sum('voto');
+          $verbaliSportiviSecondaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
+              ->select('disciplina')
+              ->count('disciplina');
+          $sommaVotiSportiviSecondaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
+              ->select('voto')
+              ->sum('voto');
+          $verbaliSportiviTerzaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+              ->select('disciplina')
+              ->count('disciplina');
+          $sommaVotiSportiviTerzaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+              ->select('voto')
+              ->sum('voto');
+          break;
       }
     }
     //da qua inizia il lavoro di giorgio
-    
-    
+
+
     $matricolaPerMaterie=$allievo->matricola_militare;
-    
+
     $materie=Materia::select('nome','sessione','classe')->get();
     $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->select('codice_materia')->get();
 
@@ -390,7 +416,28 @@ class AdminCorsiController extends Controller
     }
 
 
-    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
+
+      if($verbaliSportiviPrimaClasse > 0) {
+          $mediaSportTerrestriPrimaClasse = ($sommaVotiSportiviPrimaClasse / $verbaliSportiviPrimaClasse);
+      }else{
+          $mediaSportTerrestriPrimaClasse=0;
+      }
+      if($verbaliSportiviSecondaClasse > 0) {
+          $mediaSportTerrestriSecondaClasse = ($sommaVotiSportiviSecondaClasse / $verbaliSportiviSecondaClasse);
+      }else{
+          $mediaSportTerrestriSecondaClasse=0;
+      }
+      if($verbaliSportiviTerzaClasse> 0) {
+          $mediaSportTerrestriTerzaClasse = ($sommaVotiSportiviTerzaClasse / $verbaliSportiviTerzaClasse);
+      }else {
+          $mediaSportTerrestriTerzaClasse = 0;
+      }
+
+
+
+
+
+      $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
       'ricoveroPrimaClasse' => $ricoveroPrimaClasse, 'degCovPrimaClasse' => $degCovPrimaClasse, 'matricola' => $matricola, 'conSempPrimaClasse' => $conSempPrimaClasse, 'rimproveroPrimaClasse' => $rimproveroPrimaClasse,
       'conRigPrimaClasse' => $conRigPrimaClasse, 'elogioPrimaClasse' => $elogioPrimaClasse, 'tpsPrimaClasse' => $tpsPrimaClasse, 'esenzaTotSecondaClasse' => $esenzaTotSecondaClasse, 'esenzaAGASecondaClasse' => $esenzaAGASecondaClasse,
       'ricoveroSecondaClasse' => $ricoveroSecondaClasse, 'degCovSecondaClasse' => $degCovSecondaClasse, 'conSempSecondaClasse' => $conSempSecondaClasse, 'rimproveroSecondaClasse' => $rimproveroSecondaClasse,
@@ -399,7 +446,8 @@ class AdminCorsiController extends Controller
       'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,
       'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'materieTerzoAnno'=>$materieTerzoAnno,
       'maxprimoanno'=>$maxprimoanno, 'maxterzoanno'=>$maxterzoanno, 'maxsecondoanno'=>$maxsecondoanno,'max'=>$max,
-    ]);
+      'mediaSportTerrestriPrimaClasse'=> $mediaSportTerrestriPrimaClasse,'mediaSportTerrestriTerzaClasse'=> $mediaSportTerrestriTerzaClasse,
+      'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse]);
     return $pdf;
   }
 
