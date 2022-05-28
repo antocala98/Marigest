@@ -18,12 +18,15 @@ class CreateVerbaleSportivoTable extends Migration
             $table->string('codice_verbale');
             $table->string('disciplina')->nullable(true);
             $table->string('matricola_allievo');
+            $table->string('classe_allievo')->nullable(true);
             $table->string('data_verbale');
             $table->string('voto');
             $table->string('id_user_redattore');
             $table->timestamps();
+            $table->foreign('matricola_allievo')->references('matricola_militare')->on('allievi');
         });
     }
+
 
     /**
      * Reverse the migrations.

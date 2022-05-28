@@ -4743,23 +4743,24 @@
         </td>
         <td class="column19 style2 null"></td>
       </tr>
+
       <tr class="row40">
         <td class="column0 style12 null"></td>
         <td class="column1 style113 s style114" colspan="4">Minimi sportivi a terra</td>
-        <td class="column5 style44 n">25.167</td>
-        <td class="column6 style108 null style57" colspan="7"></td>
-        <td class="column13 style19 null"></td>
-        <td class="column14 style58 null style57" colspan="4"></td>
-        <td class="column18 style11 null"></td>
+        <td class="column5 style44 n">{{$mediaSportTerrestriPrimaClasse}}</td>
+        <td class="column6 style108 null style57" colspan="7">Minimi sportivi a terra</td>
+        <td class="column13 style19 null">{{$mediaSportTerrestriSecondaClasse}}</td>
+        <td class="column14 style58 null style57" colspan="4">Minimi sportivi a terra</td>
+        <td class="column18 style11 null">{{$mediaSportTerrestriTerzaClasse}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row41">
         <td class="column0 style12 null"></td>
         <td class="column1 style105 s style56" colspan="4">Minimi sportivi in acqua</td>
-        <td class="column5 style44 n">28.333</td>
-        <td class="column6 style108 null style57" colspan="7"></td>
+        <td class="column5 style44 n"></td>
+        <td class="column6 style108 null style57" colspan="7">Minimi sportivi in acqua</td>
         <td class="column13 style19 null"></td>
-        <td class="column14 style58 null style57" colspan="4"></td>
+        <td class="column14 style58 null style57" colspan="4">Minimi sportivi in acqua</td>
         <td class="column18 style11 null"></td>
         <td class="column19 style2 null"></td>
       </tr>
@@ -4767,9 +4768,9 @@
         <td class="column0 style12 null"></td>
         <td class="column1 style106 s style107" colspan="4">Media Voti V.A.G.S. (Mod. 2)</td>
         <td class="column5 style44 null"></td>
-        <td class="column6 style109 null style110" colspan="7"></td>
+        <td class="column6 style109 null style110" colspan="7">Media Voti V.A.G.S. (Mod. 2)</td>
         <td class="column13 style19 null"></td>
-        <td class="column14 style106 null style107" colspan="4"></td>
+        <td class="column14 style106 null style107" colspan="4">Media Voti V.A.G.S. (Mod. 2)</td>
         <td class="column18 style11 null"></td>
         <td class="column19 style2 null"></td>
       </tr>
