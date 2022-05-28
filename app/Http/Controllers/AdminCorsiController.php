@@ -389,6 +389,7 @@ class AdminCorsiController extends Controller
               ->sum('voto');
           break;
       }
+
     }
     //da qua inizia il lavoro di giorgio
 
