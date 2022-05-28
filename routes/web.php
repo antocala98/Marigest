@@ -78,7 +78,8 @@ Route::prefix('/corsi')->group(function(){
             });
             Route::prefix('/sezione-studi', [AdminCorsiController::class, 'sezioneStudi'])->group(function(){
                 Route::get('/', [AdminCorsiController::class, 'sezioneStudi'])->middleware('auth')->name('sezioneStudi');
-                Route::get('/inserisci-verbali-esami', [AdminCorsiController::class, 'inserisciVerbaliEsami'])->middleware('auth')->name('sezioneStudi-insverbali');
+                Route::get('/inserisci-verbali-esami', [AdminCorsiController::class, 'sezioneStudi'])->middleware('auth')->name('sezioneStudi-insverbali');
+                Route::post('/inserisci-verbali-esami', [AdminCorsiController::class, 'inserisciVerbaliEsami'])->middleware('auth')->name('sezioneStudi-insverbali');
             });
         });
         Route::prefix('/adminJ')->group(function () {
