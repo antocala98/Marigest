@@ -14,8 +14,9 @@
     </li>
 @endsection
 @section('body')
-<!--<?php if(isset($feedback_utente)){ ?>
-    <div id="toast-success"
+<?php if(isset($feedback_utente)){ ?>
+    <div class="block">
+        <div id="toast-success"
         class="flex items-center w-full p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
         role="alert">
         <div
@@ -37,8 +38,10 @@
                     clip-rule="evenodd"></path>
             </svg>
         </button>
-<?php } else { ?>-->
-    <form method="POST" action="#" id="form" enctype="multipart/form-data">
+    </div>
+    
+<?php } ?>
+    <form method="POST" action="{{url('corsi/marescialli/admin/sezione-studi/inserisci-verbali-esami')}}" id="form" enctype="multipart/form-data">
         @csrf
         <div class=" block md:flex md:justify-center">
             <div class="w-full md:w-2/6  sm:mx-1 mt-12 px-6 py-2 bg-white shadow-md overflow-hidden sm:rounded-lg">
@@ -55,29 +58,29 @@
                 </div>-->
                 <div class="mt-4">
                     <label for="cod_verb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Protocollo Verbale</label>
-                    <input type="number" id="codiceVerbale" name="codiceVerbale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                    <input type="number" id="codiceVerbale" name="codiceVerbale" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
                 </div>
                 <div class="mt-4">
                     <label for="materie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Codice Materia</label>
-                    <input list="materie" type="text" name="materie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input list="materie" type="text" name="materie" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mt-4">
                     <label for="data_verbale" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Data Verbale</label>
-                    <input type="date" id="dataVerbale" name="dataVerbale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="date" id="dataVerbale" name="dataVerbale" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
             </div>
             <div class="w-full md:w-2/6 sm:mx-1 mt-12 px-6 py-2 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <div class="mt-4">
                     <label for="allievo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Allievo</label>
-                    <input list="allievi" type="text" id="allievo" name="allievo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input list="allievi" type="text" id="allievo" name="allievo" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mt-4">
                     <label for="voto" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Voto</label>
-                    <input type="text" id="voto" name="voto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="text" id="voto" name="voto" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mt-4">
                     <label for="ufficiale" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ufficiale di commissione</label>
-                    <input list="ufficiale" type="text" id="ufficiale" name="ufficiale" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input list="ufficiale" type="text" id="ufficiale" name="ufficiale" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="hidden">
                     <input type="id" name="idUserRedattore" value="{{$userRedattore->id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -99,13 +102,6 @@
             <option value="{{$allievo->matricola_militare}}">{{$allievo->cognome}} {{$allievo->nome}}-{{$allievo->matricola_militare}}</option>
         @endforeach
     </datalist>
-    <!--<?php } ?>
-    <script>
-        document.getElementById('tipo_provvedimento').onchange = function () {
-            document.getElementById('num_giorni').setAttribute("disabled", "disabled");
-            if (this.value == 'Consegna Semplice' || this.value == 'Consegna Rigore'){
-                document.getElementById('num_giorni').removeAttribute("disabled");
-            }
-        };
-    </script>-->
+      ?>
+    
 @endsection

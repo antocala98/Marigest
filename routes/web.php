@@ -78,8 +78,21 @@ Route::prefix('/corsi')->group(function(){
             });
             Route::prefix('/sezione-studi', [AdminCorsiController::class, 'sezioneStudi'])->group(function(){
                 Route::get('/', [AdminCorsiController::class, 'sezioneStudi'])->middleware('auth')->name('sezioneStudi');
-                Route::get('/inserisci-verbali-esami', [AdminCorsiController::class, 'inserisciVerbaliEsami'])->middleware('auth')->name('sezioneStudi-insverbali');
+                Route::get('/inserisci-verbali-esami', [AdminCorsiController::class, 'paginaVerbaliEsami'])->middleware('auth')->name('sezioneStudi-insverbali');
+                Route::post('/inserisci-verbali-esami', [AdminCorsiController::class, 'inserisciVerbaliEsami'])->middleware('auth')->name('sezioneStudi-insverbali');
             });
+            Route::prefix('/sezione-sportiva', [AdminCorsiController::class, 'sezioneSportiva'])->group(function(){
+                Route::get('/', [AdminCorsiController::class, 'sezioneSportiva'])->middleware('auth')->name('sezioneSportiva');
+                Route::post('/inserisci-verbali-sportivi', [AdminCorsiController::class, 'inserisciVerbaliSportivi'])->middleware('auth')->name('sezioneSportiva-insverbali');
+                Route::get('/inserisci-verbali-sportivi', [AdminCorsiController::class, 'paginaInserisciVerbalisportivi'])->middleware('auth')->name('paginaSezioneSportiva-insverbali');
+
+            });
+
+
+
+
+
+
         });
         Route::prefix('/adminJ')->group(function () {
             Route::get('home', [AdminJuniorCorsiController::class, 'view'])->middleware('auth')->name('homeCorsiAdminJunior');
