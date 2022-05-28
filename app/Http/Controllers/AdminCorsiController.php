@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\IncorporandiVfp1;
 use App\Models\Materia;
+use App\Models\RequisitoSportivo;
+use App\Models\VerbaleSportivo;
 use App\Models\Allievo;
 use App\Models\ProvvedimentoDisciplinare;
 use App\Models\ProvvedimentoSanitario;
@@ -380,7 +382,7 @@ class AdminCorsiController extends Controller
     $pdf=$this->schedaIndividuale($id);
 
     return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
-    
+
   }
 
 
@@ -642,6 +644,50 @@ public function inserisciVerbaliEsami()
     $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
     return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['allievi'=>$allievi,'materie'=>$materie,'userRedattore'=>$userRedattore]);
   }
+  public function sezioneSportiva()
+  {
+        return view('corsi.admin.sezioneSportiva');
+   }
+    public function paginaInserisciVerbalisportivi()
+    {
+
+        $discipline = RequisitoSportivo::where('id','>',0)->get();
+
+        $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
+
+        if ($this->getUser()->can('view', $this->getUserAdmin())) {
+            return view('corsi.admin.sezioneSportiva.inserisciVerbaleSportivo')->with(['allievi' => $allievi,'discipline'=>$discipline]);
+        }
+        else {
+            abort(403, 'Azione non autorizzata.');
+        }
+
+    }
+    public function inserisciVerbalisportivi(Request $request)
+    {
+        $discipline = RequisitoSportivo::where('id','>',0)->get();
+
+        $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
+
+        $verbaleSportivo = new VerbaleSportivo();
+        $verbaleSportivo->codice_verbale = $request->codiceVerbale;
+        $verbaleSportivo->disciplina = $request->discipline;
+        $verbaleSportivo->data_verbale = $request->dataVerbale;
+        $verbaleSportivo->voto = $request->voto;
+        $verbaleSportivo->matricola_allievo = $request->allievo;
+        $verbaleSportivo->id_user_redattore = Auth::user()->id;
+        $verbaleSportivo->save();
+
+
+        return view('corsi.admin.sezioneSportiva.inserisciVerbaleSportivo', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il verbale",'allievi' => $allievi,'discipline'=>$discipline]);;
+    }
+
+
+
+
+
+
+
   /**
    *
    * @return mixed
