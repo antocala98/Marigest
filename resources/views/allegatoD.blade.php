@@ -4466,7 +4466,7 @@
         <td class="column6 style55 s style57" colspan="7"></td>
         @endif
         <td class="column13 style9 null">30</td>
-        @if ($i<$maxsecondoanno)
+        @if ($i<$maxterzoanno)
         <td class="column14 style59 s style57" colspan="4">{{$materieTerzoAnno[$i]->nome}}</td>
         @else
         <td class="column14 style59 s style57" colspan="4"></td>
