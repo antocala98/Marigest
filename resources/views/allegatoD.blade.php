@@ -4454,24 +4454,36 @@
       @for($i = 0; $i < $max; $i++)
       <tr class="row11">
         <td class="column0 style1 null"></td>
-        @if ($i<$maxprimoanno)
-        <td class="column1 style55 s style56" colspan="4">{{$materiePrimoAnno[$i]->nome}}</td>
+        @if ($i<$maxprimoanno||$esiste1>0)
+        <td class="column1 style55 s style56" colspan="4">{{$verbaliJoinMateriePrimoAnno[$i]->nome}}</td>
         @else
         <td class="column1 style55 s style56" colspan="4"></td>
         @endif
-        <td class="column5 style45 n">{{$votiPrimoAnno[$i]}}</td>
-        @if ($i<$maxsecondoanno)
-        <td class="column6 style55 s style57" colspan="7">{{$materieSecondoAnno[$i]->nome}}</td>
+        @if ($i<$maxprimoanno||$esiste1>0)
+        <td class="column5 style45 n">{{$verbaliJoinMateriePrimoAnno[$i]->voto}}</td>
+        @else
+        <td class="column5 style45 n"></td>
+        @endif
+        @if ($i<$maxsecondoanno && $esiste2>0)
+        <td class="column6 style55 s style57" colspan="7">{{$verbaliJoinMaterieSecondoAnno[$i]->nome}}</td>
         @else
         <td class="column6 style55 s style57" colspan="7"></td>
         @endif
-        <td class="column13 style9 null">{{$votiSecondoAnno[$i]}}</td>
-        @if ($i<$maxterzoanno)
-        <td class="column14 style59 s style57" colspan="4">{{$materieTerzoAnno[$i]->nome}}</td>
+        @if ($i<$maxsecondoanno && $esiste2>0)
+        <td class="column13 style9 null">{{$verbaliJoinMaterieSecondoAnno[$i]->voto}}</td>
+        @else
+        <td class="column13 style9 null"></td>
+        @endif
+        @if ($i<$maxterzoanno && $esiste3>0)
+        <td class="column14 style59 s style57" colspan="4">{{$verbaliJoinMaterieTerzoAnno[$i]->nome}}</td>
         @else
         <td class="column14 style59 s style57" colspan="4"></td>
         @endif
-        <td class="column18 style8 null">{{$votiTerzoAnno[$i]}}</td>
+        @if ($i<$maxterzoanno && $esiste3>0)
+        <td class="column18 style8 null">{{$verbaliJoinMaterieTerzoAnno[$i]->voto}}</td>
+        @else
+        <td class="column18 style8 null"></td>
+        @endif
         <td class="column19 style2 null"></td>
       </tr>
       @endfor

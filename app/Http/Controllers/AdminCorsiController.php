@@ -408,8 +408,8 @@ class AdminCorsiController extends Controller
 
     $matricolaPerMaterie=$allievo->matricola_militare;
 
-    $materie=Materia::select('nome','sessione','classe')->get();
-    $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->select('codice_materia')->get();
+    $materie=Materia::select('nome','codice','sessione','classe','facolta')->get();
+    $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->get();
 
     $materiePrimoAnno=Materia::where('classe','prima')->orderby('nome')->get();
     $materieSecondoAnno=Materia::where('classe','seconda')->orderby('nome')->get();
@@ -417,19 +417,41 @@ class AdminCorsiController extends Controller
     $maxprimoanno=Materia::where('classe','prima')->orderby('nome')->count();
     $maxsecondoanno=Materia::where('classe','seconda')->orderby('nome')->count();
     $maxterzoanno=Materia::where('classe','terza')->orderby('nome')->count();
-    if($maxprimoanno>$maxsecondoanno){
-      $max=$maxprimoanno;
+    
+    
+    //$verbaliJoinMateriePrimoAnno=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->leftJoin(Materia::select('nome','codice','sessione','classe','facolta'),'codice_materia', '=', 'codice')->get();
+    $verbaliJoinMateriePrimoAnno = DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->get();
+
+    $verbaliJoinMaterieSecondoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)
+    ->get();
+
+    $verbaliJoinMaterieTerzoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')->where('classe','terza')
+    ->where('matricola_allievo',$matricolaPerMaterie)
+    ->get();
+
+    $esisteprimoanno=$verbaliJoinMateriePrimoAnno->count();
+    $esistesecondoanno=$verbaliJoinMaterieSecondoAnno->count();
+    $esisteterzoanno=$verbaliJoinMaterieTerzoAnno->count();
+
+    if($esisteprimoanno>$esistesecondoanno){
+      $max=$esisteprimoanno;
     }else{
-      $max=$maxsecondoanno;
+      $max=$esistesecondoanno;
     }
-    if($max>$maxterzoanno){
+    if($max>$esisteterzoanno){
       $max=$max;
     }else{
-      $max=$maxterzoanno;
+      $max=$esisteterzoanno;
     }
 
+
     
-    $votiPrimoAnno=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->select('codice_materia')->get();
+    
 
 
 
@@ -441,8 +463,8 @@ class AdminCorsiController extends Controller
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
       'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,
       'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'materieTerzoAnno'=>$materieTerzoAnno,
-      'maxprimoanno'=>$maxprimoanno, 'maxterzoanno'=>$maxterzoanno, 'maxsecondoanno'=>$maxsecondoanno,'max'=>$max,
-        'mediaSportTerrestriPrimaClasse'=> $mediaSportTerrestriPrimaClasse,'mediaSportTerrestriTerzaClasse'=> $mediaSportTerrestriTerzaClasse,
+      'maxprimoanno'=>$esisteprimoanno, 'maxterzoanno'=>$esisteterzoanno, 'maxsecondoanno'=>$esistesecondoanno,'max'=>$max,'verbaliJoinMateriePrimoAnno'=>$verbaliJoinMateriePrimoAnno, 'verbaliJoinMaterieSecondoAnno'=>$verbaliJoinMaterieSecondoAnno, 'verbaliJoinMaterieTerzoAnno'=>$verbaliJoinMaterieTerzoAnno,
+        'mediaSportTerrestriPrimaClasse'=> $mediaSportTerrestriPrimaClasse,'mediaSportTerrestriTerzaClasse'=> $mediaSportTerrestriTerzaClasse, 'esiste1'=>$esisteprimoanno, 'esiste2'=>$esistesecondoanno , 'esiste3'=>$esisteterzoanno,
         'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse
     ]);
     return $pdf;
