@@ -663,7 +663,7 @@ public function inserisciVerbaliEsami(Request $request)
     $verbaleEsame->id_user_redattore=$request->idUserRedattore;
     $verbaleEsame->save();
 
-    return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il varbale con protocollo" . $request->codice_verbale]);
+    return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" ." ". $verbaleEsame->codice_verbale]);
   }
   public function sezioneSportiva()
   {
