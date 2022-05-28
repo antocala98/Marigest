@@ -413,6 +413,7 @@ class AdminCorsiController extends Controller
       $max=$maxterzoanno;
     }
 
+
       if($verbaliSportiviPrimaClasse > 0) {
           $mediaSportTerrestriPrimaClasse = ($sommaVotiSportiviPrimaClasse / $verbaliSportiviPrimaClasse);
       }else{
