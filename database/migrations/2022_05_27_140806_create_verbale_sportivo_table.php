@@ -27,6 +27,7 @@ class CreateVerbaleSportivoTable extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      *
