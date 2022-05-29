@@ -422,15 +422,16 @@ class AdminCorsiController extends Controller
     //$verbaliJoinMateriePrimoAnno=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->leftJoin(Materia::select('nome','codice','sessione','classe','facolta'),'codice_materia', '=', 'codice')->get();
     $verbaliJoinMateriePrimoAnno = DB::table('verbali_esami')
     ->leftJoin('materie', 'codice', '=', 'codice_materia')
-    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->get();
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')->where('voto','>=',18)
+    ->get();
 
     $verbaliJoinMaterieSecondoAnno=DB::table('verbali_esami')
     ->leftJoin('materie', 'codice', '=', 'codice_materia')
-    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')->where('voto','>=',18)
     ->get();
 
     $verbaliJoinMaterieTerzoAnno=DB::table('verbali_esami')
-    ->leftJoin('materie', 'codice', '=', 'codice_materia')->where('classe','terza')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')->where('classe','terza')->where('voto','!=','Assente')->where('voto','>=',18)
     ->where('matricola_allievo',$matricolaPerMaterie)
     ->get();
 
@@ -448,11 +449,119 @@ class AdminCorsiController extends Controller
     }else{
       $max=$esisteterzoanno;
     }
+    if($max>0){
+      if($esisteprimoanno>0){
+        $mediaVotiPrimoAnno=$verbaliJoinMateriePrimoAnno->sum('voto')/$esisteprimoanno;
+      }else{
+        $mediaVotiPrimoAnno=null;
+      }
+      if($esistesecondoanno>0){
+        $mediaVotiSecondoAnno=$verbaliJoinMaterieSecondoAnno->sum('voto')/$esistesecondoanno;
+      }else{
+        $mediaVotiSecondoAnno=null;
+      }
+      if($esisteterzoanno>0){
+        $mediaVotiTerzoAnno=$verbaliJoinMaterieTerzoAnno->sum('voto')/$esisteterzoanno;
+      }else{
+        $mediaVotiTerzoAnno=null;
+      }
+    }else{
+      $mediaVotiPrimoAnno=null;
+      $mediaVotiSecondoAnno=null;
+      $mediaVotiTerzoAnno=null;
+    }
+    $votiPrimoSemestrePrimoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')
+    ->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestrePrimoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')
+    ->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
+
+    $votiPrimoSemestreSecondoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestreSecondoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
+
+    $votiPrimoSemestreTerzoAnno= DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','terza')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')
+    ->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestreTerzoAnno= DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','terza')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')
+    ->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
 
 
+    $totaleVotiPrimoSemestrePrimoAnno=$votiPrimoSemestrePrimoAnno->sum('voto');
+    $numeroVotiPrimoSemestrePrimoAnno=$votiPrimoSemestrePrimoAnno->count();
+    if($numeroVotiPrimoSemestrePrimoAnno>0){
+      $mediaVotiPrimoSemestrePrimoAnno=$totaleVotiPrimoSemestrePrimoAnno/$numeroVotiPrimoSemestrePrimoAnno;
+    }else{
+      $mediaVotiPrimoSemestrePrimoAnno=null;
+    }
+
+    $totaleVotiSecondoSemestrePrimoAnno=$votiSecondoSemestrePrimoAnno->sum('voto');
+    $numeroVotiSecondoSemestrePrimoAnno=$votiSecondoSemestrePrimoAnno->count();
+    if($numeroVotiSecondoSemestrePrimoAnno>0){
+      $mediaVotiSecondoSemestrePrimoAnno=$totaleVotiSecondoSemestrePrimoAnno/$numeroVotiSecondoSemestrePrimoAnno;
+    }else{
+      $mediaVotiSecondoSemestrePrimoAnno=null;
+    }
     
-    
+    $totaleVotiPrimoSemestreSecondoAnno=$votiPrimoSemestreSecondoAnno->sum('voto');
+    $numeroVotiPrimoSemestreSecondoAnno=$votiPrimoSemestreSecondoAnno->count();
+    if($numeroVotiPrimoSemestreSecondoAnno>0){
+      $mediaVotiPrimoSemestreSecondoAnno=$totaleVotiPrimoSemestreSecondoAnno/$numeroVotiPrimoSemestreSecondoAnno;
+    }else{
+      $mediaVotiPrimoSemestreSecondoAnno=null;
+    }
 
+    $totaleVotiSecondoSemestreSecondoAnno=$votiSecondoSemestreSecondoAnno->sum('voto');
+    $numeroVotiSecondoSemestreSecondoAnno=$votiSecondoSemestreSecondoAnno->count();
+    if($numeroVotiSecondoSemestreSecondoAnno>0){
+      $mediaVotiSecondoSemestreSecondoAnno=$totaleVotiSecondoSemestreSecondoAnno/$numeroVotiSecondoSemestreSecondoAnno;
+    }else{
+      $mediaVotiSecondoSemestreSecondoAnno=null;
+    }
+
+    $totaleVotiPrimoSemestreTerzoAnno=$votiPrimoSemestreTerzoAnno->sum('voto');
+    $numeroVotiPrimoSemestreTerzoAnno=$votiPrimoSemestreTerzoAnno->count();
+    if($numeroVotiPrimoSemestreTerzoAnno>0){
+      $mediaVotiPrimoSemestreTerzoAnno=$totaleVotiPrimoSemestreTerzoAnno/$numeroVotiPrimoSemestreTerzoAnno;
+    }else{
+      $mediaVotiPrimoSemestreTerzoAnno=null;
+    }
+
+    $totaleVotiPrimoSemestreTerzoAnno=$votiPrimoSemestreTerzoAnno->sum('voto');
+    $numeroVotiPrimoSemestreTerzoAnno=$votiPrimoSemestreTerzoAnno->count();
+    if($numeroVotiPrimoSemestreTerzoAnno>0){
+      $mediaVotiPrimoSemestreTerzoAnno=$totaleVotiPrimoSemestreTerzoAnno/$numeroVotiPrimoSemestreTerzoAnno;
+    }else{
+      $mediaVotiPrimoSemestreTerzoAnno=null;
+    }
+
+    $totaleVotiSecondoSemestreTerzoAnno=$votiSecondoSemestreTerzoAnno->sum('voto');
+    $numeroVotiSecondoSemestreTerzoAnno=$votiSecondoSemestreTerzoAnno->count();
+    if($numeroVotiSecondoSemestreTerzoAnno>0){
+      $mediaVotiSecondoSemestreTerzoAnno=$totaleVotiSecondoSemestreTerzoAnno/$numeroVotiSecondoSemestreTerzoAnno;
+    }else{
+      $mediaVotiSecondoSemestreTerzoAnno=null;
+    }
 
 
       $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
@@ -465,7 +574,13 @@ class AdminCorsiController extends Controller
       'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'materieTerzoAnno'=>$materieTerzoAnno,
       'maxprimoanno'=>$esisteprimoanno, 'maxterzoanno'=>$esisteterzoanno, 'maxsecondoanno'=>$esistesecondoanno,'max'=>$max,'verbaliJoinMateriePrimoAnno'=>$verbaliJoinMateriePrimoAnno, 'verbaliJoinMaterieSecondoAnno'=>$verbaliJoinMaterieSecondoAnno, 'verbaliJoinMaterieTerzoAnno'=>$verbaliJoinMaterieTerzoAnno,
         'mediaSportTerrestriPrimaClasse'=> $mediaSportTerrestriPrimaClasse,'mediaSportTerrestriTerzaClasse'=> $mediaSportTerrestriTerzaClasse, 'esiste1'=>$esisteprimoanno, 'esiste2'=>$esistesecondoanno , 'esiste3'=>$esisteterzoanno,
-        'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse
+        'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse ,'mediaVotiPrimoAnno'=>$mediaVotiPrimoAnno, 'mediaVotiSecondoAnno'=>$mediaVotiSecondoAnno, 'mediaVotiTerzoAnno'=>$mediaVotiTerzoAnno,
+      'mediaVotiPrimoSemestrePrimoAnno'=>$mediaVotiPrimoSemestrePrimoAnno, 'mediaVotiSecondoSemestrePrimoAnno'=>$mediaVotiSecondoSemestrePrimoAnno, 'mediaVotiPrimoSemestreSecondoAnno'=>$mediaVotiPrimoSemestreSecondoAnno,
+      'mediaVotiSecondoSemestreSecondoAnno'=>$mediaVotiSecondoSemestreSecondoAnno, 'mediaVotiPrimoSemestreTerzoAnno'=>$mediaVotiPrimoSemestreTerzoAnno, 'mediaVotiSecondoSemestreTerzoAnno'=>$mediaVotiSecondoSemestreTerzoAnno,
+      
+
+
+
     ]);
     return $pdf;
   }

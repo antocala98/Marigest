@@ -4591,31 +4591,31 @@
       <tr class="row22">
         <td class="column0 style1 null"></td>
         <td class="column1 style115 s style50" colspan="4">Media Voti D.U.</td>
-        <td class="column5 style46 n">22.000</td>
+        <td class="column5 style46 n">{{$mediaVotiPrimoAnno}}</td>
         <td class="column6 style121 s style122" colspan="7">Media Voti D.U.</td>
-        <td class="column13 style26 null"></td>
+        <td class="column13 style26 null">{{$mediaVotiSecondoAnno}}</td>
         <td class="column14 style120 s style121" colspan="4">Media Voti D.U.</td>
-        <td class="column18 style26 null"></td>
+        <td class="column18 style26 null">{{$mediaVotiTerzoAnno}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row23">
         <td class="column0 style1 null"></td>
         <td class="column1 style77 s style79" colspan="4">Materie 1° Sessione</td>
-        <td class="column5 style47 n">22.000</td>
+        <td class="column5 style47 n">{{$mediaVotiPrimoSemestrePrimoAnno}}</td>
         <td class="column6 style79 s style78" colspan="7">Materie 1° Sessione</td>
-        <td class="column13 style15 null"></td>
+        <td class="column13 style15 null">{{$mediaVotiPrimoSemestreSecondoAnno}}</td>
         <td class="column14 style77 s style79" colspan="4">Materie 1° Sessione</td>
-        <td class="column18 style15 null"></td>
+        <td class="column18 style15 null">{{$mediaVotiPrimoSemestreTerzoAnno}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row24">
         <td class="column0 style1 null"></td>
         <td class="column1 style77 s style79" colspan="4">Materie 2° Sessione</td>
-        <td class="column5 style47 n">22.000</td>
+        <td class="column5 style47 n">{{$mediaVotiSecondoSemestrePrimoAnno}}</td>
         <td class="column6 style79 s style78" colspan="7">Materie 2° Sessione</td>
-        <td class="column13 style15 null"></td>
+        <td class="column13 style15 null">{{$mediaVotiSecondoSemestreSecondoAnno}}</td>
         <td class="column14 style77 s style79" colspan="4">Materie 2° Sessione</td>
-        <td class="column18 style15 null"></td>
+        <td class="column18 style15 null">{{$mediaVotiSecondoSemestreTerzoAnno}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row25">
