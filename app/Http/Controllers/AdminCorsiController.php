@@ -583,7 +583,7 @@ class AdminCorsiController extends Controller
     ->leftJoin('materie', 'codice', '=', 'codice_materia')->where('classe','terza')->where('voto','!=','Assente')->where('voto','>=',18)
     ->where('facolta','=','dipartimento')->where('matricola_allievo',$matricolaPerMaterie)
     ->get();
-
+    $maxdipartimento=0;
     $esistedipartimentoprimoanno=$verbaliJoinMaterieDipartimentaliPrimoAnno->count();
     $esistedipartimentosecondoanno=$verbaliJoinMaterieDipartimentaliSecondoAnno->count();
     $esistedipartimentoterzoanno=$verbaliJoinMaterieDipartimentaliTerzoAnno->count();
@@ -718,12 +718,14 @@ class AdminCorsiController extends Controller
         'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse ,'mediaVotiPrimoAnno'=>$mediaVotiPrimoAnno, 'mediaVotiSecondoAnno'=>$mediaVotiSecondoAnno, 'mediaVotiTerzoAnno'=>$mediaVotiTerzoAnno,
       'mediaVotiPrimoSemestrePrimoAnno'=>$mediaVotiPrimoSemestrePrimoAnno, 'mediaVotiSecondoSemestrePrimoAnno'=>$mediaVotiSecondoSemestrePrimoAnno, 'mediaVotiPrimoSemestreSecondoAnno'=>$mediaVotiPrimoSemestreSecondoAnno,
       'mediaVotiSecondoSemestreSecondoAnno'=>$mediaVotiSecondoSemestreSecondoAnno, 'mediaVotiPrimoSemestreTerzoAnno'=>$mediaVotiPrimoSemestreTerzoAnno, 'mediaVotiSecondoSemestreTerzoAnno'=>$mediaVotiSecondoSemestreTerzoAnno,
+      'maxdipartimento'=>$maxdipartimento, 'esistedipartimentoprimoanno'=>$esistedipartimentoprimoanno, 'esistedipartimentosecondoanno'=>$esistedipartimentosecondoanno, 'esistedipartimentoterzoanno'=>$esistedipartimentoterzoanno,
+      'mediaVotiPrimoAnnoDipartimento'=>$mediaVotiPrimoAnnoDipartimento, 'mediaVotiSecondoAnnoDipartimento'=>$mediaVotiSecondoAnnoDipartimento, 'mediaVotiTerzoAnnoDipartimento'=>$mediaVotiTerzoAnnoDipartimento,
+      'mediaVotiPrimoSemestrePrimoAnnoDipartimento'=>$mediaVotiPrimoSemestrePrimoAnnoDipartimento, 'mediaVotiSecondoSemestrePrimoAnnoDipartimento'=>$mediaVotiSecondoSemestrePrimoAnnoDipartimento,
+      'mediaVotiPrimoSemestreSecondoAnnoDipartimento'=>$mediaVotiPrimoSemestreSecondoAnnoDipartimento, 'mediaVotiSecondoSemestreSecondoAnnoDipartimento'=>$mediaVotiSecondoSemestreSecondoAnnoDipartimento,
+      'mediaVotiPrimoSemestreTerzoAnnoDipartimento'=>$mediaVotiPrimoSemestreTerzoAnnoDipartimento, 'mediaVotiSecondoSemestreTerzoAnnoDipartimento'=>$mediaVotiSecondoSemestreTerzoAnnoDipartimento,
       
-
-
-
-    ]);
-    return $pdf;
+      ]);
+      return $pdf;
   }
 
   public function visualizzaSchedaIndividuale($id)
