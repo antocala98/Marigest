@@ -22,63 +22,35 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Corso;
 
 
-
-
-class AdminJuniorCorsiController extends Controller
+class AddettoCorsiController extends Controller
 {
   private $user;
-  private $userAdminJunior;
+  private $userAddetto;
 
   public function index()
   {
-    return view('corsi.admin_jr.home');
+    return view('corsi.addetto.home');
   }
 
   public function view()
   {
 
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.home');
-    }
-    else {
+    if ($this->getUser()->can('view', $this->getUserAddetto())) {
+      return view('corsi.addetto.home');
+    } else {
       abort(403, 'Azione non autorizzata.');
     }
   }
 
 
-  public function aggiungiDatiCorsi()
-  {
-
-
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.aggiungidaticorsi');
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-
-
-  }
-
-  public function inserimentoDati(Request $request)
-  {
-    IncorporandiNMRSController::import($request);
-    return view('corsi.admin_jr.aggiungidaticorsi')->with(['feedback_utente' => "File Excel inserito con successo nel database!"]);
-  /*switch(Auth::user()->comando_appartenenza){
-   case '':
-   IncorporandiNMRSController::import($request);
-   } */
-
-
-  }
 
 
   public function schedeIndividualiAllievi()
   {
     $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.schedeIndividuali', ['allievi' => $allievi]);
+    if ($this->getUser()->can('view', $this->getUserAddetto())) {
+      return view('corsi.addetto.schedeIndividuali', ['allievi' => $allievi]);
     }
     else {
       abort(403, 'Azione non autorizzata.');
@@ -94,7 +66,7 @@ class AdminJuniorCorsiController extends Controller
       ->orwhere('matricola_militare', $request->cerca)
       ->get();
 
-    return view('corsi.admin_jr.schedeIndividuali', ['allievi' => $allievi]);
+    return view('corsi.addetto.schedeIndividuali', ['allievi' => $allievi]);
 
   }
 
@@ -541,181 +513,45 @@ class AdminJuniorCorsiController extends Controller
     return $pdf->stream('Scheda Individuale-' . $allievo->cognome . $allievo->nome . '.pdf');
 
   }
-  public function modificaDatiAllievi($id = null)
-  {
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      if ($id == null) {
-        $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
-        return view('corsi.admin_jr.modificaDatiAllievo')->with(['allievi' => $allievi]);
-      }
-      else {
-        $allievo = Allievo::where('id', $id)->first();
-        return view('corsi.admin_jr.modificaDatiAllievo')->with(['allievo' => $allievo]);
-      }
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-  }
+ 
 
   public function schedeRiepilogative()
   {
 
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.schederiepilogative');
+    if ($this->getUser()->can('view', $this->getUserAddetto())) {
+      return view('corsi.addetto.schederiepilogative');
     }
     else {
       abort(403, 'Azione non autorizzata.');
     }
   }
 
-  public function aggiornaDatiAllievo(Request $request)
-  {
-    $allievo = Allievo::find($request->id);
-
-    if ($request->foto != null) {
-      $request->foto = Storage::disk('local')->putFile('foto', $request->file('foto'));
-      $allievo->foto = $request->foto;
-    }
-
-    $allievo->matricola_militare = $request->matricola_militare;
-    $allievo->nome = $request->nome;
-    $allievo->cognome = $request->cognome;
-    $allievo->sesso = $request->sesso;
-    $allievo->codice_fiscale = $request->codice_fiscale;
-    $allievo->data_nascita = $request->data_nascita;
-    $allievo->luogo_nascita = $request->luogo_nascita;
-    $allievo->provincia_nascita = $request->provincia_nascita;
-    $allievo->nazione_nascita = $request->nazione_nascita;
-    $allievo->matricola_universita = $request->matricola_universita;
-    $allievo->categoria = $request->categoria;
-    $allievo->corso = $request->corso;
-    $allievo->titolo_studio = $request->titolo_studio;
-    $allievo->voto_diploma = $request->voto_diploma;
-    $allievo->data_incorporamento = $request->data_incorporamento;
-    $allievo->data_giuridica = $request->data_giuridica;
-    $allievo->data_arrivo = $request->data_arrivo;
-    $allievo->status_attuale = $request->status_attuale;
-    $allievo->lavoro_precedente = $request->lavoro_precedente;
-    $allievo->provincia_residenza = $request->provincia_residenza;
-    $allievo->cap_residenza = $request->cap_residenza;
-    $allievo->indirizzo_residenza = $request->indirizzo_residenza;
-    $allievo->luogo_residenza = $request->luogo_residenza;
-    $allievo->scalo_ferroviario = $request->scalo_ferroviario;
-    $allievo->comando_carabinieri = $request->comando_carabinieri;
-    $allievo->tribunale = $request->tribunale;
-    $allievo->motivo_arruolamento = $request->motivo_arruolamento;
-    $allievo->sport_praticato = $request->sport_praticato;
-    $allievo->livello_sport_praticato = $request->livello_sport_praticato;
-    $allievo->livello_lingue = $request->livello_lingue;
-    $allievo->lingue = $request->lingue;
-    $allievo->altro_titolo_studio = $request->altro_titolo_studio;
-    $allievo->studio_2 = $request->studio_2;
-    $allievo->scuola_militare = $request->scuola_militare;
-    $allievo->freq_accademia = $request->freq_accademia;
-    $allievo->ruolo_normale = $request->ruolo_normale;
-    $allievo->provincia_domicilio = $request->provincia_domicilio;
-    $allievo->cap_domicilio = $request->cap_domicilio;
-    $allievo->indirizzo_domicilio = $request->indirizzo_domicilio;
-    $allievo->luogo_domicilio = $request->luogo_domicilio;
-
-
-    $allievo->save();
-
-    return view('corsi.admin_jr.modificaDatiAllievo', ['id' => $request->id])->with(['feedback_utente' => "Hai modificato con successo i dati di " . $request->cognome . " " . "$request->nome"]);
-
-  }
+  
 
   public function sezioneDisciplinare()
   {
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.sezioneDisciplinare');
+    if ($this->getUser()->can('view', $this->getUserAddetto())) {
+      return view('corsi.addetto.sezioneDisciplinare');
     }
     else {
       abort(403, 'Azione non autorizzata.');
     }
 
   }
-  public function paginaInserisciDisciplinare()
-  {
-    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.funzioniDisciplinare.inserisciProvDisciplinare')->with(['allievi' => $allievi]);
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-  }
-  public function inserisciDisciplinare(Request $request)
-  {
-    $request->validate([
-      'n_protocollo' => ['required', 'string', 'max:255'],
-      'data_provvedimento' => ['required'],
-      'data_notifica' => ['required'],
-    ]);
-
-
-    $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
-
-    if ($request->tipo_provvedimento == 'consegna semplice' || $request->tipo_provvedimento == 'consegna rigore') {
-      $request->validate(['num_giorni' => ['required']]);
-    }
-    $provvedimentoDisciplinare = new ProvvedimentoDisciplinare();
-
-    $provvedimentoDisciplinare->num_protocollo = $request->n_protocollo;
-    $provvedimentoDisciplinare->tipo_provvedimento = $request->tipo_provvedimento;
-    $provvedimentoDisciplinare->num_giorni_provvedimento = $request->num_giorni;
-    $provvedimentoDisciplinare->data_provvedimento = $request->data_provvedimento;
-    $provvedimentoDisciplinare->data_notifica = $request->data_notifica;
-    $provvedimentoDisciplinare->matricola_allievo = $request->allievo;
-    $provvedimentoDisciplinare->classe_allievo = $corso->classe;
-    $provvedimentoDisciplinare->id_user_committente = Auth::user()->id;
-
-
-    $provvedimentoDisciplinare->save();
-
-    return view('corsi.admin_jr.funzioniDisciplinare.inserisciProvDisciplinare', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
-  }
-
-  public function paginaModificaDisciplinare($id = null)
-  {
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      if ($id == null) {
-        $provvedimentoDisciplinare = ProvvedimentoDisciplinare::orderBy('data_provvedimento')->get();
-        return view('corsi.admin_jr.funzioniDisciplinare.modificaProvDisciplinare')
-          ->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
-      }
-      else {
-        $provvedimentoD = ProvvedimentoDisciplinare::where('id', $id)->first();
-        return view('corsi.admin_jr.funzioniDisciplinare.modificaProvDisciplinare')->with(['provvedimentoD' => $provvedimentoD]);
-      }
-    }
-  }
-  public function aggiornaProvvedimentoD(Request $request)
-  {
-    $provvedimentoDisciplinare = ProvvedimentoDisciplinare::find($request->id);
-
-    $provvedimentoDisciplinare->tipo_provvedimento = $request->tipo_provvedimento;
-    $provvedimentoDisciplinare->num_giorni_provvedimento = $request->num_giorni;
-    $provvedimentoDisciplinare->data_provvedimento = $request->data_provvedimento;
-    $provvedimentoDisciplinare->num_protocollo = $request->n_protocollo;
-
-    $provvedimentoDisciplinare->save();
-
-    return view('corsi.admin_jr.funzioniDisciplinare.modificaProvDisciplinare', ['id' => $request->id])->with(['feedback_utente' => "Hai modificato con successo i dati di " . $request->matricola_allievo]);
-
-  }
+ 
+ 
+  
   public function paginaVisualizzaDisciplinare()
   {
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+    if ($this->getUser()->can('view', $this->getUserAddetto())) {
       $provvedimentoDisciplinare = ProvvedimentoDisciplinare::orderBy('data_provvedimento')->get();
       foreach ($provvedimentoDisciplinare as $provvedimentoD) {
         $provvedimentoD->data_provvedimento = Carbon::parse($provvedimentoD->data_provvedimento)->format('d/m/Y');
         $provvedimentoD->data_notifica = Carbon::parse($provvedimentoD->data_notifica)->format('d/m/Y');
 
       }
-      return view('corsi.admin_jr.funzioniDisciplinare.visualizzaProvDisciplinare')->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
+      return view('corsi.addetto.funzioniDisciplinare.visualizzaProvDisciplinare')->with(['provvedimentoDisciplinare' => $provvedimentoDisciplinare]);
     }
     else {
       abort(403, 'Azione non autorizzata.');
@@ -727,81 +563,24 @@ class AdminJuniorCorsiController extends Controller
 
   public function sezioneSanitaria()
   {
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.sezioneSanitaria');
+    if ($this->getUser()->can('view', $this->getUserAddetto())) {
+      return view('corsi.addetto.sezioneSanitaria');
     }
     else {
       abort(403, 'Azione non autorizzata.');
     }
 
   }
-  public function paginaInserisciSanitaria()
-  {
-    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.funzioniSanitarie.inserisciProvSanitario')->with(['allievi' => $allievi]);
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-  }
-  public function inserisciSanitaria(Request $request)
-  {
-    $request->validate([
-      'data_provvedimento' => ['required'],
-    ]);
-
-    $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
-
-    $provvedimentoSanitario = new ProvvedimentoSanitario();
-
-    $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
-    $provvedimentoSanitario->num_giorni_provvedimento = $request->num_giorni;
-    $provvedimentoSanitario->data_provvedimento = $request->data_provvedimento;
-    $provvedimentoSanitario->matricola_allievo_paziente = $request->allievo;
-    $provvedimentoSanitario->classe_allievo = $corso->classe;
-    $provvedimentoSanitario->id_user_infermeria = Auth::user()->id;
-
-    $provvedimentoSanitario->save();
-    return view('corsi.admin_jr.funzioniSanitarie.inserisciProvSanitario', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
-  }
-  public function paginaModificaSanitaria($id = null)
-  {
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      if ($id == null) {
-        $provvedimentiSanitari = ProvvedimentoSanitario::orderBy('data_provvedimento')->get();
-        return view('corsi.admin_jr.funzioniSanitarie.modificaProvSanitario')
-          ->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
-      }
-      else {
-        $provvedimento = ProvvedimentoSanitario::where('id', $id)->first();
-        return view('corsi.admin_jr.funzioniSanitarie.modificaProvSanitario')->with(['provvedimento' => $provvedimento]);
-      }
-    }
-  }
-  public function aggiornaProvvedimento(Request $request)
-  {
-    $provvedimentoSanitario = ProvvedimentoSanitario::find($request->id);
-
-    $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
-    $provvedimentoSanitario->num_giorni_provvedimento = $request->num_giorni;
-    $provvedimentoSanitario->data_provvedimento = $request->data_provvedimento;
-    $provvedimentoSanitario->save();
-
-    return view('corsi.admin_jr.funzioniSanitarie.modificaProvSanitario', ['id' => $request->id])->with(['feedback_utente' => "Hai modificato con successo i dati di " . $request->matricola_allievo_paziente]);
-
-
-  }
 
   public function paginaVisualizzaSanitaria()
   {
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
+    if ($this->getUser()->can('view', $this->getUserAddetto())) {
       $provvedimentiSanitari = ProvvedimentoSanitario::orderBy('data_provvedimento')->get();
       foreach ($provvedimentiSanitari as $provvedimento) {
         $provvedimento->data_provvedimento = Carbon::parse($provvedimento->data_provvedimento)->format('d/m/Y');
       }
-      return view('corsi.admin_jr.funzioniSanitarie.visualizzaProvSanitario')->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
+      return view('corsi.addetto.funzioniSanitarie.visualizzaProvSanitario')->with(['provvedimentiSanitari' => $provvedimentiSanitari]);
     }
     else {
       abort(403, 'Azione non autorizzata.');
@@ -811,100 +590,8 @@ class AdminJuniorCorsiController extends Controller
   }
 
  
-
-  public function sezioneStudi()
-  {
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.sezioneStudi');
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-
-
-  }
-
-  public function paginaVerbaliEsami()
-  {
-    $userRedattore = Auth::user();
-    $materie = Materia::where('id', '>', 0)->get();
-    $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.sezioneStudi.aggiungiVerbaleEsame', ['userRedattore' => $userRedattore, 'materie' => $materie, 'allievi' => $allievi]); //->with(['feedback_utente' => "Hai inserito con successo il varbale con protocollo" . $request->codice_verbale]);
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-  }
-  public function inserisciVerbaliEsami(Request $request)
-  {
-    $materie = Materia::where('id', '>', 0)->get();
-    $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
-    $userRedattore = Auth::user();
-    $verbaleEsame = new VerbaleEsame();
-
-    $verbaleEsame->codice_verbale = $request->codiceVerbale;
-    $verbaleEsame->codice_materia = $request->materie;
-    $verbaleEsame->data_verbale = $request->dataVerbale;
-    $verbaleEsame->voto = $request->voto;
-    $verbaleEsame->ufficiale_commissione = $request->ufficiale;
-    $verbaleEsame->matricola_allievo = $request->allievo;
-    $verbaleEsame->id_user_redattore = $request->idUserRedattore;
-    $verbaleEsame->save();
-
-    return view('corsi.admin_jr.sezioneStudi.aggiungiVerbaleEsame', ['userRedattore' => $userRedattore, 'materie' => $materie, 'allievi' => $allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" . " " . $verbaleEsame->codice_verbale]);
-  }
-  public function sezioneSportiva()
-  {
-
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.sezioneSportiva');
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-
-  }
-  public function paginaInserisciVerbalisportivi()
-  {
-
-    $discipline = RequisitoSportivo::where('id', '>', 0)->get();
-
-    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
-
-    if ($this->getUser()->can('view', $this->getUserAdmin())) {
-      return view('corsi.admin_jr.sezioneSportiva.inserisciVerbaleSportivo')->with(['allievi' => $allievi, 'discipline' => $discipline]);
-    }
-    else {
-      abort(403, 'Azione non autorizzata.');
-    }
-
-  }
-  public function inserisciVerbalisportivi(Request $request)
-  {
-    $discipline = RequisitoSportivo::where('id', '>', 0)->get();
-
-    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
-
-    $verbaleSportivo = new VerbaleSportivo();
-    $verbaleSportivo->codice_verbale = $request->codiceVerbale;
-    $verbaleSportivo->disciplina = $request->discipline;
-    $verbaleSportivo->data_verbale = $request->dataVerbale;
-    $verbaleSportivo->voto = $request->voto;
-    $verbaleSportivo->matricola_allievo = $request->allievo;
-    $verbaleSportivo->id_user_redattore = Auth::user()->id;
-    $verbaleSportivo->save();
-
-
-    return view('corsi.admin_jr.sezioneSportiva.inserisciVerbaleSportivo', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il verbale", 'allievi' => $allievi, 'discipline' => $discipline]);
-    ;
-  }
-
-
-
-
-
-
+  
+ 
 
   /**
    *
@@ -920,9 +607,9 @@ class AdminJuniorCorsiController extends Controller
    *
    * @return mixed
    */
-  function getUserAdmin()
+  function getUserAddetto()
   {
-    $this->userAdminJunior = new User(['tipo_utente' => '2']);
-    return $this->userAdminJunior;
+    $this->userAddetto = new User(['tipo_utente' => '3']);
+    return $this->userAddetto;
   }
 }

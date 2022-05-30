@@ -99,11 +99,6 @@
                                         <br>ACQUISISCI DATI INCORPORAMENTO</h5> </a>
                                 </li>
                                 <li class="mt-8">
-                                    <a href="{{ url('corsi/marescialli/admin/aggiungi-dati-corsi') }}"
-                                        class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
-                                        <br>ACQUISISCI DATI INCORPORAMENTO</h5> </a>
-                                </li>
-                                <li class="mt-8">
                                     <a href="{{ url('corsi/marescialli/admin/schede-individuali') }}"
                                         class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
                                         <br>SCHEDE INDIVIDUALI ALLIEVI</h5> </a>
