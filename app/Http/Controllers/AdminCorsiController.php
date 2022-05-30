@@ -183,8 +183,7 @@ class AdminCorsiController extends Controller
   public function schedaIndividuale($id){
     $allievo = Allievo::where('id', $id)->first();
     $provvedimentiSanitari = ProvvedimentoSanitario::get();
-
-
+    $provvedimentiDisciplinari = ProvvedimentoDisciplinare::get();
 
 
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
@@ -286,7 +285,14 @@ class AdminCorsiController extends Controller
           ->where('classe_allievo', 'terza')
           ->select('num_giorni_provvedimento')
           ->sum('num_giorni_provvedimento');
+        }
+    }
+    
 
+      foreach($provvedimentiDisciplinari as $provvedimento){
+
+        $matricola = $provvedimento->matricola_allievo;
+        if ($allievo->matricola_militare == $matricola) {
         $rimproveroPrimaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
           ->where('matricola_allievo', $matricola)
           ->where('classe_allievo', 'prima')
