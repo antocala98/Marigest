@@ -414,17 +414,13 @@ class AdminCorsiController extends Controller
 
     $matricolaPerMaterie=$allievo->matricola_militare;
 
-    $materie=Materia::select('nome','codice','sessione','classe','facolta')->get();
-    $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->get();
+    //$materie=Materia::select('nome','codice','sessione','classe','facolta')->get();
+    //$verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->get();
 
     $materiePrimoAnno=Materia::where('classe','prima')->orderby('nome')->get();
     $materieSecondoAnno=Materia::where('classe','seconda')->orderby('nome')->get();
     $materieTerzoAnno=Materia::where('classe','terza')->orderby('nome')->get();
-    $maxprimoanno=Materia::where('classe','prima')->orderby('nome')->count();
-    $maxsecondoanno=Materia::where('classe','seconda')->orderby('nome')->count();
-    $maxterzoanno=Materia::where('classe','terza')->orderby('nome')->count();
-    
-    
+        
     //$verbaliJoinMateriePrimoAnno=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->leftJoin(Materia::select('nome','codice','sessione','classe','facolta'),'codice_materia', '=', 'codice')->get();
     $verbaliJoinMateriePrimoAnno = DB::table('verbali_esami')
     ->leftJoin('materie', 'codice', '=', 'codice_materia')
@@ -568,6 +564,9 @@ class AdminCorsiController extends Controller
     }else{
       $mediaVotiSecondoSemestreTerzoAnno=null;
     }
+
+    //$matricolaPerMaterie=$allievo->matricola_militare;
+
 
 
       $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
@@ -879,12 +878,13 @@ public function inserisciVerbaliEsami(Request $request)
     $verbaleEsame->id_user_redattore=$request->idUserRedattore;
     
     $controlloEsame=VerbaleEsame::where('codice_materia',$verbaleEsame->codice_materia)->where('matricola_allievo',$verbaleEsame->matricola_allievo)->where('voto','>=',18)->count();
-
-    if($controlloEsame>0){
+    $zero=0;
+    if($controlloEsame > $zero){
+      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente2' => "Il voto per la materia selezionata è già stato inserito. Per la modifica del verbale recati nell'apposita sezione".$controlloEsame]);
+    }else{
       $verbaleEsame->save();
       return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" ." ". $verbaleEsame->codice_verbale]);
-    }else{
-      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente2' => "Il voto per la materia selezionata è già stato inserito. Per la modifica del verbale recati nell'apposita sezione"]);
+      
     }
     
   }

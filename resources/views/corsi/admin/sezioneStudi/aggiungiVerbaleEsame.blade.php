@@ -39,8 +39,9 @@
             </svg>
         </button>
     </div>
+<?php }else{
     
-<?php } ?>
+} ?>
 <?php if(isset($feedback_utente2)){ ?>
     <div class="block">
         <div id="toast-success"
@@ -116,7 +117,6 @@
             <div class="flex justify-center mt-6">
                 <x-button element="button" class="mb-24" type="submit">Inserisci</x-button>
             </div>
-    
     </form>
     <datalist id="materie">
         @foreach ($materie as $materia)
