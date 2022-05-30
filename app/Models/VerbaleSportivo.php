@@ -17,6 +17,7 @@ class VerbaleSportivo extends Model
         'matricola_allievo',
         'data_verbale',
         'voto',
+        'tipologia',
         'id_user_redattore',
     ];
 
