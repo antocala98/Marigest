@@ -184,6 +184,7 @@ class AdminCorsiController extends Controller
     $allievo = Allievo::where('id', $id)->first();
     $provvedimentiSanitari = ProvvedimentoSanitario::get();
     $provvedimentiDisciplinari = ProvvedimentoDisciplinare::get();
+    $verbSport = VerbaleSportivo::get();
 
 
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
@@ -287,7 +288,7 @@ class AdminCorsiController extends Controller
           ->sum('num_giorni_provvedimento');
         }
     }
-    
+
 
       foreach($provvedimentiDisciplinari as $provvedimento){
 
@@ -372,29 +373,33 @@ class AdminCorsiController extends Controller
           ->where('classe_allievo', 'terza')
           ->select('tipo_provvedimento')
           ->count('tipo_provvedimento');
-
-          $verbaliSportiviPrimaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
-              ->select('disciplina')
-              ->count('disciplina');
-          $sommaVotiSportiviPrimaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
-              ->select('voto')
-              ->sum('voto');
-          $verbaliSportiviSecondaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
-              ->select('disciplina')
-              ->count('disciplina');
-          $sommaVotiSportiviSecondaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
-              ->select('voto')
-              ->sum('voto');
-          $verbaliSportiviTerzaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
-              ->select('disciplina')
-              ->count('disciplina');
-          $sommaVotiSportiviTerzaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
-              ->select('voto')
-              ->sum('voto');
-        break;
+        }
       }
-    }
-    if($verbaliSportiviPrimaClasse > 0) {
+            foreach($verbSport as $verbale){
+                $matricola = $verbale->matricola_allievo;
+                if ($allievo->matricola_militare == $matricola) {
+                    $verbaliSportiviPrimaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
+                        ->select('disciplina')
+                        ->count('disciplina');
+                    $sommaVotiSportiviPrimaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
+                        ->select('voto')
+                        ->sum('voto');
+                    $verbaliSportiviSecondaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
+                        ->select('disciplina')
+                        ->count('disciplina');
+                    $sommaVotiSportiviSecondaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
+                        ->select('voto')
+                        ->sum('voto');
+                    $verbaliSportiviTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+                        ->select('disciplina')
+                        ->count('disciplina');
+                    $sommaVotiSportiviTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+                        ->select('voto')
+                        ->sum('voto');
+                }
+            }
+
+      if($verbaliSportiviPrimaClasse > 0) {
       $mediaSportTerrestriPrimaClasse = ($sommaVotiSportiviPrimaClasse / $verbaliSportiviPrimaClasse);
   }else{
       $mediaSportTerrestriPrimaClasse=0;
@@ -420,7 +425,7 @@ class AdminCorsiController extends Controller
     $materiePrimoAnno=Materia::where('classe','prima')->orderby('nome')->get();
     $materieSecondoAnno=Materia::where('classe','seconda')->orderby('nome')->get();
     $materieTerzoAnno=Materia::where('classe','terza')->orderby('nome')->get();
-        
+
     //$verbaliJoinMateriePrimoAnno=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->leftJoin(Materia::select('nome','codice','sessione','classe','facolta'),'codice_materia', '=', 'codice')->get();
     $verbaliJoinMateriePrimoAnno = DB::table('verbali_esami')
     ->leftJoin('materie', 'codice', '=', 'codice_materia')
@@ -524,7 +529,7 @@ class AdminCorsiController extends Controller
     }else{
       $mediaVotiSecondoSemestrePrimoAnno=null;
     }
-    
+
     $totaleVotiPrimoSemestreSecondoAnno=$votiPrimoSemestreSecondoAnno->sum('voto');
     $numeroVotiPrimoSemestreSecondoAnno=$votiPrimoSemestreSecondoAnno->count();
     if($numeroVotiPrimoSemestreSecondoAnno>0){
@@ -876,7 +881,7 @@ public function inserisciVerbaliEsami(Request $request)
     $verbaleEsame->ufficiale_commissione=$request->ufficiale;
     $verbaleEsame->matricola_allievo=$request->allievo;
     $verbaleEsame->id_user_redattore=$request->idUserRedattore;
-    
+
     $controlloEsame=VerbaleEsame::where('codice_materia',$verbaleEsame->codice_materia)->where('matricola_allievo',$verbaleEsame->matricola_allievo)->where('voto','>=',18)->count();
     $zero=0;
     if($controlloEsame > $zero){
@@ -884,9 +889,9 @@ public function inserisciVerbaliEsami(Request $request)
     }else{
       $verbaleEsame->save();
       return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" ." ". $verbaleEsame->codice_verbale]);
-      
+
     }
-    
+
   }
   public function sezioneSportiva()
   {
@@ -910,6 +915,8 @@ public function inserisciVerbaliEsami(Request $request)
     public function inserisciVerbalisportivi(Request $request)
     {
         $discipline = RequisitoSportivo::where('id','>',0)->get();
+        $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
+
 
         $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
@@ -919,6 +926,7 @@ public function inserisciVerbaliEsami(Request $request)
         $verbaleSportivo->data_verbale = $request->dataVerbale;
         $verbaleSportivo->voto = $request->voto;
         $verbaleSportivo->matricola_allievo = $request->allievo;
+        $verbaleSportivo->classe_allievo = $corso->classe;
         $verbaleSportivo->id_user_redattore = Auth::user()->id;
         $verbaleSportivo->save();
 
