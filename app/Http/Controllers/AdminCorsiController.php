@@ -577,7 +577,7 @@ class AdminCorsiController extends Controller
         'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse ,'mediaVotiPrimoAnno'=>$mediaVotiPrimoAnno, 'mediaVotiSecondoAnno'=>$mediaVotiSecondoAnno, 'mediaVotiTerzoAnno'=>$mediaVotiTerzoAnno,
       'mediaVotiPrimoSemestrePrimoAnno'=>$mediaVotiPrimoSemestrePrimoAnno, 'mediaVotiSecondoSemestrePrimoAnno'=>$mediaVotiSecondoSemestrePrimoAnno, 'mediaVotiPrimoSemestreSecondoAnno'=>$mediaVotiPrimoSemestreSecondoAnno,
       'mediaVotiSecondoSemestreSecondoAnno'=>$mediaVotiSecondoSemestreSecondoAnno, 'mediaVotiPrimoSemestreTerzoAnno'=>$mediaVotiPrimoSemestreTerzoAnno, 'mediaVotiSecondoSemestreTerzoAnno'=>$mediaVotiSecondoSemestreTerzoAnno,
-      
+
 
 
 
@@ -859,7 +859,10 @@ public function inserisciVerbaliEsami(Request $request)
     $materie = Materia::where('id','>',0)->get();
     $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
     $userRedattore=Auth::user();
+    $verbaliEsami=VerbaleEsame::get();
     $verbaleEsame = new VerbaleEsame();
+
+
 
     $verbaleEsame->codice_verbale=$request->codiceVerbale;
     $verbaleEsame->codice_materia=$request->materie;
@@ -868,9 +871,16 @@ public function inserisciVerbaliEsami(Request $request)
     $verbaleEsame->ufficiale_commissione=$request->ufficiale;
     $verbaleEsame->matricola_allievo=$request->allievo;
     $verbaleEsame->id_user_redattore=$request->idUserRedattore;
-    $verbaleEsame->save();
+    
+    $controlloEsame=VerbaleEsame::where('codice_materia',$verbaleEsame->codice_materia)->where('matricola_allievo',$verbaleEsame->matricola_allievo)->where('voto','>=',18)->count();
 
-    return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" ." ". $verbaleEsame->codice_verbale]);
+    if($controlloEsame>0){
+      $verbaleEsame->save();
+      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" ." ". $verbaleEsame->codice_verbale]);
+    }else{
+      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente2' => "Il voto per la materia selezionata è già stato inserito. Per la modifica del verbale recati nell'apposita sezione"]);
+    }
+    
   }
   public function sezioneSportiva()
   {
