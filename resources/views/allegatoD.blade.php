@@ -4454,33 +4454,33 @@
       @for($i = 0; $i < $max; $i++)
       <tr class="row11">
         <td class="column0 style1 null"></td>
-        @if ($i<$maxprimoanno||$esiste1>0)
+        @if ($i<$maxprimoanno and $esiste1>0)
         <td class="column1 style55 s style56" colspan="4">{{$verbaliJoinMateriePrimoAnno[$i]->nome}}</td>
         @else
         <td class="column1 style55 s style56" colspan="4"></td>
         @endif
-        @if ($i<$maxprimoanno||$esiste1>0)
-        <td class="column5 style45 n">{{$verbaliJoinMateriePrimoAnno[$i]->voto}}</td>
+        @if ($i<$maxprimoanno and $esiste1>0)
+        <td class="column5 style45 n">@php echo round($verbaliJoinMateriePrimoAnno[$i]->voto,2)@endphp</td>
         @else
         <td class="column5 style45 n"></td>
         @endif
-        @if ($i<$maxsecondoanno && $esiste2>0)
+        @if ($i<$maxsecondoanno and $esiste2>0)
         <td class="column6 style55 s style57" colspan="7">{{$verbaliJoinMaterieSecondoAnno[$i]->nome}}</td>
         @else
         <td class="column6 style55 s style57" colspan="7"></td>
         @endif
-        @if ($i<$maxsecondoanno && $esiste2>0)
-        <td class="column13 style9 null">{{$verbaliJoinMaterieSecondoAnno[$i]->voto}}</td>
+        @if ($i<$maxsecondoanno and $esiste2>0)
+        <td class="column13 style9 null">@php echo round($verbaliJoinMaterieSecondoAnno[$i]->voto,2)@endphp</td>
         @else
         <td class="column13 style9 null"></td>
         @endif
-        @if ($i<$maxterzoanno && $esiste3>0)
+        @if ($i<$maxterzoanno and $esiste3>0)
         <td class="column14 style59 s style57" colspan="4">{{$verbaliJoinMaterieTerzoAnno[$i]->nome}}</td>
         @else
         <td class="column14 style59 s style57" colspan="4"></td>
         @endif
-        @if ($i<$maxterzoanno && $esiste3>0)
-        <td class="column18 style8 null">{{$verbaliJoinMaterieTerzoAnno[$i]->voto}}</td>
+        @if ($i<$maxterzoanno and $esiste3>0)
+        <td class="column18 style8 null">@php echo round($verbaliJoinMaterieTerzoAnno[$i]->voto,2)@endphp</td>
         @else
         <td class="column18 style8 null"></td>
         @endif
@@ -4591,11 +4591,11 @@
       <tr class="row22">
         <td class="column0 style1 null"></td>
         <td class="column1 style115 s style50" colspan="4">Media Voti D.U.</td>
-        <td class="column5 style46 n">{{$mediaVotiPrimoAnno}}</td>
+        <td class="column5 style46 n">@php echo round($mediaVotiPrimoAnno,2)@endphp</td>
         <td class="column6 style121 s style122" colspan="7">Media Voti D.U.</td>
-        <td class="column13 style26 null">{{$mediaVotiSecondoAnno}}</td>
+        <td class="column13 style26 null">@php echo round($mediaVotiSecondoAnno,2)@endphp</td>
         <td class="column14 style120 s style121" colspan="4">Media Voti D.U.</td>
-        <td class="column18 style26 null">{{$mediaVotiTerzoAnno}}</td>
+        <td class="column18 style26 null">@php echo round($mediaVotiTerzoAnno,2)@endphp</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row23">
@@ -4618,42 +4618,48 @@
         <td class="column18 style15 null">{{$mediaVotiSecondoSemestreTerzoAnno}}</td>
         <td class="column19 style2 null"></td>
       </tr>
+      
       <tr class="row25">
         <td class="column0 style1 null"></td>
         <td class="column1 style119 s style74" colspan="18">QUADRO DISCIPLINE TECNICO PROFESSIONALE (D.T.P.)</td>
         <td class="column19 style2 null"></td>
       </tr>
-      <tr class="row26">
-        <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">Inglese 1ª sessione</td>
-        <td class="column5 style45 n">21</td>
-        <td class="column6 style57 null style58" colspan="7"></td>
-        <td class="column13 style28 null"></td>
-        <td class="column14 style59 s style57" colspan="4"></td>
-        <td class="column18 style8 null"></td>
-        <td class="column19 style2 null"></td>
-      </tr>
-
-      <tr class="row27">
-        <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">Inglese 2ª sessione</td>
-        <td class="column5 style45 n">28</td>
-        <td class="column6 style57 null style58" colspan="7"></td>
-        <td class="column13 style28 null"></td>
-        <td class="column14 style59 s style57" colspan="4"></td>
-        <td class="column18 style8 null"></td>
-        <td class="column19 style2 null"></td>
-      </tr>
-      <tr class="row28">
-        <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">Sociologia</td>
-        <td class="column5 style45 n">26</td>
-        <td class="column6 style57 null style58" colspan="7"></td>
-        <td class="column13 style7 null"></td>
-        <td class="column14 style59 s style57" colspan="4"></td>
-        <td class="column18 style8 null"></td>
-        <td class="column19 style2 null"></td>
-      </tr>
+      @for($i = 0; $i < $maxdipartimento; $i++)
+        <tr class="row26">
+          <td class="column0 style1 null"></td>
+          @if ($i<$esistedipartimentoprimoanno and $esistedipartimentoprimoanno>0)
+          <td class="column1 style55 s style56" colspan="4">{{$verbaliJoinMaterieDipartimentaliPrimoAnno[$i]->nome}}</td>
+          @else
+          <td class="column1 style55 s style56" colspan="4"></td>
+          @endif
+          @if ($i<$esistedipartimentoprimoanno and $esistedipartimentoprimoanno>0)
+          <td class="column5 style45 n">@php echo round($verbaliJoinMaterieDipartimentaliPrimoAnno[$i]->voto,2)@endphp</td>
+          @else
+          <td class="column5 style45 n"></td>
+          @endif
+          @if ($i<$esistedipartimentosecondoanno and $esistedipartimentosecondoanno>0)
+          <td class="column6 style57 null style58" colspan="7">{{$verbaliJoinMaterieDipartimentaliSecondoAnno[$i]->nome}}</td>
+          @else
+          <td class="column6 style57 null style58" colspan="7"></td>
+          @endif
+          @if ($i<$esistedipartimentosecondoanno and $esistedipartimentosecondoanno>0)
+          <td class="column13 style28 null">@php echo round($verbaliJoinMaterieDipartimentaliSecondoAnno[$i]->voto,2)@endphp</td>
+          @else
+          <td class="column13 style28 null"></td>
+          @endif
+          @if ($i<$esistedipartimentoterzoanno and $esistedipartimentoterzoanno>0)
+          <td class="column14 style59 s style57" colspan="4">{{$verbaliJoinMaterieDipartimentaliTerzoAnno[$i]->nome}}</td>
+          @else
+          <td class="column14 style59 s style57" colspan="4"></td>
+          @endif
+          @if ($i<$esistedipartimentoterzoanno and $esistedipartimentoterzoanno>0)
+          <td class="column18 style8 null">@php echo round($verbaliJoinMaterieDipartimentaliTerzoAnno[$i]->voto,2)@endphp</td>
+          @else
+          <td class="column18 style8 null"></td>
+          @endif
+          <td class="column19 style2 null"></td>
+        </tr>
+      @endfor
       <tr class="row29">
         <td class="column0 style1 null"></td>
         <td class="column1 style55 null style56" colspan="4"></td>
@@ -4667,31 +4673,31 @@
       <tr class="row30">
         <td class="column0 style1 null"></td>
         <td class="column1 style120 s style121" colspan="4">Media Voti D.T.P.</td>
-        <td class="column5 style46 null"></td>
+        <td class="column5 style46 null">@php echo round($mediaVotiPrimoAnnoDipartimento,2)@endphp</td>
         <td class="column6 style50 s style116" colspan="7">Media Voti D.T.P.</td>
-        <td class="column13 style26 null"></td>
+        <td class="column13 style26 null">@php echo round($mediaVotiSecondoAnnoDipartimento,2)@endphp</td>
         <td class="column14 style115 s style50" colspan="4">Media Voti D.T.P.</td>
-        <td class="column18 style26 null"></td>
+        <td class="column18 style26 null">@php echo round($mediaVotiTerzoAnnoDipartimento,2)@endphp</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row31">
         <td class="column0 style1 null"></td>
         <td class="column1 style117 s style118" colspan="4">Materie 1° Sessione</td>
-        <td class="column5 style44 null"></td>
+        <td class="column5 style44 null">@php echo round($mediaVotiPrimoSemestrePrimoAnnoDipartimento,2)@endphp</td>
         <td class="column6 style79 s style78" colspan="7">Materie 1° Sessione</td>
-        <td class="column13 style16 null"></td>
+        <td class="column13 style16 null">@php echo round($mediaVotiPrimoSemestreSecondoAnnoDipartimento,2)@endphp</td>
         <td class="column14 style77 s style79" colspan="4">Materie 1° Sessione</td>
-        <td class="column18 style16 null"></td>
+        <td class="column18 style16 null">@php echo round($mediaVotiPrimoSemestreTerzoAnnoDipartimento,2)@endphp</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row32">
         <td class="column0 style1 null"></td>
         <td class="column1 style117 s style118" colspan="4">Materie 2° Sessione</td>
-        <td class="column5 style44 null"></td>
+        <td class="column5 style44 null">@php echo round($mediaVotiSecondoSemestrePrimoAnnoDipartimento,2)@endphp</td>
         <td class="column6 style79 s style78" colspan="7">Materie 2° Sessione</td>
-        <td class="column13 style16 null"></td>
+        <td class="column13 style16 null">@php echo round($mediaVotiSecondoSemestreSecondoAnnoDipartimento,2)@endphp</td>
         <td class="column14 style77 s style79" colspan="4">Materie 2° Sessione</td>
-        <td class="column18 style16 null"></td>
+        <td class="column18 style16 null">@php echo round($mediaVotiSecondoSemestreTerzoAnnoDipartimento,2)@endphp</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row33">
