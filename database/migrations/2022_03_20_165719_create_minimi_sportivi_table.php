@@ -16,6 +16,7 @@ class CreateMinimiSportiviTable extends Migration
         Schema::create('minimi_sportivi', function (Blueprint $table) {
             $table->id();
             $table->string('disciplina');
+            $table->string('tipologia')->nullable(true);
             $table->string('livello_uomini_o_30');
             $table->string('livello_uomini_u_30');
             $table->string('livello_donne_o_30');
@@ -23,7 +24,6 @@ class CreateMinimiSportiviTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
