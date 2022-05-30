@@ -744,6 +744,7 @@ public function inserisciVerbaliEsami(Request $request)
     return $this->user;
   }
 
+
   /**
    *
    * @return mixed
