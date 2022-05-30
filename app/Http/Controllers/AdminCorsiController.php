@@ -569,7 +569,7 @@ class AdminCorsiController extends Controller
     $verbaliJoinMaterieDipartimentaliTerzoAnno=DB::table('verbali_esami')
     ->leftJoin('materie', 'codice', '=', 'codice_materia')->where('classe','terza')->where('voto','!=','Assente')->where('voto','>=',18)
     ->where('facolta','=','dipartimento')->where('matricola_allievo',$matricolaPerMaterie)
-    ->get(); 
+    ->get();
 
     $esistedipartimentoprimoanno=$verbaliJoinMaterieDipartimentaliPrimoAnno->count();
     $esistedipartimentosecondoanno=$verbaliJoinMaterieDipartimentaliSecondoAnno->count();
@@ -656,7 +656,7 @@ class AdminCorsiController extends Controller
     }else{
       $mediaVotiSecondoSemestrePrimoAnnoDipartimento=null;
     }
-    
+
     $totaleVotiPrimoSemestreSecondoAnnoDipartimento=$votiPrimoSemestreSecondoAnnoDipartimento->sum('voto');
     $numeroVotiPrimoSemestreSecondoAnnoDipartimento=$votiPrimoSemestreSecondoAnnoDipartimento->count();
     if($numeroVotiPrimoSemestreSecondoAnnoDipartimento>0){
@@ -697,7 +697,7 @@ class AdminCorsiController extends Controller
       'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
       'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,
-      
+
       'maxprimoanno'=>$esisteprimoanno, 'maxterzoanno'=>$esisteterzoanno, 'maxsecondoanno'=>$esistesecondoanno,'max'=>$max,'verbaliJoinMateriePrimoAnno'=>$verbaliJoinMateriePrimoAnno, 'verbaliJoinMaterieSecondoAnno'=>$verbaliJoinMaterieSecondoAnno, 'verbaliJoinMaterieTerzoAnno'=>$verbaliJoinMaterieTerzoAnno,
         'mediaSportTerrestriPrimaClasse'=> $mediaSportTerrestriPrimaClasse,'mediaSportTerrestriTerzaClasse'=> $mediaSportTerrestriTerzaClasse, 'esiste1'=>$esisteprimoanno, 'esiste2'=>$esistesecondoanno , 'esiste3'=>$esisteterzoanno,
         'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse ,'mediaVotiPrimoAnno'=>$mediaVotiPrimoAnno, 'mediaVotiSecondoAnno'=>$mediaVotiSecondoAnno, 'mediaVotiTerzoAnno'=>$mediaVotiTerzoAnno,
@@ -1034,7 +1034,7 @@ public function inserisciVerbaliEsami(Request $request)
         $discipline = RequisitoSportivo::where('id','>',0)->get();
         $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
 
-        $tipo = RequisitoSportivo::where('disciplina',$request->discipline)->select('tipologia');
+        $tipo = RequisitoSportivo::where('disciplina',$request->discipline)->first();
 
 
         $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
@@ -1046,7 +1046,7 @@ public function inserisciVerbaliEsami(Request $request)
         $verbaleSportivo->voto = $request->voto;
         $verbaleSportivo->matricola_allievo = $request->allievo;
         $verbaleSportivo->classe_allievo = $corso->classe;
-        $verbaleSportivo->tipologia = $tipo->get('tipologia');
+        $verbaleSportivo->tipologia = $tipo->tipologia;
         $verbaleSportivo->id_user_redattore = Auth::user()->id;
         $verbaleSportivo->save();
 
