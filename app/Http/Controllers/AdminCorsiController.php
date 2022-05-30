@@ -392,7 +392,7 @@ class AdminCorsiController extends Controller
                         ->sum('voto');
                     $verbaliSportiviTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
                         ->select('disciplina')
-                        ->count('disciplina');
+                        ->count('voto');
                     $sommaVotiSportiviTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
                         ->select('voto')
                         ->sum('voto');
@@ -889,7 +889,6 @@ public function inserisciVerbaliEsami(Request $request)
     }else{
       $verbaleEsame->save();
       return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" ." ". $verbaleEsame->codice_verbale]);
-
     }
 
   }
@@ -917,6 +916,8 @@ public function inserisciVerbaliEsami(Request $request)
         $discipline = RequisitoSportivo::where('id','>',0)->get();
         $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
 
+        $tipo = RequisitoSportivo::where('disciplina',$request->discipline)->select('tipologia');
+
 
         $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
@@ -927,6 +928,7 @@ public function inserisciVerbaliEsami(Request $request)
         $verbaleSportivo->voto = $request->voto;
         $verbaleSportivo->matricola_allievo = $request->allievo;
         $verbaleSportivo->classe_allievo = $corso->classe;
+        $verbaleSportivo->tipologia = $tipo->get('tipologia');
         $verbaleSportivo->id_user_redattore = Auth::user()->id;
         $verbaleSportivo->save();
 
