@@ -183,7 +183,9 @@ class AdminCorsiController extends Controller
   public function schedaIndividuale($id){
     $allievo = Allievo::where('id', $id)->first();
     $provvedimentiSanitari = ProvvedimentoSanitario::get();
+
     $provvedimentiDisciplinari = ProvvedimentoDisciplinare::get();
+
 
 
     $allievo->data_nascita = Carbon::parse($allievo->data_nascita)->format('d/m/Y');
@@ -215,12 +217,6 @@ class AdminCorsiController extends Controller
     $tpsSecondaClasse = 0;
     $tpsTerzaClasse = 0;
     $matricola = 0;
-    $verbaliSportiviPrimaClasse=0;
-      $sommaVotiSportiviPrimaClasse=0;
-      $verbaliSportiviSecondaClasse=0;
-      $sommaVotiSportiviSecondaClasse=0;
-      $verbaliSportiviTerzaClasse=0;
-      $sommaVotiSportiviTerzaClasse=0;
     foreach ($provvedimentiSanitari as $provvedimento) {
       $matricola = ($provvedimento->matricola_allievo_paziente);
       if ($allievo->matricola_militare == $matricola) {
@@ -285,14 +281,12 @@ class AdminCorsiController extends Controller
           ->where('classe_allievo', 'terza')
           ->select('num_giorni_provvedimento')
           ->sum('num_giorni_provvedimento');
+
         }
     }
     
 
-      foreach($provvedimentiDisciplinari as $provvedimento){
 
-        $matricola = $provvedimento->matricola_allievo;
-        if ($allievo->matricola_militare == $matricola) {
         $rimproveroPrimaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
           ->where('matricola_allievo', $matricola)
           ->where('classe_allievo', 'prima')
@@ -372,6 +366,11 @@ class AdminCorsiController extends Controller
           ->where('classe_allievo', 'terza')
           ->select('tipo_provvedimento')
           ->count('tipo_provvedimento');
+
+
+        break;
+      }
+
 
           $verbaliSportiviPrimaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
               ->select('disciplina')
@@ -519,7 +518,13 @@ class AdminCorsiController extends Controller
       $mediaVotiPrimoSemestrePrimoAnno=$totaleVotiPrimoSemestrePrimoAnno/$numeroVotiPrimoSemestrePrimoAnno;
     }else{
       $mediaVotiPrimoSemestrePrimoAnno=null;
+
     }
+    //da qua inizia il lavoro di giorgio
+
+
+
+    $matricolaPerMaterie=$allievo->matricola_militare;
 
     $totaleVotiSecondoSemestrePrimoAnno=$votiSecondoSemestrePrimoAnno->sum('voto');
     $numeroVotiSecondoSemestrePrimoAnno=$votiSecondoSemestrePrimoAnno->count();
@@ -686,30 +691,40 @@ class AdminCorsiController extends Controller
       $mediaVotiSecondoSemestreSecondoAnnoDipartimento=null;
     }
 
-    $totaleVotiPrimoSemestreTerzoAnnoDipartimento=$votiPrimoSemestreTerzoAnnoDipartimento->sum('voto');
-    $numeroVotiPrimoSemestreTerzoAnnoDipartimento=$votiPrimoSemestreTerzoAnnoDipartimento->count();
-    if($numeroVotiPrimoSemestreTerzoAnnoDipartimento>0){
-      $mediaVotiPrimoSemestreTerzoAnnoDipartimento=$totaleVotiPrimoSemestreTerzoAnnoDipartimento/$numeroVotiPrimoSemestreTerzoAnnoDipartimento;
+    $materie=Materia::select('nome','sessione','classe')->get();
+    $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->select('codice_materia')->get();
+
+    $materiePrimoAnno=Materia::where('classe','prima')->orderby('nome')->get();
+    $materieSecondoAnno=Materia::where('classe','seconda')->orderby('nome')->get();
+    $materieTerzoAnno=Materia::where('classe','terza')->orderby('nome')->get();
+    $maxprimoanno=Materia::where('classe','prima')->orderby('nome')->count();
+    $maxsecondoanno=Materia::where('classe','seconda')->orderby('nome')->count();
+    $maxterzoanno=Materia::where('classe','terza')->orderby('nome')->count();
+    if($maxprimoanno>$maxsecondoanno){
+      $max=$maxprimoanno;
     }else{
-      $mediaVotiPrimoSemestreTerzoAnnoDipartimento=null;
+      $max=$maxsecondoanno;
+    }
+    if($max>$maxterzoanno){
+      $max=$max;
+    }else{
+      $max=$maxterzoanno;
     }
 
-    $totaleVotiSecondoSemestreTerzoAnnoDipartimento=$votiSecondoSemestreTerzoAnnoDipartimento->sum('voto');
-    $numeroVotiSecondoSemestreTerzoAnnoDipartimento=$votiSecondoSemestreTerzoAnnoDipartimento->count();
-    if($numeroVotiSecondoSemestreTerzoAnnoDipartimento>0){
-      $mediaVotiSecondoSemestreTerzoAnnoDipartimento=$totaleVotiSecondoSemestreTerzoAnnoDipartimento/$numeroVotiSecondoSemestreTerzoAnnoDipartimento;
-    }else{
-      $mediaVotiSecondoSemestreTerzoAnnoDipartimento=null;
-    }
 
-
-      $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
+    $pdf = PDF::loadView('allegatoD', ['allievo' => $allievo, 'esenzaTotPrimaClasse' => $esenzaTotPrimaClasse, 'esenzaAGAPrimaClasse' => $esenzaAGAPrimaClasse,
       'ricoveroPrimaClasse' => $ricoveroPrimaClasse, 'degCovPrimaClasse' => $degCovPrimaClasse, 'matricola' => $matricola, 'conSempPrimaClasse' => $conSempPrimaClasse, 'rimproveroPrimaClasse' => $rimproveroPrimaClasse,
       'conRigPrimaClasse' => $conRigPrimaClasse, 'elogioPrimaClasse' => $elogioPrimaClasse, 'tpsPrimaClasse' => $tpsPrimaClasse, 'esenzaTotSecondaClasse' => $esenzaTotSecondaClasse, 'esenzaAGASecondaClasse' => $esenzaAGASecondaClasse,
       'ricoveroSecondaClasse' => $ricoveroSecondaClasse, 'degCovSecondaClasse' => $degCovSecondaClasse, 'conSempSecondaClasse' => $conSempSecondaClasse, 'rimproveroSecondaClasse' => $rimproveroSecondaClasse,
       'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
       'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,
+
+      'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'materieTerzoAnno'=>$materieTerzoAnno,
+      'maxprimoanno'=>$maxprimoanno, 'maxterzoanno'=>$maxterzoanno, 'maxsecondoanno'=>$maxsecondoanno,'max'=>$max,
+    ]);
+    return $pdf;
+
 
       'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'materieTerzoAnno'=>$materieTerzoAnno,
 
@@ -726,6 +741,7 @@ class AdminCorsiController extends Controller
       
       ]);
       return $pdf;
+
   }
 
   public function visualizzaSchedaIndividuale($id)
@@ -1053,6 +1069,7 @@ public function inserisciVerbaliEsami(Request $request)
         $verbaleSportivo->voto = $request->voto;
         $verbaleSportivo->matricola_allievo = $request->allievo;
 
+
         $verbaleSportivo->classe_allievo = $corso->classe;
         $verbaleSportivo->tipologia = $tipo->tipologia;
 
@@ -1078,6 +1095,7 @@ public function inserisciVerbaliEsami(Request $request)
     $this->user = Auth::user();
     return $this->user;
   }
+
 
   /**
    *
