@@ -4775,9 +4775,9 @@
       <tr class="row41">
         <td class="column0 style12 null"></td>
         <td class="column1 style105 s style56" colspan="4">Minimi sportivi in acqua</td>
-        <td class="column5 style44 n"></td>
+        <td class="column5 style44 n">{{$mediaSportAcquaticiPrimaClasse}}</td>
         <td class="column6 style108 null style57" colspan="7">Minimi sportivi in acqua</td>
-        <td class="column13 style19 null"></td>
+        <td class="column13 style19 null">{{$mediaSportAcquaticiSecondaClasse}}</td>
         <td class="column14 style58 null style57" colspan="4">Minimi sportivi in acqua</td>
         <td class="column18 style11 null">{{$mediaSportAcquaticiTerzaClasse}}</td>
         <td class="column19 style2 null"></td>
@@ -4785,9 +4785,9 @@
       <tr class="row42">
         <td class="column0 style12 null"></td>
         <td class="column1 style106 s style107" colspan="4">Media Voti V.A.G.S. (Mod. 2)</td>
-        <td class="column5 style44 null"></td>
+        <td class="column5 style44 null">{{$mediaSportivaFinalePrimaClasse}}</td>
         <td class="column6 style109 null style110" colspan="7">Media Voti V.A.G.S. (Mod. 2)</td>
-        <td class="column13 style19 null"></td>
+        <td class="column13 style19 null">{{$mediaSportivaFinaleSecondaClasse}}</td>
         <td class="column14 style106 null style107" colspan="4">Media Voti V.A.G.S. (Mod. 2)</td>
         <td class="column18 style11 null">{{$mediaSportivaFinaleTerzaClasse}}</td>
         <td class="column19 style2 null"></td>
