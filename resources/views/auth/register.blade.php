@@ -39,7 +39,43 @@
             </div>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                <!-- Sezione appartenenza e tipo corso -->
+                <!-- Grado sezione appartenenza e tipo corso -->
+                <div>
+                    <x-label for="grado" :value="__('Grado')" />
+
+                    <select id="grado" name="grado" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="Com 2^">Com 2^</option>
+                        <option value="Com 1^">Com 1^</option>
+                        <option value="Sottocapo">Sottocapo</option>
+                        <option value="SC 3^">SC 3^</option>
+                        <option value="SC 2^">SC 2^</option>
+                        <option value="SC 1^">SC 1^</option>
+                        <option value="SC 1^ SC">SC 1^ SC</option>
+                        <option value="SC 1^ SC QS">SC 1^ SC QS</option>
+                        <option value="Sergente">Sergente</option>
+                        <option value="2° C°">2° C°</option>
+                        <option value="2° C° SC">2° C° SC</option>
+                        <option value="2° C° SC QS">2° C° SC QS</option>
+                        <option value="C° 3^">C° 3^</option>
+                        <option value="C° 2^">C° 2^</option>
+                        <option value="C° 1^">C° 1^</option>
+                        <option value="1° MRS">1° MRS</option>
+                        <option value="LGT">LGT</option>
+                        <option value="1° LGT">1° LGT</option>
+                        <option value="A.G.M.">A.G.M.</option>
+                        <option value="G.M.">G.M.</option>
+                        <option value="S.T.V.">S.T.V.</option>
+                        <option value="TV">T.V.</option>
+                        <option value="C.C.">C.C.</option>
+                        <option value="C.F.">C.F.</option>
+                        <option value="C.V.">C.V.</option>
+                        <option value="C.A.">C.A.</option>
+                        <option value="A.D.">A.D.</option>
+                        <option value="A.S.">A.S.</option>
+                    </select>
+
+                </div>
+
                 <div>
                     <x-label for="sezione_appartenenza" :value="__('Sezione appartenenza')" />
 

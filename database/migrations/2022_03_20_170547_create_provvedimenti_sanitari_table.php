@@ -19,6 +19,7 @@ class CreateProvvedimentiSanitariTable extends Migration
             $table->string('num_giorni_provvedimento')->nullable(true);  
             $table->string('data_provvedimento');
             $table->string('id_user_infermeria');
+            $table->string('classe_allievo')->nullable(true);
             $table->string('matricola_allievo_paziente');
             $table->timestamps();
         });

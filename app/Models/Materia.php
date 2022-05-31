@@ -18,6 +18,7 @@ class Materia extends Model
         'anno_accademico',
         'facolta',
         'sessione',
+        'classe'
     ];
 
     public function verbali(){

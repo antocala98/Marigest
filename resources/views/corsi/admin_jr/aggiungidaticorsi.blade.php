@@ -3,7 +3,7 @@
     <li>
         <div class="flex items-center">
             <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-            <a href="{{url('corsi/22-nmrs/adminJ/aggiungi-dati-corsi')}}" class="inline-flex items-center text-sm font-medium text-white hover:scale-110 dark:text-gray-400 dark:hover:text-white">Acquisisci dati incorporamento</a>
+            <a href="{{url('corsi/marescialli/adminJ/aggiungi-dati-corsi')}}" class="inline-flex items-center text-sm font-medium text-white hover:scale-110 dark:text-gray-400 dark:hover:text-white">Acquisisci dati incorporamento</a>
         </div>
     </li>
 @endsection
@@ -12,7 +12,7 @@
 
         <div class="h-auto my-10 w-9/12 p-4 border-4 rounded-lg shadow-xl">
 
-            <form action="{{ route('inserimentoDatiAdminJunior22NMRS')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('inserimentoDatiAdminJunior')}}" method="POST" enctype="multipart/form-data">
                 @csrf
             <label class="block mb-2 text-lg text-center font-medium text-gray-900 dark:text-gray-300" for="user_avatar">Importa File</label>
             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50

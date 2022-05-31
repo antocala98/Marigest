@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-gray-900 border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-gray-900 border-b static border-gray-100">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
 
@@ -20,7 +20,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-white hover:scale-125 hover:border-gray-300 focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div>{{ Auth::user()->nome}} {{Auth::user()->cognome }}</div>
+                            <div>{{ Auth::user()->nome}} {{Auth::user()->cognome }} - {{Auth::user()->grado }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

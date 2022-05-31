@@ -652,7 +652,7 @@
       font-weight: bold;
       color: #000000;
       font-family: 'Times New Roman';
-      font-size: 8pt;
+      font-size: 7pt;
       background-color: #FFFFFF
     }
 
@@ -4403,16 +4403,14 @@
         <td class="column2 style54 s style54" colspan="7">{{$allievo['titolo_studio']}}</td>
         <td class="column9 style129 s style129" colspan="2">Voto:</td>
         <td class="column11 style136 n style136" colspan="2">{{$allievo['voto_diploma']}}</td>
-        <td class="column13 style20 s">su: <span
-            style="text-decoration:underline; color:#000000; font-family:'Times New Roman'; font-size:8pt">100</span>
-        </td>
+        <td class="column13 style20 s">su:100</td>
         <td class="column14 style24 null"></td>
         <td class="column18">&nbsp;</td>
         <td class="column19">&nbsp;</td>
       </tr>
       <tr class="row7">
         <td class="column0 style12 null"></td>
-        <td class="column1 style134 s style135" colspan="5">Graduatorie Cat. App. : - Concorso : 41</td>
+        <td class="column1 style134 s style135" colspan="5">Graduatorie Cat. App. : - Concorso : </td>
         <td class="column6 style130 s style130" colspan="2">1° Classe :</td>
         <td class="column8 style130 s style130" colspan="5">2° Classe :</td>
         <td class="column13 style130 s style131" colspan="2">3° Classe :</td>
@@ -4453,17 +4451,44 @@
         <td class="column1 style102 s style76" colspan="18">QUADRO DISCIPLINE UNIVERSITARIE (D.U.)</td>
         <td class="column19 style35 null"></td>
       </tr>
+      @for($i = 0; $i < $max; $i++)
       <tr class="row11">
         <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">Matematica</td>
-        <td class="column5 style45 n">30</td>
-        <td class="column6 style57 null style58" colspan="7"></td>
+        @if ($i<$maxprimoanno and $esiste1>0)
+        <td class="column1 style55 s style56" colspan="4">{{$verbaliJoinMateriePrimoAnno[$i]->nome}}</td>
+        @else
+        <td class="column1 style55 s style56" colspan="4"></td>
+        @endif
+        @if ($i<$maxprimoanno and $esiste1>0)
+        <td class="column5 style45 n">@php echo round($verbaliJoinMateriePrimoAnno[$i]->voto,2)@endphp</td>
+        @else
+        <td class="column5 style45 n"></td>
+        @endif
+        @if ($i<$maxsecondoanno and $esiste2>0)
+        <td class="column6 style55 s style57" colspan="7">{{$verbaliJoinMaterieSecondoAnno[$i]->nome}}</td>
+        @else
+        <td class="column6 style55 s style57" colspan="7"></td>
+        @endif
+        @if ($i<$maxsecondoanno and $esiste2>0)
+        <td class="column13 style9 null">@php echo round($verbaliJoinMaterieSecondoAnno[$i]->voto,2)@endphp</td>
+        @else
         <td class="column13 style9 null"></td>
+        @endif
+        @if ($i<$maxterzoanno and $esiste3>0)
+        <td class="column14 style59 s style57" colspan="4">{{$verbaliJoinMaterieTerzoAnno[$i]->nome}}</td>
+        @else
         <td class="column14 style59 s style57" colspan="4"></td>
+        @endif
+        @if ($i<$maxterzoanno and $esiste3>0)
+        <td class="column18 style8 null">@php echo round($verbaliJoinMaterieTerzoAnno[$i]->voto,2)@endphp</td>
+        @else
         <td class="column18 style8 null"></td>
+        @endif
         <td class="column19 style2 null"></td>
       </tr>
-      <tr class="row12">
+      @endfor
+      
+      <!--<tr class="row12">
         <td class="column0 style1 null"></td>
         <td class="column1 style55 s style56" colspan="4">Economia aziendale</td>
         <td class="column5 style45 n">29</td>
@@ -4532,7 +4557,7 @@
         <td class="column14 style59 s style57" colspan="4"></td>
         <td class="column18 style8 null"></td>
         <td class="column19 style2 null"></td>
-      </tr>
+      </tr>-->
       <tr class="row19">
         <td class="column0 style1 null"></td>
         <td class="column1 style55 null style56" colspan="4"></td>
@@ -4566,69 +4591,75 @@
       <tr class="row22">
         <td class="column0 style1 null"></td>
         <td class="column1 style115 s style50" colspan="4">Media Voti D.U.</td>
-        <td class="column5 style46 n">22.000</td>
+        <td class="column5 style46 n">@php echo round($mediaVotiPrimoAnno,2)@endphp</td>
         <td class="column6 style121 s style122" colspan="7">Media Voti D.U.</td>
-        <td class="column13 style26 null"></td>
+        <td class="column13 style26 null">@php echo round($mediaVotiSecondoAnno,2)@endphp</td>
         <td class="column14 style120 s style121" colspan="4">Media Voti D.U.</td>
-        <td class="column18 style26 null"></td>
+        <td class="column18 style26 null">@php echo round($mediaVotiTerzoAnno,2)@endphp</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row23">
         <td class="column0 style1 null"></td>
         <td class="column1 style77 s style79" colspan="4">Materie 1° Sessione</td>
-        <td class="column5 style47 n">22.000</td>
+        <td class="column5 style47 n">{{$mediaVotiPrimoSemestrePrimoAnno}}</td>
         <td class="column6 style79 s style78" colspan="7">Materie 1° Sessione</td>
-        <td class="column13 style15 null"></td>
+        <td class="column13 style15 null">{{$mediaVotiPrimoSemestreSecondoAnno}}</td>
         <td class="column14 style77 s style79" colspan="4">Materie 1° Sessione</td>
-        <td class="column18 style15 null"></td>
+        <td class="column18 style15 null">{{$mediaVotiPrimoSemestreTerzoAnno}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row24">
         <td class="column0 style1 null"></td>
         <td class="column1 style77 s style79" colspan="4">Materie 2° Sessione</td>
-        <td class="column5 style47 n">22.000</td>
+        <td class="column5 style47 n">{{$mediaVotiSecondoSemestrePrimoAnno}}</td>
         <td class="column6 style79 s style78" colspan="7">Materie 2° Sessione</td>
-        <td class="column13 style15 null"></td>
+        <td class="column13 style15 null">{{$mediaVotiSecondoSemestreSecondoAnno}}</td>
         <td class="column14 style77 s style79" colspan="4">Materie 2° Sessione</td>
-        <td class="column18 style15 null"></td>
+        <td class="column18 style15 null">{{$mediaVotiSecondoSemestreTerzoAnno}}</td>
         <td class="column19 style2 null"></td>
       </tr>
+      
       <tr class="row25">
         <td class="column0 style1 null"></td>
         <td class="column1 style119 s style74" colspan="18">QUADRO DISCIPLINE TECNICO PROFESSIONALE (D.T.P.)</td>
         <td class="column19 style2 null"></td>
       </tr>
-      <tr class="row26">
-        <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">Inglese 1ª sessione</td>
-        <td class="column5 style45 n">21</td>
-        <td class="column6 style57 null style58" colspan="7"></td>
-        <td class="column13 style28 null"></td>
-        <td class="column14 style59 s style57" colspan="4"></td>
-        <td class="column18 style8 null"></td>
-        <td class="column19 style2 null"></td>
-      </tr>
-
-      <tr class="row27">
-        <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">Inglese 2ª sessione</td>
-        <td class="column5 style45 n">28</td>
-        <td class="column6 style57 null style58" colspan="7"></td>
-        <td class="column13 style28 null"></td>
-        <td class="column14 style59 s style57" colspan="4"></td>
-        <td class="column18 style8 null"></td>
-        <td class="column19 style2 null"></td>
-      </tr>
-      <tr class="row28">
-        <td class="column0 style1 null"></td>
-        <td class="column1 style55 s style56" colspan="4">Sociologia</td>
-        <td class="column5 style45 n">26</td>
-        <td class="column6 style57 null style58" colspan="7"></td>
-        <td class="column13 style7 null"></td>
-        <td class="column14 style59 s style57" colspan="4"></td>
-        <td class="column18 style8 null"></td>
-        <td class="column19 style2 null"></td>
-      </tr>
+      @for($i = 0; $i < $maxdipartimento; $i++)
+        <tr class="row26">
+          <td class="column0 style1 null"></td>
+          @if ($i<$esistedipartimentoprimoanno and $esistedipartimentoprimoanno>0)
+          <td class="column1 style55 s style56" colspan="4">{{$verbaliJoinMaterieDipartimentaliPrimoAnno[$i]->nome}}</td>
+          @else
+          <td class="column1 style55 s style56" colspan="4"></td>
+          @endif
+          @if ($i<$esistedipartimentoprimoanno and $esistedipartimentoprimoanno>0)
+          <td class="column5 style45 n">@php echo round($verbaliJoinMaterieDipartimentaliPrimoAnno[$i]->voto,2)@endphp</td>
+          @else
+          <td class="column5 style45 n"></td>
+          @endif
+          @if ($i<$esistedipartimentosecondoanno and $esistedipartimentosecondoanno>0)
+          <td class="column6 style57 null style58" colspan="7">{{$verbaliJoinMaterieDipartimentaliSecondoAnno[$i]->nome}}</td>
+          @else
+          <td class="column6 style57 null style58" colspan="7"></td>
+          @endif
+          @if ($i<$esistedipartimentosecondoanno and $esistedipartimentosecondoanno>0)
+          <td class="column13 style28 null">@php echo round($verbaliJoinMaterieDipartimentaliSecondoAnno[$i]->voto,2)@endphp</td>
+          @else
+          <td class="column13 style28 null"></td>
+          @endif
+          @if ($i<$esistedipartimentoterzoanno and $esistedipartimentoterzoanno>0)
+          <td class="column14 style59 s style57" colspan="4">{{$verbaliJoinMaterieDipartimentaliTerzoAnno[$i]->nome}}</td>
+          @else
+          <td class="column14 style59 s style57" colspan="4"></td>
+          @endif
+          @if ($i<$esistedipartimentoterzoanno and $esistedipartimentoterzoanno>0)
+          <td class="column18 style8 null">@php echo round($verbaliJoinMaterieDipartimentaliTerzoAnno[$i]->voto,2)@endphp</td>
+          @else
+          <td class="column18 style8 null"></td>
+          @endif
+          <td class="column19 style2 null"></td>
+        </tr>
+      @endfor
       <tr class="row29">
         <td class="column0 style1 null"></td>
         <td class="column1 style55 null style56" colspan="4"></td>
@@ -4642,31 +4673,31 @@
       <tr class="row30">
         <td class="column0 style1 null"></td>
         <td class="column1 style120 s style121" colspan="4">Media Voti D.T.P.</td>
-        <td class="column5 style46 null"></td>
+        <td class="column5 style46 null">@php echo round($mediaVotiPrimoAnnoDipartimento,2)@endphp</td>
         <td class="column6 style50 s style116" colspan="7">Media Voti D.T.P.</td>
-        <td class="column13 style26 null"></td>
+        <td class="column13 style26 null">@php echo round($mediaVotiSecondoAnnoDipartimento,2)@endphp</td>
         <td class="column14 style115 s style50" colspan="4">Media Voti D.T.P.</td>
-        <td class="column18 style26 null"></td>
+        <td class="column18 style26 null">@php echo round($mediaVotiTerzoAnnoDipartimento,2)@endphp</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row31">
         <td class="column0 style1 null"></td>
         <td class="column1 style117 s style118" colspan="4">Materie 1° Sessione</td>
-        <td class="column5 style44 null"></td>
+        <td class="column5 style44 null">@php echo round($mediaVotiPrimoSemestrePrimoAnnoDipartimento,2)@endphp</td>
         <td class="column6 style79 s style78" colspan="7">Materie 1° Sessione</td>
-        <td class="column13 style16 null"></td>
+        <td class="column13 style16 null">@php echo round($mediaVotiPrimoSemestreSecondoAnnoDipartimento,2)@endphp</td>
         <td class="column14 style77 s style79" colspan="4">Materie 1° Sessione</td>
-        <td class="column18 style16 null"></td>
+        <td class="column18 style16 null">@php echo round($mediaVotiPrimoSemestreTerzoAnnoDipartimento,2)@endphp</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row32">
         <td class="column0 style1 null"></td>
         <td class="column1 style117 s style118" colspan="4">Materie 2° Sessione</td>
-        <td class="column5 style44 null"></td>
+        <td class="column5 style44 null">@php echo round($mediaVotiSecondoSemestrePrimoAnnoDipartimento,2)@endphp</td>
         <td class="column6 style79 s style78" colspan="7">Materie 2° Sessione</td>
-        <td class="column13 style16 null"></td>
+        <td class="column13 style16 null">@php echo round($mediaVotiSecondoSemestreSecondoAnnoDipartimento,2)@endphp</td>
         <td class="column14 style77 s style79" colspan="4">Materie 2° Sessione</td>
-        <td class="column18 style16 null"></td>
+        <td class="column18 style16 null">@php echo round($mediaVotiSecondoSemestreTerzoAnnoDipartimento,2)@endphp</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row33">
@@ -4730,23 +4761,24 @@
         </td>
         <td class="column19 style2 null"></td>
       </tr>
+
       <tr class="row40">
         <td class="column0 style12 null"></td>
         <td class="column1 style113 s style114" colspan="4">Minimi sportivi a terra</td>
-        <td class="column5 style44 n">25.167</td>
-        <td class="column6 style108 null style57" colspan="7"></td>
-        <td class="column13 style19 null"></td>
-        <td class="column14 style58 null style57" colspan="4"></td>
-        <td class="column18 style11 null"></td>
+        <td class="column5 style44 n">{{$mediaSportTerrestriPrimaClasse}}</td>
+        <td class="column6 style108 null style57" colspan="7">Minimi sportivi a terra</td>
+        <td class="column13 style19 null">{{$mediaSportTerrestriSecondaClasse}}</td>
+        <td class="column14 style58 null style57" colspan="4">Minimi sportivi a terra</td>
+        <td class="column18 style11 null">{{$mediaSportTerrestriTerzaClasse}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row41">
         <td class="column0 style12 null"></td>
         <td class="column1 style105 s style56" colspan="4">Minimi sportivi in acqua</td>
-        <td class="column5 style44 n">28.333</td>
-        <td class="column6 style108 null style57" colspan="7"></td>
+        <td class="column5 style44 n"></td>
+        <td class="column6 style108 null style57" colspan="7">Minimi sportivi in acqua</td>
         <td class="column13 style19 null"></td>
-        <td class="column14 style58 null style57" colspan="4"></td>
+        <td class="column14 style58 null style57" colspan="4">Minimi sportivi in acqua</td>
         <td class="column18 style11 null"></td>
         <td class="column19 style2 null"></td>
       </tr>
@@ -4754,9 +4786,9 @@
         <td class="column0 style12 null"></td>
         <td class="column1 style106 s style107" colspan="4">Media Voti V.A.G.S. (Mod. 2)</td>
         <td class="column5 style44 null"></td>
-        <td class="column6 style109 null style110" colspan="7"></td>
+        <td class="column6 style109 null style110" colspan="7">Media Voti V.A.G.S. (Mod. 2)</td>
         <td class="column13 style19 null"></td>
-        <td class="column14 style106 null style107" colspan="4"></td>
+        <td class="column14 style106 null style107" colspan="4">Media Voti V.A.G.S. (Mod. 2)</td>
         <td class="column18 style11 null"></td>
         <td class="column19 style2 null"></td>
       </tr>
@@ -4866,13 +4898,13 @@
       <tr class="row53">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Esenza A.G.A.</td>
-        <td class="column3 style14 n">{{$esenzaAGA}}</td>
-        <td class="column4 style29 null"></td>
-        <td class="column5 style30 null"></td>
+        <td class="column3 style14 n">{{$esenzaAGAPrimaClasse}}</td>
+        <td class="column4 style29 null">{{$esenzaAGASecondaClasse}}</td>
+        <td class="column5 style30 null">{{$esenzaAGATerzaClasse}}</td>
         <td class="column6 style13 s">Rimprovero</td>
-        <td class="column7 style60 n style61" colspan="2">{{$rimprovero}}</td>
-        <td class="column9 style62 null style63" colspan="2"></td>
-        <td class="column11 style64 null style65" colspan="2"></td>
+        <td class="column7 style60 n style61" colspan="2">{{$rimproveroPrimaClasse}}</td>
+        <td class="column9 style62 null style63" colspan="2">{{$rimproveroSecondaClasse}}</td>
+        <td class="column11 style64 null style65" colspan="2">{{$rimproveroTerzaClasse}}</td>
         <td class="column13 style66 null style66" colspan="2" rowspan="2"></td>
         <td class="column15 style67 null style70" colspan="2" rowspan="2"></td>
         <td class="column17 style71 null style70" colspan="2" rowspan="2"></td>
@@ -4881,25 +4913,25 @@
       <tr class="row54">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Esenza totale</td>
-        <td class="column3 style14 n">{{$esenzaTot}}</td>
-        <td class="column4 style31 null"></td>
-        <td class="column5 style30 null"></td>
+        <td class="column3 style14 n">{{$esenzaTotPrimaClasse}}</td>
+        <td class="column4 style31 null">{{$esenzaTotSecondaClasse}}</td>
+        <td class="column5 style30 null">{{$esenzaTotTerzaClasse}}</td>
         <td class="column6 style13 s">consegna Semplice</td>
-        <td class="column7 style60 n style61" colspan="2">{{$conSemp}}</td>
-        <td class="column9 style62 null style63" colspan="2"></td>
-        <td class="column11 style64 null style65" colspan="2"></td>
+        <td class="column7 style60 n style61" colspan="2">{{$conSempPrimaClasse}}</td>
+        <td class="column9 style62 null style63" colspan="2">{{$conSempSecondaClasse}}</td>
+        <td class="column11 style64 null style65" colspan="2">{{$conSempTerzaClasse}}</td>
         <td class="column19 style2 null"></td>
       </tr>
       <tr class="row55">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Ricovero in infermeria</td>
-        <td class="column3 style38 n">{{$ricovero}}</td>
-        <td class="column4 style31 null"></td>
-        <td class="column5 style30 null"></td>
+        <td class="column3 style38 n">{{$ricoveroPrimaClasse}}</td>
+        <td class="column4 style31 null">{{$ricoveroSecondaClasse}}</td>
+        <td class="column5 style30 null">{{$ricoveroTerzaClasse}}</td>
         <td class="column6 style13 s">Consegna di Rigore</td>
-        <td class="column7 style100 n style101" colspan="2">{{$conRig}}</td>
-        <td class="column9 style64 null style65" colspan="2"></td>
-        <td class="column11 style64 null style65" colspan="2"></td>
+        <td class="column7 style100 n style101" colspan="2">{{$conRigPrimaClasse}}</td>
+        <td class="column9 style64 null style65" colspan="2">{{$conRigSecondaClasse}}</td>
+        <td class="column11 style64 null style65" colspan="2">{{$conRigTerzaClasse}}</td>
         <td class="column13 style19 s">TIA/RI</td>
         <td class="column14 style19 s">TIC/RC</td>
         <td class="column15 style19 s">TIA/RI</td>
@@ -4911,16 +4943,16 @@
       <tr class="row56">
         <td class="column0 style1 null"></td>
         <td class="column1 style59 s style58" colspan="2">Rip. Dom. / Convalescenza</td>
-        <td class="column3 style38 n">{{$degCov}}</td>
-        <td class="column4 style31 null"></td>
-        <td class="column5 style30 null"></td>
+        <td class="column3 style38 n">{{$degCovPrimaClasse}}</td>
+        <td class="column4 style31 null">{{$degCovSecondaClasse}}</td>
+        <td class="column5 style30 null">{{$degCovTerzaClasse}}</td>
         <td class="column6 style13 s">Elogio / T.P.S.</td>
-        <td class="column7 style38 n">{{$elogio}}</td>
-        <td class="column8 style39 n">{{$tps}}</td>
-        <td class="column9 style37 null"></td>
-        <td class="column10 style37 null"></td>
-        <td class="column11 style37 null"></td>
-        <td class="column12 style31 null"></td>
+        <td class="column7 style38 n">{{$elogioPrimaClasse}}</td>
+        <td class="column8 style39 n">{{$tpsPrimaClasse}}</td>
+        <td class="column9 style37 null">{{$elogioSecondaClasse}}</td>
+        <td class="column10 style37 null">{{$tpsSecondaClasse}}</td>
+        <td class="column11 style37 null">{{$elogioTerzaClasse}}</td>
+        <td class="column12 style31 null">{{$tpsTerzaClasse}}</td>
         <td class="column13 style66 null style94" colspan="2" rowspan="2"></td>
         <td class="column15 style67 null style96" colspan="2" rowspan="2"></td>
         <td class="column17 style71 null style96" colspan="2" rowspan="2"></td>

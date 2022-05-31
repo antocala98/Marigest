@@ -42,6 +42,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'sezione_appartenenza' => ['required', 'string', 'max:255'],
             'comando_appartenenza' => ['string', 'max:255'],
+            'grado' => ['string', 'required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -54,6 +55,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'sezione_appartenenza' => $request->sezione_appartenenza,
             'comando_appartenenza' => $request->comando_appartenenza,
+            'grado' => $request->grado,
             'tipo_utente' => '0',
             'remember_token'  => hash('sha256', $token),
             'password' => Hash::make($request->password),

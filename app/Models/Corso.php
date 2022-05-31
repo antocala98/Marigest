@@ -14,8 +14,7 @@ class Corso extends Model
         'numero_corso',
         'tipo_corso',
         'nome',
-        'anno_inizio',
-        'anno_fine',
+        'data_inizio',
         'classe',
     ];
 }

@@ -12,6 +12,7 @@ class RequisitoSportivo extends Model
 
     protected $fillable=[
         'disciplina',
+        'tipologia',
         'livello_uomini_o_30',
         'livello_uomini_u_30',
         'livello_donne_o_30',

@@ -153,7 +153,7 @@ class ImportIncorporandiNMRS implements ToModel, WithHeadingRow
             'tipo_documento' => $row['Tipo'],
             'num_documento' => $row['Docume'],
             'rilasciato_da' => $row['Rilascio'],
-            'data_rilascio' => $row['DataRil'],
+            'data_rilascio' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject((int)$row['DataRil'])),
             'matricola_allievo' => $row['MATRICOLA'],
         ]);
 
