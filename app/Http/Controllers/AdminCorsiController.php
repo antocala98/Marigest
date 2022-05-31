@@ -184,6 +184,7 @@ class AdminCorsiController extends Controller
     $allievo = Allievo::where('id', $id)->first();
     $provvedimentiSanitari = ProvvedimentoSanitario::get();
 
+    $provvedimentiDisciplinari = ProvvedimentoDisciplinare::get();
 
 
 
@@ -281,6 +282,11 @@ class AdminCorsiController extends Controller
           ->select('num_giorni_provvedimento')
           ->sum('num_giorni_provvedimento');
 
+        }
+    }
+    
+
+
         $rimproveroPrimaClasse = ProvvedimentoDisciplinare::where('tipo_provvedimento', 'Rimprovero')
           ->where('matricola_allievo', $matricola)
           ->where('classe_allievo', 'prima')
@@ -361,13 +367,329 @@ class AdminCorsiController extends Controller
           ->select('tipo_provvedimento')
           ->count('tipo_provvedimento');
 
+
+        break;
+      }
+
+
+          $verbaliSportiviPrimaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
+              ->select('disciplina')
+              ->count('disciplina');
+          $sommaVotiSportiviPrimaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
+              ->select('voto')
+              ->sum('voto');
+          $verbaliSportiviSecondaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
+              ->select('disciplina')
+              ->count('disciplina');
+          $sommaVotiSportiviSecondaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
+              ->select('voto')
+              ->sum('voto');
+          $verbaliSportiviTerzaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+              ->select('disciplina')
+              ->count('disciplina');
+          $sommaVotiSportiviTerzaClasse=VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+              ->select('voto')
+              ->sum('voto');
         break;
       }
     }
+    if($verbaliSportiviPrimaClasse > 0) {
+      $mediaSportTerrestriPrimaClasse = ($sommaVotiSportiviPrimaClasse / $verbaliSportiviPrimaClasse);
+  }else{
+      $mediaSportTerrestriPrimaClasse=0;
+  }
+  if($verbaliSportiviSecondaClasse > 0) {
+      $mediaSportTerrestriSecondaClasse = ($sommaVotiSportiviSecondaClasse / $verbaliSportiviSecondaClasse);
+  }else{
+      $mediaSportTerrestriSecondaClasse=0;
+  }
+  if($verbaliSportiviTerzaClasse> 0) {
+      $mediaSportTerrestriTerzaClasse = ($sommaVotiSportiviTerzaClasse / $verbaliSportiviTerzaClasse);
+  }else {
+      $mediaSportTerrestriTerzaClasse = 0;
+  }
     //da qua inizia il lavoro di giorgio
 
 
     $matricolaPerMaterie=$allievo->matricola_militare;
+
+    $materie=Materia::select('nome','codice','sessione','classe','facolta')->get();
+    $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->get();
+
+    $materiePrimoAnno=Materia::where('classe','prima')->orderby('nome')->get();
+    $materieSecondoAnno=Materia::where('classe','seconda')->orderby('nome')->get();
+    $materieTerzoAnno=Materia::where('classe','terza')->orderby('nome')->get();
+    $maxprimoanno=Materia::where('classe','prima')->orderby('nome')->count();
+    $maxsecondoanno=Materia::where('classe','seconda')->orderby('nome')->count();
+    $maxterzoanno=Materia::where('classe','terza')->orderby('nome')->count();
+    
+    
+    //$verbaliJoinMateriePrimoAnno=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->leftJoin(Materia::select('nome','codice','sessione','classe','facolta'),'codice_materia', '=', 'codice')->get();
+    $verbaliJoinMateriePrimoAnno = DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')->where('voto','>=',18)
+    ->get();
+
+    $verbaliJoinMaterieSecondoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')->where('voto','>=',18)
+    ->get();
+
+    $verbaliJoinMaterieTerzoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')->where('classe','terza')->where('voto','!=','Assente')->where('voto','>=',18)
+    ->where('matricola_allievo',$matricolaPerMaterie)
+    ->get();
+
+    $esisteprimoanno=$verbaliJoinMateriePrimoAnno->count();
+    $esistesecondoanno=$verbaliJoinMaterieSecondoAnno->count();
+    $esisteterzoanno=$verbaliJoinMaterieTerzoAnno->count();
+
+    if($esisteprimoanno>$esistesecondoanno){
+      $max=$esisteprimoanno;
+    }else{
+      $max=$esistesecondoanno;
+    }
+    if($max>$esisteterzoanno){
+      $max=$max;
+    }else{
+      $max=$esisteterzoanno;
+    }
+    if($max>0){
+      if($esisteprimoanno>0){
+        $mediaVotiPrimoAnno=$verbaliJoinMateriePrimoAnno->sum('voto')/$esisteprimoanno;
+      }else{
+        $mediaVotiPrimoAnno=null;
+      }
+      if($esistesecondoanno>0){
+        $mediaVotiSecondoAnno=$verbaliJoinMaterieSecondoAnno->sum('voto')/$esistesecondoanno;
+      }else{
+        $mediaVotiSecondoAnno=null;
+      }
+      if($esisteterzoanno>0){
+        $mediaVotiTerzoAnno=$verbaliJoinMaterieTerzoAnno->sum('voto')/$esisteterzoanno;
+      }else{
+        $mediaVotiTerzoAnno=null;
+      }
+    }else{
+      $mediaVotiPrimoAnno=null;
+      $mediaVotiSecondoAnno=null;
+      $mediaVotiTerzoAnno=null;
+    }
+    $votiPrimoSemestrePrimoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')
+    ->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestrePrimoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')
+    ->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
+
+    $votiPrimoSemestreSecondoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestreSecondoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
+
+    $votiPrimoSemestreTerzoAnno= DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','terza')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')
+    ->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestreTerzoAnno= DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','terza')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')
+    ->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
+
+
+    $totaleVotiPrimoSemestrePrimoAnno=$votiPrimoSemestrePrimoAnno->sum('voto');
+    $numeroVotiPrimoSemestrePrimoAnno=$votiPrimoSemestrePrimoAnno->count();
+    if($numeroVotiPrimoSemestrePrimoAnno>0){
+      $mediaVotiPrimoSemestrePrimoAnno=$totaleVotiPrimoSemestrePrimoAnno/$numeroVotiPrimoSemestrePrimoAnno;
+    }else{
+      $mediaVotiPrimoSemestrePrimoAnno=null;
+
+    }
+    //da qua inizia il lavoro di giorgio
+
+
+
+    $matricolaPerMaterie=$allievo->matricola_militare;
+
+    $totaleVotiSecondoSemestrePrimoAnno=$votiSecondoSemestrePrimoAnno->sum('voto');
+    $numeroVotiSecondoSemestrePrimoAnno=$votiSecondoSemestrePrimoAnno->count();
+    if($numeroVotiSecondoSemestrePrimoAnno>0){
+      $mediaVotiSecondoSemestrePrimoAnno=$totaleVotiSecondoSemestrePrimoAnno/$numeroVotiSecondoSemestrePrimoAnno;
+    }else{
+      $mediaVotiSecondoSemestrePrimoAnno=null;
+    }
+    
+    $totaleVotiPrimoSemestreSecondoAnno=$votiPrimoSemestreSecondoAnno->sum('voto');
+    $numeroVotiPrimoSemestreSecondoAnno=$votiPrimoSemestreSecondoAnno->count();
+    if($numeroVotiPrimoSemestreSecondoAnno>0){
+      $mediaVotiPrimoSemestreSecondoAnno=$totaleVotiPrimoSemestreSecondoAnno/$numeroVotiPrimoSemestreSecondoAnno;
+    }else{
+      $mediaVotiPrimoSemestreSecondoAnno=null;
+    }
+
+    $totaleVotiSecondoSemestreSecondoAnno=$votiSecondoSemestreSecondoAnno->sum('voto');
+    $numeroVotiSecondoSemestreSecondoAnno=$votiSecondoSemestreSecondoAnno->count();
+    if($numeroVotiSecondoSemestreSecondoAnno>0){
+      $mediaVotiSecondoSemestreSecondoAnno=$totaleVotiSecondoSemestreSecondoAnno/$numeroVotiSecondoSemestreSecondoAnno;
+    }else{
+      $mediaVotiSecondoSemestreSecondoAnno=null;
+    }
+
+    $totaleVotiPrimoSemestreTerzoAnno=$votiPrimoSemestreTerzoAnno->sum('voto');
+    $numeroVotiPrimoSemestreTerzoAnno=$votiPrimoSemestreTerzoAnno->count();
+    if($numeroVotiPrimoSemestreTerzoAnno>0){
+      $mediaVotiPrimoSemestreTerzoAnno=$totaleVotiPrimoSemestreTerzoAnno/$numeroVotiPrimoSemestreTerzoAnno;
+    }else{
+      $mediaVotiPrimoSemestreTerzoAnno=null;
+    }
+
+    $totaleVotiPrimoSemestreTerzoAnno=$votiPrimoSemestreTerzoAnno->sum('voto');
+    $numeroVotiPrimoSemestreTerzoAnno=$votiPrimoSemestreTerzoAnno->count();
+    if($numeroVotiPrimoSemestreTerzoAnno>0){
+      $mediaVotiPrimoSemestreTerzoAnno=$totaleVotiPrimoSemestreTerzoAnno/$numeroVotiPrimoSemestreTerzoAnno;
+    }else{
+      $mediaVotiPrimoSemestreTerzoAnno=null;
+    }
+
+    $totaleVotiSecondoSemestreTerzoAnno=$votiSecondoSemestreTerzoAnno->sum('voto');
+    $numeroVotiSecondoSemestreTerzoAnno=$votiSecondoSemestreTerzoAnno->count();
+    if($numeroVotiSecondoSemestreTerzoAnno>0){
+      $mediaVotiSecondoSemestreTerzoAnno=$totaleVotiSecondoSemestreTerzoAnno/$numeroVotiSecondoSemestreTerzoAnno;
+    }else{
+      $mediaVotiSecondoSemestreTerzoAnno=null;
+    }
+    $verbaliJoinMaterieDipartimentaliPrimoAnno = DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('facolta','=','dipartimento')
+    ->where('facolta','=','dipartimento')->where('voto','!=','Assente')->where('voto','>=',18)
+    ->get();
+
+    $verbaliJoinMaterieDipartimentaliSecondoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('facolta','=','dipartimento')->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)->where('voto','!=','Assente')->where('voto','>=',18)
+    ->get();
+
+    $verbaliJoinMaterieDipartimentaliTerzoAnno=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')->where('classe','terza')->where('voto','!=','Assente')->where('voto','>=',18)
+    ->where('facolta','=','dipartimento')->where('matricola_allievo',$matricolaPerMaterie)
+    ->get();
+    $maxdipartimento=0;
+    $esistedipartimentoprimoanno=$verbaliJoinMaterieDipartimentaliPrimoAnno->count();
+    $esistedipartimentosecondoanno=$verbaliJoinMaterieDipartimentaliSecondoAnno->count();
+    $esistedipartimentoterzoanno=$verbaliJoinMaterieDipartimentaliTerzoAnno->count();
+    if($esistedipartimentoprimoanno>$esistedipartimentosecondoanno){
+      $maxdipartimento=$esistedipartimentoprimoanno;
+    }else{
+      $maxdipartimento=$esistedipartimentosecondoanno;
+    }
+    if($maxdipartimento>$esistedipartimentoterzoanno){
+      $maxdipartimento=$maxdipartimento;
+    }else{
+      $maxdipartimento=$esistedipartimentoterzoanno;
+    }
+    if($maxdipartimento>0){
+      if($esistedipartimentoprimoanno>0){
+        $mediaVotiPrimoAnnoDipartimento=$verbaliJoinMaterieDipartimentaliPrimoAnno->sum('voto')/$esistedipartimentoprimoanno;
+      }else{
+        $mediaVotiPrimoAnnoDipartimento=null;
+      }
+      if($esistedipartimentosecondoanno>0){
+        $mediaVotiSecondoAnnoDipartimento=$verbaliJoinMaterieDipartimentaliSecondoAnno->sum('voto')/$esistedipartimentosecondoanno;
+      }else{
+        $mediaVotiSecondoAnnoDipartimento=null;
+      }
+      if($esistedipartimentoterzoanno>0){
+        $mediaVotiTerzoAnnoDipartimento=$verbaliJoinMaterieDipartimentaliTerzoAnno->sum('voto')/$esistedipartimentoterzoanno;
+      }else{
+        $mediaVotiTerzoAnnoDipartimento=null;
+      }
+    }else{
+      $mediaVotiPrimoAnnoDipartimento=null;
+      $mediaVotiSecondoAnnoDipartimento=null;
+      $mediaVotiTerzoAnnoDipartimento=null;
+    }
+    $votiPrimoSemestrePrimoAnnoDipartimento=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('facolta','=','dipartimento')
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestrePrimoAnnoDipartimento=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','prima')->where('matricola_allievo',$matricolaPerMaterie)->where('facolta','=','dipartimento')
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
+
+    $votiPrimoSemestreSecondoAnnoDipartimento=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)->where('facolta','=','dipartimento')
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestreSecondoAnnoDipartimento=DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','seconda')->where('matricola_allievo',$matricolaPerMaterie)->where('facolta','=','dipartimento')
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
+
+    $votiPrimoSemestreTerzoAnnoDipartimento= DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','terza')->where('matricola_allievo',$matricolaPerMaterie)->where('facolta','=','dipartimento')
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','primo semestre')
+    ->get();
+
+    $votiSecondoSemestreTerzoAnnoDipartimento= DB::table('verbali_esami')
+    ->leftJoin('materie', 'codice', '=', 'codice_materia')
+    ->where('classe','terza')->where('matricola_allievo',$matricolaPerMaterie)->where('facolta','=','dipartimento')
+    ->where('voto','!=','Assente')->where('voto','>=',18)->where('sessione','secondo semestre')
+    ->get();
+
+    $totaleVotiPrimoSemestrePrimoAnnoDipartimento=$votiPrimoSemestrePrimoAnnoDipartimento->sum('voto');
+    $numeroVotiPrimoSemestrePrimoAnnoDipartimento=$votiPrimoSemestrePrimoAnnoDipartimento->count();
+    if($numeroVotiPrimoSemestrePrimoAnnoDipartimento>0){
+      $mediaVotiPrimoSemestrePrimoAnnoDipartimento=$totaleVotiPrimoSemestrePrimoAnnoDipartimento/$numeroVotiPrimoSemestrePrimoAnnoDipartimento;
+    }else{
+      $mediaVotiPrimoSemestrePrimoAnnoDipartimento=null;
+    }
+
+    $totaleVotiSecondoSemestrePrimoAnnoDipartimento=$votiSecondoSemestrePrimoAnnoDipartimento->sum('voto');
+    $numeroVotiSecondoSemestrePrimoAnnoDipartimento=$votiSecondoSemestrePrimoAnnoDipartimento->count();
+    if($numeroVotiSecondoSemestrePrimoAnnoDipartimento>0){
+      $mediaVotiSecondoSemestrePrimoAnnoDipartimento=$totaleVotiSecondoSemestrePrimoAnnoDipartimento/$numeroVotiSecondoSemestrePrimoAnnoDipartimento;
+    }else{
+      $mediaVotiSecondoSemestrePrimoAnnoDipartimento=null;
+    }
+
+    $totaleVotiPrimoSemestreSecondoAnnoDipartimento=$votiPrimoSemestreSecondoAnnoDipartimento->sum('voto');
+    $numeroVotiPrimoSemestreSecondoAnnoDipartimento=$votiPrimoSemestreSecondoAnnoDipartimento->count();
+    if($numeroVotiPrimoSemestreSecondoAnnoDipartimento>0){
+      $mediaVotiPrimoSemestreSecondoAnnoDipartimento=$totaleVotiPrimoSemestreSecondoAnnoDipartimento/$numeroVotiPrimoSemestreSecondoAnnoDipartimento;
+    }else{
+      $mediaVotiPrimoSemestreSecondoAnnoDipartimento=null;
+    }
+
+    $totaleVotiSecondoSemestreSecondoAnnoDipartimento=$votiSecondoSemestreSecondoAnnoDipartimento->sum('voto');
+    $numeroVotiSecondoSemestreSecondoAnnoDipartimento=$votiSecondoSemestreSecondoAnnoDipartimento->count();
+    if($numeroVotiSecondoSemestreSecondoAnnoDipartimento>0){
+      $mediaVotiSecondoSemestreSecondoAnnoDipartimento=$totaleVotiSecondoSemestreSecondoAnnoDipartimento/$numeroVotiSecondoSemestreSecondoAnnoDipartimento;
+    }else{
+      $mediaVotiSecondoSemestreSecondoAnnoDipartimento=null;
+    }
 
     $materie=Materia::select('nome','sessione','classe')->get();
     $verbaliEsami=VerbaleEsame::where('matricola_allievo',$matricolaPerMaterie)->select('codice_materia')->get();
@@ -397,10 +719,29 @@ class AdminCorsiController extends Controller
       'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
       'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,
+
       'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'materieTerzoAnno'=>$materieTerzoAnno,
       'maxprimoanno'=>$maxprimoanno, 'maxterzoanno'=>$maxterzoanno, 'maxsecondoanno'=>$maxsecondoanno,'max'=>$max,
     ]);
     return $pdf;
+
+
+      'materiePrimoAnno'=>$materiePrimoAnno,'materieSecondoAnno'=>$materieSecondoAnno, 'materieTerzoAnno'=>$materieTerzoAnno,
+
+      'maxprimoanno'=>$esisteprimoanno, 'maxterzoanno'=>$esisteterzoanno, 'maxsecondoanno'=>$esistesecondoanno,'max'=>$max,'verbaliJoinMateriePrimoAnno'=>$verbaliJoinMateriePrimoAnno, 'verbaliJoinMaterieSecondoAnno'=>$verbaliJoinMaterieSecondoAnno, 'verbaliJoinMaterieTerzoAnno'=>$verbaliJoinMaterieTerzoAnno,
+        'mediaSportTerrestriPrimaClasse'=> $mediaSportTerrestriPrimaClasse,'mediaSportTerrestriTerzaClasse'=> $mediaSportTerrestriTerzaClasse, 'esiste1'=>$esisteprimoanno, 'esiste2'=>$esistesecondoanno , 'esiste3'=>$esisteterzoanno,
+        'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse ,'mediaVotiPrimoAnno'=>$mediaVotiPrimoAnno, 'mediaVotiSecondoAnno'=>$mediaVotiSecondoAnno, 'mediaVotiTerzoAnno'=>$mediaVotiTerzoAnno,
+      'mediaVotiPrimoSemestrePrimoAnno'=>$mediaVotiPrimoSemestrePrimoAnno, 'mediaVotiSecondoSemestrePrimoAnno'=>$mediaVotiSecondoSemestrePrimoAnno, 'mediaVotiPrimoSemestreSecondoAnno'=>$mediaVotiPrimoSemestreSecondoAnno,
+      'mediaVotiSecondoSemestreSecondoAnno'=>$mediaVotiSecondoSemestreSecondoAnno, 'mediaVotiPrimoSemestreTerzoAnno'=>$mediaVotiPrimoSemestreTerzoAnno, 'mediaVotiSecondoSemestreTerzoAnno'=>$mediaVotiSecondoSemestreTerzoAnno,
+      'maxdipartimento'=>$maxdipartimento, 'esistedipartimentoprimoanno'=>$esistedipartimentoprimoanno, 'esistedipartimentosecondoanno'=>$esistedipartimentosecondoanno, 'esistedipartimentoterzoanno'=>$esistedipartimentoterzoanno,
+      'mediaVotiPrimoAnnoDipartimento'=>$mediaVotiPrimoAnnoDipartimento, 'mediaVotiSecondoAnnoDipartimento'=>$mediaVotiSecondoAnnoDipartimento, 'mediaVotiTerzoAnnoDipartimento'=>$mediaVotiTerzoAnnoDipartimento,
+      'mediaVotiPrimoSemestrePrimoAnnoDipartimento'=>$mediaVotiPrimoSemestrePrimoAnnoDipartimento, 'mediaVotiSecondoSemestrePrimoAnnoDipartimento'=>$mediaVotiSecondoSemestrePrimoAnnoDipartimento,
+      'mediaVotiPrimoSemestreSecondoAnnoDipartimento'=>$mediaVotiPrimoSemestreSecondoAnnoDipartimento, 'mediaVotiSecondoSemestreSecondoAnnoDipartimento'=>$mediaVotiSecondoSemestreSecondoAnnoDipartimento,
+      'mediaVotiPrimoSemestreTerzoAnnoDipartimento'=>$mediaVotiPrimoSemestreTerzoAnnoDipartimento, 'mediaVotiSecondoSemestreTerzoAnnoDipartimento'=>$mediaVotiSecondoSemestreTerzoAnnoDipartimento,
+      
+      ]);
+      return $pdf;
+
   }
 
   public function visualizzaSchedaIndividuale($id)
@@ -713,6 +1054,12 @@ public function inserisciVerbaliEsami(Request $request)
     {
         $discipline = RequisitoSportivo::where('id','>',0)->get();
 
+        $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
+
+        $tipo = RequisitoSportivo::where('disciplina',$request->discipline)->first();
+
+
+
         $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
         $verbaleSportivo = new VerbaleSportivo();
@@ -721,6 +1068,11 @@ public function inserisciVerbaliEsami(Request $request)
         $verbaleSportivo->data_verbale = $request->dataVerbale;
         $verbaleSportivo->voto = $request->voto;
         $verbaleSportivo->matricola_allievo = $request->allievo;
+
+
+        $verbaleSportivo->classe_allievo = $corso->classe;
+        $verbaleSportivo->tipologia = $tipo->tipologia;
+
         $verbaleSportivo->id_user_redattore = Auth::user()->id;
         $verbaleSportivo->save();
 

@@ -50,37 +50,46 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api', function (Request $request) {
+        RateLimiter::for ('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
 
-    public static function HOME($user, $request=null){
-        switch($user->sezione_appartenenza){
-            case 'incorporamento': break; //non registrato
-            case 'corsi': 
-                switch($user->tipo_utente){
+    public static function HOME($user, $request = null)
+    {
+        switch ($user->sezione_appartenenza) {
+            case 'incorporamento':
+                break; //non registrato
+            case 'corsi':
+                switch ($user->tipo_utente) {
                     case '0':
                         return view('auth.register')->with(["standby" => "Il tuo account non è stato ancora attivato."]);
                     case '1':
-                        if(!Auth::user()){
+                        if (!Auth::user()) {
                             $request->authenticate();
                             $request->session()->regenerate();
                         }
                         return redirect()->intended(route('homeCorsiAdmin'));
 
-                    case '2': 
-                        if(!Auth::user()){
+                    case '2':
+                        if (!Auth::user()) {
                             $request->authenticate();
                             $request->session()->regenerate();
                         }
                         return redirect()->intended(route('homeCorsiAdminJunior'));
-                         
-                    case '3': break;
+
+                    case '3':
+                        if (!Auth::user()) {
+                            $request->authenticate();
+                            $request->session()->regenerate();
+                        }
+                        return redirect()->intended(route('homeCorsiAddetto'));
                 }
-                //admin
-            case 'vestiario': break; //admin junior
-            case 'sanitaria': break; //addetto
+            //admin
+            case 'vestiario':
+                break; //admin junior
+            case 'sanitaria':
+                break; //addetto
         }
     }
 }
