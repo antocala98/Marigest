@@ -77,7 +77,7 @@
                                 {{$allievo->categoria}}
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('visualizzaScheda', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Visualizza PDF</a>
+                                <a href="{{ route('visualizzaSchedaAdminJ', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Visualizza PDF</a>
                             </td>
                             <td class="px-6 py-4 text-right hidden lg:block">
                                 <a href="{{ route('downloadScheda', ['id' => $allievo->id ]) }} " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Scarica PDF</a>

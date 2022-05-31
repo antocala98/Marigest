@@ -103,7 +103,7 @@ Route::prefix('/corsi')->group(function(){
             Route::get('schede-individuali', [AdminJuniorCorsiController::class,'schedeIndividualiAllievi'])->middleware('auth')->name('schedeIndividuali');
             Route::post('schede-individuali', [AdminJuniorCorsiController::class,'ricercaSchedaIndividuale'])->middleware('auth')->name('schedeIndividuali');
             Route::get('scheda-allievo/{id}', [AdminJuniorCorsiController::class, 'downloadSchedaIndividuale'])->middleware('auth')->name('downloadScheda');
-            Route::get('visualizza-scheda-allievo/{id}', [AdminJuniorCorsiController::class, 'visualizzaSchedaIndividuale'])->middleware('auth')->name('visualizzaScheda');
+            Route::get('visualizza-scheda-allievo/{id}', [AdminJuniorCorsiController::class, 'visualizzaSchedaIndividuale'])->middleware('auth')->name('visualizzaSchedaAdminJ');
             Route::get('/', [AdminJuniorCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative');
             Route::prefix('/schede-riepilogative')->group(function () {
                 Route::get('/', [AdminJuniorCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative');
@@ -146,10 +146,10 @@ Route::prefix('/corsi')->group(function(){
         });
         Route::prefix('/addetto')->group(function () {
             Route::get('home', [AddettoCorsiController::class, 'view'])->middleware('auth')->name('homeCorsiAddetto');
-            Route::get('schede-individuali', [AddettoCorsiController::class,'schedeIndividualiAllievi'])->middleware('auth')->name('schedeIndividuali');
-            Route::post('schede-individuali', [AddettoCorsiController::class,'ricercaSchedaIndividuale'])->middleware('auth')->name('schedeIndividuali');
+            Route::get('schede-individuali', [AddettoCorsiController::class,'schedeIndividualiAllievi'])->middleware('auth')->name('schedeIndividualiAddetto');
+            Route::post('schede-individuali', [AddettoCorsiController::class,'ricercaSchedaIndividuale'])->middleware('auth')->name('schedeIndividualiAddetto');
             Route::get('scheda-allievo/{id}', [AddettoCorsiController::class, 'downloadSchedaIndividuale'])->middleware('auth')->name('downloadScheda');
-            Route::get('visualizza-scheda-allievo/{id}', [AddettoCorsiController::class, 'visualizzaSchedaIndividuale'])->middleware('auth')->name('visualizzaScheda');
+            Route::get('visualizza-scheda-allievo/{id}', [AddettoCorsiController::class, 'visualizzaSchedaIndividuale'])->middleware('auth')->name('visualizzaSchedaAddetto');
             Route::get('/', [AddettoCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative');
             Route::prefix('/schede-riepilogative')->group(function () {
                 Route::get('/', [AddettoCorsiController::class, 'schedeRiepilogative'])->middleware('auth')->name('schedeRiepilogative');
