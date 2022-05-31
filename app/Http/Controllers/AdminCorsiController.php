@@ -384,21 +384,34 @@ class AdminCorsiController extends Controller
                     $sommaVotiSportiviPrimaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'prima')
                         ->select('voto')
                         ->sum('voto');
+                    /*---------- SPORT SECONDA CLASSE -----------------*/
                     $verbaliSportiviSecondaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
                         ->select('disciplina')
                         ->count('disciplina');
                     $sommaVotiSportiviSecondaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'seconda')
                         ->select('voto')
                         ->sum('voto');
-                    $verbaliSportiviTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+
+                    /*----------------- SPORT TERZA CLASSE -----------------------*/
+                    $verbaliSportiviTerrestiTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+                        ->where('tipologia', 'terrestre')
                         ->select('disciplina')
                         ->count('voto');
-                    $sommaVotiSportiviTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+                    $sommaVotiSportiviTerrestiTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+                        ->where('tipologia', 'terrestre')
+                        ->select('voto')
+                        ->sum('voto');
+                    $verbaliSportiviAcquaticiTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+                        ->where('tipologia', 'acquatico')
+                        ->select('disciplina')
+                        ->count('voto');
+                    $sommaVotiSportiviAcquaticiTerzaClasse = VerbaleSportivo::where('matricola_allievo', $matricola)->where('classe_allievo', 'terza')
+                        ->where('tipologia', 'acquatico')
                         ->select('voto')
                         ->sum('voto');
                 }
             }
-
+/*---------------Sport Terrestri------------------------*/
       if($verbaliSportiviPrimaClasse > 0) {
       $mediaSportTerrestriPrimaClasse = ($sommaVotiSportiviPrimaClasse / $verbaliSportiviPrimaClasse);
   }else{
@@ -409,11 +422,26 @@ class AdminCorsiController extends Controller
   }else{
       $mediaSportTerrestriSecondaClasse=0;
   }
-  if($verbaliSportiviTerzaClasse> 0) {
-      $mediaSportTerrestriTerzaClasse = ($sommaVotiSportiviTerzaClasse / $verbaliSportiviTerzaClasse);
+  if($verbaliSportiviTerrestiTerzaClasse> 0) {
+      $mediaSportTerrestriTerzaClasse = ($sommaVotiSportiviTerrestiTerzaClasse / $verbaliSportiviTerrestiTerzaClasse);
   }else {
       $mediaSportTerrestriTerzaClasse = 0;
   }
+      /*---------------Sport Acquatici------------------------*/
+      if($verbaliSportiviAcquaticiTerzaClasse> 0) {
+          $mediaSportAcquaticiTerzaClasse = ($sommaVotiSportiviAcquaticiTerzaClasse / $verbaliSportiviAcquaticiTerzaClasse);
+      }else {
+          $mediaSportAcquaticiTerzaClasse = 0;
+      }
+      /*---------------Media Sportiva------------------------*/
+      if($mediaSportTerrestriTerzaClasse > 0 && $mediaSportAcquaticiTerzaClasse > 0){
+          $mediaSportivaFinaleTerzaClasse = ($mediaSportTerrestriTerzaClasse + $mediaSportAcquaticiTerzaClasse) / (2);
+      }else{
+          $mediaSportivaFinaleTerzaClasse = 0;
+      }
+
+
+
 
     $matricolaPerMaterie=$allievo->matricola_militare;
 
@@ -569,7 +597,7 @@ class AdminCorsiController extends Controller
     $verbaliJoinMaterieDipartimentaliTerzoAnno=DB::table('verbali_esami')
     ->leftJoin('materie', 'codice', '=', 'codice_materia')->where('classe','terza')->where('voto','!=','Assente')->where('voto','>=',18)
     ->where('facolta','=','dipartimento')->where('matricola_allievo',$matricolaPerMaterie)
-    ->get(); 
+    ->get();
 
     $esistedipartimentoprimoanno=$verbaliJoinMaterieDipartimentaliPrimoAnno->count();
     $esistedipartimentosecondoanno=$verbaliJoinMaterieDipartimentaliSecondoAnno->count();
@@ -656,7 +684,7 @@ class AdminCorsiController extends Controller
     }else{
       $mediaVotiSecondoSemestrePrimoAnnoDipartimento=null;
     }
-    
+
     $totaleVotiPrimoSemestreSecondoAnnoDipartimento=$votiPrimoSemestreSecondoAnnoDipartimento->sum('voto');
     $numeroVotiPrimoSemestreSecondoAnnoDipartimento=$votiPrimoSemestreSecondoAnnoDipartimento->count();
     if($numeroVotiPrimoSemestreSecondoAnnoDipartimento>0){
@@ -697,9 +725,10 @@ class AdminCorsiController extends Controller
       'conRigSecondaClasse' => $conRigSecondaClasse, 'elogioSecondaClasse' => $elogioSecondaClasse, 'tpsSecondaClasse' => $tpsSecondaClasse, 'esenzaTotTerzaClasse' => $esenzaTotTerzaClasse, 'esenzaAGATerzaClasse' => $esenzaAGATerzaClasse,
       'ricoveroTerzaClasse' => $ricoveroTerzaClasse, 'degCovTerzaClasse' => $degCovTerzaClasse, 'conSempTerzaClasse' => $conSempTerzaClasse, 'rimproveroTerzaClasse' => $rimproveroTerzaClasse,
       'conRigTerzaClasse' => $conRigTerzaClasse, 'elogioTerzaClasse' => $elogioTerzaClasse, 'tpsTerzaClasse' => $tpsTerzaClasse,
-      
+
       'maxprimoanno'=>$esisteprimoanno, 'maxterzoanno'=>$esisteterzoanno, 'maxsecondoanno'=>$esistesecondoanno,'max'=>$max,'verbaliJoinMateriePrimoAnno'=>$verbaliJoinMateriePrimoAnno, 'verbaliJoinMaterieSecondoAnno'=>$verbaliJoinMaterieSecondoAnno, 'verbaliJoinMaterieTerzoAnno'=>$verbaliJoinMaterieTerzoAnno,
         'mediaSportTerrestriPrimaClasse'=> $mediaSportTerrestriPrimaClasse,'mediaSportTerrestriTerzaClasse'=> $mediaSportTerrestriTerzaClasse, 'esiste1'=>$esisteprimoanno, 'esiste2'=>$esistesecondoanno , 'esiste3'=>$esisteterzoanno,
+        'mediaSportAcquaticiTerzaClasse' => $mediaSportAcquaticiTerzaClasse,'mediaSportivaFinaleTerzaClasse' => $mediaSportivaFinaleTerzaClasse,
         'mediaSportTerrestriSecondaClasse'=> $mediaSportTerrestriSecondaClasse ,'mediaVotiPrimoAnno'=>$mediaVotiPrimoAnno, 'mediaVotiSecondoAnno'=>$mediaVotiSecondoAnno, 'mediaVotiTerzoAnno'=>$mediaVotiTerzoAnno,
       'mediaVotiPrimoSemestrePrimoAnno'=>$mediaVotiPrimoSemestrePrimoAnno, 'mediaVotiSecondoSemestrePrimoAnno'=>$mediaVotiSecondoSemestrePrimoAnno, 'mediaVotiPrimoSemestreSecondoAnno'=>$mediaVotiPrimoSemestreSecondoAnno,
       'mediaVotiSecondoSemestreSecondoAnno'=>$mediaVotiSecondoSemestreSecondoAnno, 'mediaVotiPrimoSemestreTerzoAnno'=>$mediaVotiPrimoSemestreTerzoAnno, 'mediaVotiSecondoSemestreTerzoAnno'=>$mediaVotiSecondoSemestreTerzoAnno,
