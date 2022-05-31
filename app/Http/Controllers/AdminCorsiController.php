@@ -217,11 +217,14 @@ class AdminCorsiController extends Controller
     $tpsTerzaClasse = 0;
     $matricola = 0;
     $verbaliSportiviPrimaClasse=0;
-      $sommaVotiSportiviPrimaClasse=0;
-      $verbaliSportiviSecondaClasse=0;
-      $sommaVotiSportiviSecondaClasse=0;
-      $verbaliSportiviTerzaClasse=0;
-      $sommaVotiSportiviTerzaClasse=0;
+    $verbaliSportiviSecondalasse=0;
+    $verbaliSportiviTerrestiTerzaClasse=0;
+    $verbaliSportiviAcquaticiTerzaClasse=0;
+    $sommaVotiSportiviPrimaClasse=0;
+    $sommaVotiSportiviSecondaClasse=0;
+    $sommaVotiSportiviTerrestiTerzaClasse=0;
+    $sommaVotiSportiviAcquaticiTerzaClasse=0;
+
     foreach ($provvedimentiSanitari as $provvedimento) {
       $matricola = ($provvedimento->matricola_allievo_paziente);
       if ($allievo->matricola_militare == $matricola) {
