@@ -36,8 +36,8 @@
                                     <ul class="py-1 list-unstyled fw-normal small">
                                         <li>
                                             <button href="{{ url('corsi/marescialli/addetto/sezione-disciplinare') }}" data-collapse-toggle="dropdownDisciplinare"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "><br><b>SEZIONE
-                                                    DISCIPLINARE</b>
+                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "><br>SEZIONE
+                                                    DISCIPLINARE
                                             </button>
                                             <div class="hidden" id="dropdownDisciplinare">
                                                 <ul>
@@ -51,8 +51,8 @@
                                         <br>
                                         <li>
                                             <button href="{{ url('corsi/marescialli/addetto/sezione-sanitaria') }}" data-collapse-toggle="dropdownSanitaria"
-                                                class="pt-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "
-                                                aria-current="page"><b>SEZIONE SANITARIA</b></button>
+                                                class="pt-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "
+                                                aria-current="page">SEZIONE SANITARIA</button>
                                                 <div class="hidden" id="dropdownSanitaria">
                                                     <ul>
                                                         <li><a href="{{ url('corsi/marescialli/addetto/sezione-sanitaria/visualizza-provvedimento-sanitario') }}"
@@ -66,12 +66,12 @@
                                 </li>
                                 <li class="mt-0">
                                     <a href="{{ url('corsi/marescialli/addetto/schede-individuali') }}"
-                                        class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
+                                        class="mb-2 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>SCHEDE INDIVIDUALI ALLIEVI</h5> </a>
                                 </li>
                                 <li class="mt-2">
                                     <button href="{{ url('corsi/marescialli/addetto/schede-riepilogative') }}"data-collapse-toggle="dropdownSchedeRiepilogative"
-                                        class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
+                                        class="mb-2 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>SCHEDE RIEPILOGATIVE</h5> </button>
                                         <div class="hidden" id="dropdownSchedeRiepilogative">
                                             <ul>

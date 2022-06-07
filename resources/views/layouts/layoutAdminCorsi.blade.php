@@ -22,7 +22,7 @@
         <div class="px-4 mx-auto w-full max-w-8xl">
             <div class="lg:flex">
                 <aside id="sidebar"
-                    class="hidden fixed flex-none w-72 h-full lg:static lg:h-screen  lg:overflow-y-auto lg:pt-0 lg:w-56 lg:block lg:border-r-2">
+                    class="hidden fixed flex-none w-72 h-full lg:static lg:h-screen  lg:overflow-y-auto lg:pt-0 lg:w-60 lg:block lg:border-r-2">
                     <div id="navWrapper"
                         class="overflow-hidden overflow-y-auto z-20 h- bg-white scrolling-touch max-w-2xs lg:h-5/6 lg:block lg:sticky top:2 lg:top-2 dark:bg-gray-900 lg:mr-0">
                         <nav id="nav"
