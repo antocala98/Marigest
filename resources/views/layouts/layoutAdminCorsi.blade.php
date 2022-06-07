@@ -22,120 +22,139 @@
         <div class="px-4 mx-auto w-full max-w-8xl">
             <div class="lg:flex">
                 <aside id="sidebar"
-                    class="hidden fixed inset-0 z-20 flex-none w-72 h-full lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:w-48 lg:block">
+                    class="hidden fixed flex-none w-72 h-full lg:static lg:h-screen  lg:overflow-y-auto lg:pt-0 lg:w-56 lg:block lg:border-r-2">
                     <div id="navWrapper"
-                        class="overflow-hidden overflow-y-auto z-20 h- bg-white scrolling-touch max-w-2xs lg:h-screen lg:block lg:sticky top:24 lg:top-12 dark:bg-gray-900 lg:mr-0">
+                        class="overflow-hidden overflow-y-auto z-20 h- bg-white scrolling-touch max-w-2xs lg:h-5/6 lg:block lg:sticky top:2 lg:top-2 dark:bg-gray-900 lg:mr-0">
                         <nav id="nav"
-                            class="pt-16 px-1 pl-3 lg:pl-0 lg:pt-2 overflow-y-auto font-medium text-base lg:text-sm pb-10 lg:pb-20 sticky?lg:h-(screen-18)"
+                            class="pt-16 px-1 pl-3 lg:pl-0 lg:pt-2 overflow-y-auto font-medium text-base lg:text-sm pb-2 lg:pb-2 "
                             aria-label="Docs navigation">
                             <ul class="mb-0 list-unstyled">
-                                <li class="mt-8">
-                                    <a href="{{ url('corsi/marescialli/admin/home') }}"
+                                <li class="mt-2">
+                                    <!--<a href="{{ url('corsi/marescialli/admin/home') }}"
                                         class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
-                                        <br>HOME</h5> </a>
+                                        <br>HOME</h5> </a>-->
                                     <ul class="py-1 list-unstyled fw-normal small">
                                         <li>
-                                            <a href="{{ url('corsi/marescialli/admin/sezione-disciplinare') }}"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "><br><b>Sezione
-                                                    disciplinare</b>
-                                            </a>
-                                            <ul>
-                                                <li><a href="{{ url('corsi/marescialli/admin/sezione-disciplinare/inserisci-provvedimento-disciplinare') }}"
-                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Inserisci
-                                                        provvedimento disciplinare</a></li>
-                                                <li><a href="{{ url('corsi/marescialli/admin/sezione-disciplinare/modifica-provvedimento-disciplinare') }}"
-                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Modifica
-                                                        provvedimento disciplinare</a></li>
-                                                <li><a href="{{ url('corsi/marescialli/admin/sezione-disciplinare/visualizza-provvedimento-disciplinare') }}"
-                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Visualizza
-                                                        provvedimento disciplinare</a></li>
-                                            </ul>
+                                                <button  href={{ url('corsi/marescialli/admin/sezione-disciplinare/') }} data-collapse-toggle="dropdownDisciplinare" type="button" 
+                                                class="  py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "><br>SEZIONE
+                                                    DISCIPLINARE
+                                                </button>
+                                                <div id="dropdownDisciplinare" class=" hidden " >
+                                                    <ul >
+                                                    
+                                                        <li><a  href="{{ url('corsi/marescialli/admin/sezione-disciplinare/inserisci-provvedimento-disciplinare') }}"
+                                                            class="indent-1 py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "> Inserisci
+                                                            provvedimento disciplinare</a></li>
+                                                        <li><a  href="{{ url('corsi/marescialli/admin/sezione-disciplinare/modifica-provvedimento-disciplinare') }}"
+                                                                class="  py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Modifica
+                                                                provvedimento disciplinare</a></li>
+                                                        <li><a  href="{{ url('corsi/marescialli/admin/sezione-disciplinare/visualizza-provvedimento-disciplinare') }}"
+                                                                class=" py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Visualizza
+                                                                provvedimento disciplinare</a></li>
+                                                    </ul>
+                                                </div>
+                                            
                                         </li>
                                         <br>
                                         <li>
-                                            <a href="{{ url('corsi/marescialli/admin/sezione-sanitaria') }}"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "
-                                                aria-current="page"><b>Sezione sanitaria</b></a>
-                                            <ul>
-                                                <li><a href="{{ url('corsi/marescialli/admin/sezione-sanitaria/inserisci-provvedimento-sanitario') }}"
-                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Inserisci
-                                                        provvedimento sanitario</a></li>
-                                                <li><a href="{{ url('corsi/marescialli/admin/sezione-sanitaria/modifica-provvedimento-sanitario') }}"
-                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Modifica
-                                                        provvedimento sanitario</a></li>
-                                                <li><a href="{{ url('corsi/marescialli/admin/sezione-sanitaria/visualizza-provvedimento-sanitario') }}"
-                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Visualizza
-                                                        provvedimento sanitario</a></li>
-                                            </ul>
+                                            <button href="{{ url('corsi/marescialli/admin/sezione-sanitaria') }}" data-collapse-toggle="dropdownSanitaria"
+                                                class="py-2 transition-colors duration-200 relative block  hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "
+                                                aria-current="page">SEZIONE SANITARIA</button>
+                                            <div class="hidden " id="dropdownSanitaria">
+                                                <ul>
+                                                    <li><a href="{{ url('corsi/marescialli/admin/sezione-sanitaria/inserisci-provvedimento-sanitario') }}"
+                                                            class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Inserisci
+                                                            provvedimento sanitario</a></li>
+                                                    <li><a href="{{ url('corsi/marescialli/admin/sezione-sanitaria/modifica-provvedimento-sanitario') }}"
+                                                            class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Modifica
+                                                            provvedimento sanitario</a></li>
+                                                    <li><a href="{{ url('corsi/marescialli/admin/sezione-sanitaria/visualizza-provvedimento-sanitario') }}"
+                                                            class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Visualizza
+                                                            provvedimento sanitario</a></li>
+                                                </ul>
+                                            </div>
+                                            
                                         </li>
                                         <br>
                                         <li>
-                                            <a href="{{ url('corsi/marescialli/admin/sezione-studi') }}"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "><b>Sezione
-                                                studi</b></a>
-                                            <ul>
-                                                <li><a href="{{ url('corsi/marescialli/admin/sezione-studi/inserisci-verbali-esami')}}" class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Verbali esami</a></li>
-                                            </ul>
+                                            <button href="{{ url('corsi/marescialli/admin/sezione-studi') }}" data-collapse-toggle="dropdownStudi"
+                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white ">SEZIONE
+                                                STUDI</button>
+                                                <div class="hidden " id="dropdownStudi">
+                                                    <ul>
+                                                        <li><a href="{{ url('corsi/marescialli/admin/sezione-studi/inserisci-verbali-esami')}}" class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Verbali esami</a></li>
+                                                    </ul>
+                                                </div>
                                         </li>
                                         <br>
                                         <li>
-                                            <a href="{{ url('corsi/marescialli/admin/sezione-sportiva') }}"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "><b>Sezione
-                                                sportiva</b>
-                                            </a>
-                                            <ul>
-                                                <li><a href="{{ url('corsi/marescialli/admin/sezione-sportiva/inserisci-verbali-sportivi')}}" class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Verbali sportivi</a></li>
-                                            </ul>
+                                            <button href="{{ url('corsi/marescialli/admin/sezione-sportiva') }}" data-collapse-toggle="dropdownSportiva"
+                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white ">SEZIONE
+                                                SPORTIVA
+                                            </button>
+                                            <div class="hidden" id="dropdownSportiva">
+                                                <ul>
+                                                    <li><a href="{{ url('corsi/marescialli/admin/sezione-sportiva/inserisci-verbali-sportivi')}}" class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">Verbali sportivi</a></li>
+                                                </ul>
+                                            </div>
+                                            
                                         </li>
                                 </li>
-                                <li class="mt-8">
+                                <li class="mt-2">
                                     <a href="{{ url('corsi/marescialli/admin/gestione-personale-corsi') }}"
-                                        class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
+                                        class="mb-2   hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>GESTIONE PERSONALE</h5> </a>
                                 </li>
-                                <li class="mt-8">
+                                <li class="mt-2">
                                     <a href="{{ url('corsi/marescialli/admin/aggiungi-dati-corsi') }}"
-                                        class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
+                                        class="mb-2  hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>ACQUISISCI DATI INCORPORAMENTO</h5> </a>
                                 </li>
-                                <li class="mt-8">
+                                <li class="mt-2">
                                     <a href="{{ url('corsi/marescialli/admin/schede-individuali') }}"
-                                        class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
+                                        class="mb-2  hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>SCHEDE INDIVIDUALI ALLIEVI</h5> </a>
                                 </li>
-                                <li class="mt-8">
-                                    <a href="{{ url('corsi/marescialli/admin/schede-riepilogative') }}"
-                                        class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
-                                        <br>SCHEDE RIEPILOGATIVE</h5> </a>
-                                        <li>
-                                            <a href="{{ url('corsi/marescialli/admin/schede-riepilogative/Relazione-fine-incorporamento') }}"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
-                                                Relazione di fine incorporamento</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
-                                                Informazioni anagrafiche</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
-                                                Situazione disciplinare</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
-                                                Schede sanitarie</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
-                                                Carriera universitaria</a>
-                                        </li>
+                                <li class="mt-2">
+                                    <button href="{{ url('corsi/marescialli/admin/schede-riepilogative') }}" data-collapse-toggle="dropdownSchedeRiepilogative"
+                                        class="mb-2 hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
+                                        <br>SCHEDE RIEPILOGATIVE</h5>
+                                    </button>
+
+                                        <div class="hidden" id="dropdownSchedeRiepilogative">
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ url('corsi/marescialli/admin/schede-riepilogative/Relazione-fine-incorporamento') }}"
+                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
+                                                        Relazione di fine incorporamento</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"
+                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
+                                                        Informazioni anagrafiche</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"
+                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
+                                                        Situazione disciplinare</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"
+                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
+                                                        Schede sanitarie</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"
+                                                        class="py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white ">
+                                                        Carriera universitaria</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
                                 </li>
-                                <li class="mt-8">
+                                <li class="mt-2">
                                     <a href="{{ url('corsi/marescialli/admin/modifica-dati-allievi') }}"
-                                        class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
+                                        class="mb-2 hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>MODIFICA DATI ALLIEVI</h5> </a>
                                 </li>
                                 
