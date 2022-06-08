@@ -22,14 +22,14 @@
         <div class="px-4 mx-auto w-full max-w-8xl">
             <div class="lg:flex">
                 <aside id="sidebar"
-                    class="hidden fixed flex-none w-72 h-full lg:static lg:h-screen  lg:overflow-y-auto lg:pt-0 lg:w-60 lg:block lg:border-r-2">
+                class="hidden fixed flex-none w-72 h-full lg:static lg:h-screen lg:overflow-y-auto lg:pt-0 lg:w-60 lg:block lg:border-r-2">
                     <div id="navWrapper"
-                    class="overflow-hidden overflow-y-auto z-20 h- bg-white scrolling-touch max-w-2xs lg:h-5/6 lg:block lg:sticky top:2 lg:top-2 dark:bg-gray-900 lg:mr-0">
+                    class="overflow-hidden overflow-y-auto z-20  bg-white scrolling-touch max-w-2xs lg:h-5/6 lg:block lg:sticky top:0 lg:top-0 dark:bg-gray-900 lg:mr-0">
                         <nav id="nav"
-                            class="pt-16 px-1 pl-3 lg:pl-0 lg:pt-2 overflow-y-auto font-medium text-base lg:text-sm pb-10 lg:pb-2 sticky?lg:h-(screen-18)"
+                        class="mt-0 pt-0 top-0 px-1 pl-3 lg:pl-0  overflow-y-auto font-medium text-base lg:text-sm   "
                             aria-label="Docs navigation">
-                            <ul class="mb-0 list-unstyled">
-                                <li class="mt-2">
+                            <ul class="mb-0 ">
+                                <li class="">
                                     <!--<button href="{{ url('corsi/marescialli/adminJ/home') }}" data-collapse-toggle="dropdownDisciplinare"
                                         class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
                                         <br>HOME</h5> 
@@ -37,12 +37,13 @@
                                     <div class="hidden" id="dropdownDisciplinare">
 
                                     </div>-->
-                                    <ul class="py-1 list-unstyled fw-normal small">
-                                        <li>
+                                    <ul >
+                                        <li class="border-b-2 pb-3">
                                             <button href="{{ url('corsi/marescialli/adminJ/sezione-disciplinare') }}" data-collapse-toggle="dropdownDisciplinare"
-                                                class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "><br>SEZIONE
+                                                class="py-0 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "><br>SEZIONE
                                                     DISCIPLINARE
                                             </button>
+                                        
                                             <div class="hidden" id="dropdownDisciplinare">
                                                 <ul>
                                                     <li><a href="{{ url('corsi/marescialli/adminJ/sezione-disciplinare/inserisci-provvedimento-disciplinare') }}"
@@ -58,8 +59,8 @@
                                             </div>
                                             
                                         </li>
-                                        <br>
-                                        <li>
+                                        
+                                        <li class="border-b-2 pb-3">
                                             <button href="{{ url('corsi/marescialli/adminJ/sezione-sanitaria') }}" data-collapse-toggle="dropdownSanitaria"
                                                 class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "
                                                 aria-current="page">SEZIONE SANITARIA
@@ -79,8 +80,8 @@
                                             </div>
                                             
                                         </li>
-                                        <br>
-                                        <li>
+                                        
+                                        <li class="border-b-2 pb-3">
                                             <button href="{{ url('corsi/marescialli/adminJ/sezione-studi') }}" data-collapse-toggle="dropdownStudi"
                                                 class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white ">SEZIONE
                                                 STUDI</button>
@@ -90,8 +91,8 @@
                                                     </ul>
                                                 </div>
                                         </li>
-                                        <br>
-                                        <li>
+                                        
+                                        <li class="border-b-2 pb-3">
                                             <button href="{{ url('corsi/marescialli/adminJ/sezione-sportiva') }}" data-collapse-toggle="dropdownSportiva"
                                                 class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white ">SEZIONE
                                                 SPORTIVA
@@ -104,20 +105,20 @@
                                             
                                         </li>
                                 </li>
-                                <li class="mt-2">
+                                <li class="border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/adminJ/aggiungi-dati-corsi') }}"
                                         class="mb-2  font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>ACQUISISCI DATI INCORPORAMENTO</h5> </a>
                                 </li>
-                                <li class="mt-2">
+                                <li class="border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/adminJ/schede-individuali') }}"
                                         class="mb-2 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>SCHEDE INDIVIDUALI ALLIEVI</h5> </a>
                                 </li>
-                                <li class="mt-2">
+                                <li class="mt-4 border-b-2 pb-3">
                                     <button href="{{ url('corsi/marescialli/adminJ/schede-riepilogative') }}"data-collapse-toggle="dropdownSchedeRiepilogative"
-                                        class="mb-2 font-semibold tracking-wide text-gray-500 dark:text-white">
-                                        <br>SCHEDE RIEPILOGATIVE</h5> 
+                                        class=" font-semibold tracking-wide text-gray-500 dark:text-white">
+                                        SCHEDE RIEPILOGATIVE</h5> 
                                     </button>
                                     <div class="hidden" id="dropdownSchedeRiepilogative">
                                         <ul>
@@ -151,10 +152,10 @@
                                     </div>
                                         
                                 </li>
-                                <li class="mt-2">
+                                <li class="mt-4 border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/adminJ/modifica-dati-allievi') }}"
                                         class="mb-2 font-semibold tracking-wide text-gray-500 dark:text-white">
-                                        <br>MODIFICA DATI ALLIEVI</h5> </a>
+                                        MODIFICA DATI ALLIEVI</h5> </a>
                                 </li>
                                 
                         </nav>

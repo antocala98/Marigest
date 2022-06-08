@@ -19,24 +19,24 @@
                 </ol>
             </nav>
         </div>
-        <div class="px-4 mx-auto w-full max-w-8xl">
+        <div class="pl-4  w-full max-w-8xl">
             <div class="lg:flex">
                 <aside id="sidebar"
-                    class="hidden fixed flex-none w-72 h-full lg:static lg:h-screen  lg:overflow-y-auto lg:pt-0 lg:w-60 lg:block lg:border-r-2">
+                    class="hidden fixed flex-none w-72 h-full lg:static lg:h-screen lg:overflow-y-auto lg:pt-0 lg:w-60 lg:block lg:border-r-2">
                     <div id="navWrapper"
-                        class="overflow-hidden overflow-y-auto z-20 h- bg-white scrolling-touch max-w-2xs lg:h-5/6 lg:block lg:sticky top:2 lg:top-2 dark:bg-gray-900 lg:mr-0">
+                        class="overflow-hidden overflow-y-auto z-20  bg-white scrolling-touch max-w-2xs lg:h-5/6 lg:block lg:sticky top:0 lg:top-0 dark:bg-gray-900 lg:mr-0">
                         <nav id="nav"
-                            class="pt-16 px-1 pl-3 lg:pl-0 lg:pt-2 overflow-y-auto font-medium text-base lg:text-sm pb-2 lg:pb-2 "
+                            class="mt-0 pt-0 top-0 px-1 pl-3 lg:pl-0  overflow-y-auto font-medium text-base lg:text-sm   "
                             aria-label="Docs navigation">
-                            <ul class="mb-0 list-unstyled">
-                                <li class="mt-2">
+                            <ul class="mb-0 ">
+                                <li >
                                     <!--<a href="{{ url('corsi/marescialli/admin/home') }}"
                                         class="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase lg:text-xs dark:text-white">
                                         <br>HOME</h5> </a>-->
-                                    <ul class="py-1 list-unstyled fw-normal small">
-                                        <li>
+                                    <ul >
+                                        <li class="border-b-2 pb-3">
                                                 <button  href={{ url('corsi/marescialli/admin/sezione-disciplinare/') }} data-collapse-toggle="dropdownDisciplinare" type="button" 
-                                                class="  py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "><br>SEZIONE
+                                                class=" py-0 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "><br>SEZIONE
                                                     DISCIPLINARE
                                                 </button>
                                                 <div id="dropdownDisciplinare" class=" hidden " >
@@ -56,7 +56,7 @@
                                             
                                         </li>
                                         <br>
-                                        <li>
+                                        <li class="border-b-2 pb-3">
                                             <button href="{{ url('corsi/marescialli/admin/sezione-sanitaria') }}" data-collapse-toggle="dropdownSanitaria"
                                                 class="py-2 transition-colors duration-200 relative block  hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white "
                                                 aria-current="page">SEZIONE SANITARIA</button>
@@ -76,7 +76,7 @@
                                             
                                         </li>
                                         <br>
-                                        <li>
+                                        <li class="border-b-2 pb-3">
                                             <button href="{{ url('corsi/marescialli/admin/sezione-studi') }}" data-collapse-toggle="dropdownStudi"
                                                 class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white ">SEZIONE
                                                 STUDI</button>
@@ -87,7 +87,7 @@
                                                 </div>
                                         </li>
                                         <br>
-                                        <li>
+                                        <li class="border-b-2 pb-3">
                                             <button href="{{ url('corsi/marescialli/admin/sezione-sportiva') }}" data-collapse-toggle="dropdownSportiva"
                                                 class="py-2 transition-colors duration-200 relative block hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-gray-400 dark:hover:text-white ">SEZIONE
                                                 SPORTIVA
@@ -100,22 +100,22 @@
                                             
                                         </li>
                                 </li>
-                                <li class="mt-2">
+                                <li class="border-b-2 pb-3 pt-2">
                                     <a href="{{ url('corsi/marescialli/admin/gestione-personale-corsi') }}"
                                         class="mb-2   hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>GESTIONE PERSONALE</h5> </a>
                                 </li>
-                                <li class="mt-2">
+                                <li class="border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/admin/aggiungi-dati-corsi') }}"
                                         class="mb-2  hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>ACQUISISCI DATI INCORPORAMENTO</h5> </a>
                                 </li>
-                                <li class="mt-2">
+                                <li class="border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/admin/schede-individuali') }}"
                                         class="mb-2  hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>SCHEDE INDIVIDUALI ALLIEVI</h5> </a>
                                 </li>
-                                <li class="mt-2">
+                                <li class="border-b-2 pb-3">
                                     <button href="{{ url('corsi/marescialli/admin/schede-riepilogative') }}" data-collapse-toggle="dropdownSchedeRiepilogative"
                                         class="mb-2 hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>SCHEDE RIEPILOGATIVE</h5>
@@ -152,7 +152,7 @@
                                         </div>
                                         
                                 </li>
-                                <li class="mt-2">
+                                <li class="border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/admin/modifica-dati-allievi') }}"
                                         class="mb-2 hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         <br>MODIFICA DATI ALLIEVI</h5> </a>
