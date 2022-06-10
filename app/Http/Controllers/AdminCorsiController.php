@@ -981,7 +981,7 @@ class AdminCorsiController extends Controller
   {
     return view('corsi.admin.sezioneSanitaria');
   }
-  public function paginaInserisciSanitataria()
+  public function paginaInserisciSanitaria()
   {
     $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
@@ -992,6 +992,7 @@ class AdminCorsiController extends Controller
       abort(403, 'Azione non autorizzata.');
     }
   }
+  
   public function inserisciSanitaria(Request $request)
   {
     $request->validate([
