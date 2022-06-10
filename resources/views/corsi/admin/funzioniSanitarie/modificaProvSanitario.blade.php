@@ -16,7 +16,7 @@
             </svg>
             &nbsp;
             <a href="{{ url('corsi/marescialli/admin/sezione-sanitaria/visualizza-provvedimento-sanitario') }}"
-               class="inline-flex items-center text-sm font-medium text-white hover:scale-110 dark:text-gray-400 dark:hover:text-white">Inserisci provvedimento sanitario</a>
+               class="inline-flex items-center text-sm font-medium text-white hover:scale-110 dark:text-gray-400 dark:hover:text-white">MOdifica provvedimento sanitario</a>
         </div>
     </li>
 @endsection
