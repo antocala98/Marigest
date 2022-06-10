@@ -103,6 +103,5 @@
             <option value="{{$allievo->matricola_militare}}">{{$allievo->cognome}} {{$allievo->nome}}-{{$allievo->matricola_militare}}</option>
         @endforeach
     </datalist>
-      ?>
     
 @endsection
