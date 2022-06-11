@@ -109,7 +109,7 @@ class RelazioneIncorporamentoController extends Controller
         ->orwhere('provincia_residenza', 'FR')
         ->orwhere('provincia_residenza', 'LT')
         ->orwhere('provincia_residenza', 'RI')
-        ->orwhere('provincia_residenza', 'RO')
+        ->orwhere('provincia_residenza', 'RM')
         ->orwhere('provincia_residenza', 'Roma')
         ->orwhere('provincia_residenza', 'VT')
         //Marche
