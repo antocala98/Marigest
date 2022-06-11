@@ -56,13 +56,13 @@
                                 </td>
                             </tr>
                             <tr id="accordion-collapse-body-{{$user->id}}" class="hidden bg-green-100" aria-labelledby="accordion-collapse-heading-{{$user->id}}">
-                                <td>
-                                    <label class="pl-5" for="description">Scegli quale permesso concedere a {{$user->cognome}}</label>
+                                <td class="inline-flex">
+                                    <label class="pl-5" for="description">Scegli quale permesso concedere a <strong>{{$user->cognome}}</strong> <strong>{{$user->nome}}</strong></label>
                                 </td>
                                 <td class="pl-4">
                                     <form method="POST" action="{{url('corsi/marescialli/admin/gestione-personale-corsi')}}" class="inline-flex">
                                         @csrf                                               
-                                        <select name="permessi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Addetto" required>>
+                                        <select name="permessi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Addetto" required>
                                             <option value="1">Admin</option>
                                             <option value="2">Admin Junior</option>
                                             <option value="3">Addetto</option>                                            
@@ -80,6 +80,9 @@
                                             </td>
                                     </form>
                                     
+                                </td>
+                                <td>
+
                                 </td>
                             </tr>
                         @endforeach
