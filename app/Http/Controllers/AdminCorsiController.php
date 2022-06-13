@@ -958,10 +958,11 @@ class AdminCorsiController extends Controller
     $provvedimentoDisciplinare->num_giorni_provvedimento = $request->num_giorni;
     $provvedimentoDisciplinare->data_provvedimento = $request->data_provvedimento;
     $provvedimentoDisciplinare->num_protocollo = $request->n_protocollo;
+    $matricola=$request->allievo_matricola;
 
     $provvedimentoDisciplinare->save();
-
-    return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare', ['id' => $request->id])->with(['feedback_utente' => "Hai modificato con successo i dati di " . $request->matricola_allievo]);
+    $request->allievo;
+    return view('corsi.admin.funzioniDisciplinare.modificaProvDisciplinare', ['id' => $request->id])->with(['feedback_utente' => "Hai modificato con successo i dati di " ." ". $matricola]);
 
   }
   public function paginaVisualizzaDisciplinare()

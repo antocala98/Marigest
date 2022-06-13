@@ -84,7 +84,7 @@
     </div>
     <?php } else if(!isset($provvedimentoDisciplinare) && !isset($feedback_utente)){   ?>
     <form method="POST" action="{{ route('aggiornaProvDAdmin') }}" enctype="multipart/form-data">
-    @csrf
+         @csrf
         <div class="flex justify-center"
         <div class="m-11 grid gap-6 mb-24 lg:grid-cols-2">
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
@@ -92,7 +92,7 @@
 
                 <div class="mt-4 w-full">
                     <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Matricola</label>
-                    <input type="text" id="allievo" name="allievo" disabled
+                    <input type="text" id="allievo" name="allievo_matricola"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            value="{{ $provvedimentoD->matricola_allievo}}"
                 </div>
