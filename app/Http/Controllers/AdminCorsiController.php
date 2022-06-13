@@ -1087,7 +1087,7 @@ public function inserisciVerbaliEsami(Request $request)
     $controlloEsame=VerbaleEsame::where('codice_materia',$verbaleEsame->codice_materia)->where('matricola_allievo',$verbaleEsame->matricola_allievo)->where('voto','>=',18)->count();
     $zero=0;
     if($controlloEsame > $zero){
-      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente2' => "Il voto per la materia selezionata è già stato inserito. Per la modifica del verbale recati nell'apposita sezione".$controlloEsame]);
+      return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente2' => "Il voto per la materia selezionata è già stato inserito. Per la modifica del verbale recati nell'apposita sezione"]);
     }else{
       $verbaleEsame->save();
       return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" ." ". $verbaleEsame->codice_verbale]);
