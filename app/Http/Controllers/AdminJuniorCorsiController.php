@@ -937,23 +937,27 @@ class AdminJuniorCorsiController extends Controller
   }
   public function inserisciSanitaria(Request $request)
   {
-    $request->validate([
-      'data_provvedimento' => ['required'],
-    ]);
+      $request->validate([
+          'data_provvedimento' => ['required'],
+      ]);
+      $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
+      $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
-    $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
+      if($request->data_provvedimento>Carbon::today()){
+          return view('corsi.admin_jr.funzioniSanitarie.inserisciProvSanitario',['allievi'=>$allievi])->with(['feedback_utente2' => "La data inserita per il provvedimento è una data futura"]);
+      }else{
+          $provvedimentoSanitario = new ProvvedimentoSanitario();
 
-    $provvedimentoSanitario = new ProvvedimentoSanitario();
+          $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
+          $provvedimentoSanitario->num_giorni_provvedimento = $request->num_giorni;
+          $provvedimentoSanitario->data_provvedimento = $request->data_provvedimento;
+          $provvedimentoSanitario->matricola_allievo_paziente = $request->allievo;
+          $provvedimentoSanitario->classe_allievo = $corso->classe;
+          $provvedimentoSanitario->id_user_infermeria = Auth::user()->id;
 
-    $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
-    $provvedimentoSanitario->num_giorni_provvedimento = $request->num_giorni;
-    $provvedimentoSanitario->data_provvedimento = $request->data_provvedimento;
-    $provvedimentoSanitario->matricola_allievo_paziente = $request->allievo;
-    $provvedimentoSanitario->classe_allievo = $corso->classe;
-    $provvedimentoSanitario->id_user_infermeria = Auth::user()->id;
-
-    $provvedimentoSanitario->save();
-    return view('corsi.admin_jr.funzioniSanitarie.inserisciProvSanitario', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
+          $provvedimentoSanitario->save();
+          return view('corsi.admin_jr.funzioniSanitarie.inserisciProvSanitario', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
+      }
   }
   public function paginaModificaSanitaria($id = null)
   {
