@@ -993,15 +993,18 @@ class AdminCorsiController extends Controller
       abort(403, 'Azione non autorizzata.');
     }
   }
-  
+
   public function inserisciSanitaria(Request $request)
   {
     $request->validate([
       'data_provvedimento' => ['required'],
     ]);
-
     $corso = Corso::where('numero_corso', explode('_', Auth::user()->comando_appartenenza))->first();
+    $allievi = Allievo::where('corso', $this->getUser()->comando_appartenenza)->orderBy('cognome')->get();
 
+      if($request->data_provvedimento>Carbon::today()){
+          return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario',['allievi'=>$allievi])->with(['feedback_utente2' => "La data inserita per il provvedimento è una data futura"]);
+      }else{
     $provvedimentoSanitario = new ProvvedimentoSanitario();
 
     $provvedimentoSanitario->tipo_provvedimento = $request->tipo_provvedimento;
@@ -1013,6 +1016,7 @@ class AdminCorsiController extends Controller
 
     $provvedimentoSanitario->save();
     return view('corsi.admin.funzioniSanitarie.inserisciProvSanitario', ['id' => $request->id])->with(['feedback_utente' => "Hai inserito con successo il provvedimento disciplinare"]);
+  }
   }
   public function paginaModificaSanitaria($id = null)
   {
@@ -1072,15 +1076,15 @@ public function inserisciVerbaliEsami(Request $request)
     $userRedattore=Auth::user();
     $materie = Materia::where('id','>',0)->get();
     $allievi = Allievo::where('corso', Auth::user()->comando_appartenenza)->orderBy('cognome')->get();
-    
+
     if($request->dataVerbale>Carbon::today()){
       return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente2' => "La data inserita per il verbale esame è una data futura"]);
     }else{
       $verbaliEsami=VerbaleEsame::get();
       $verbaleEsame = new VerbaleEsame();
-  
-  
-  
+
+
+
       $verbaleEsame->codice_verbale=$request->codiceVerbale;
       $verbaleEsame->codice_materia=$request->materie;
       $verbaleEsame->data_verbale=$request->dataVerbale;
@@ -1088,7 +1092,7 @@ public function inserisciVerbaliEsami(Request $request)
       $verbaleEsame->ufficiale_commissione=$request->ufficiale;
       $verbaleEsame->matricola_allievo=$request->allievo;
       $verbaleEsame->id_user_redattore=$request->idUserRedattore;
-  
+
       $controlloEsame=VerbaleEsame::where('codice_materia',$verbaleEsame->codice_materia)->where('matricola_allievo',$verbaleEsame->matricola_allievo)->where('voto','>=',18)->count();
       $zero=0;
       if($controlloEsame > $zero){
@@ -1098,9 +1102,9 @@ public function inserisciVerbaliEsami(Request $request)
         return view('corsi.admin.sezioneStudi.aggiungiVerbaleEsame',['userRedattore' => $userRedattore,'materie'=> $materie,'allievi'=>$allievi])->with(['feedback_utente' => "Hai inserito con successo il verbale con protocollo" ." ". $verbaleEsame->codice_verbale]);
       }
     }
-    
-   
-   
+
+
+
 
   }
   public function sezioneSportiva()
