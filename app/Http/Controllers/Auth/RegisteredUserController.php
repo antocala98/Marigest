@@ -39,8 +39,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'nome' => ['required', 'string', 'max:255'],
             'cognome' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'email_confirmation'=>['required','string','email','confirmed','max:255','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','confirmed'],
+            //'email_confirmation'=>['required','string','email','confirmed',,],
             'sezione_appartenenza' => ['required', 'string', 'max:255'],
             'comando_appartenenza' => ['string', 'max:255'],
             'grado' => ['string', 'required'],

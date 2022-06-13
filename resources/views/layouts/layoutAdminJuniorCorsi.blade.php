@@ -19,7 +19,7 @@
                 </ol>
             </nav>
         </div>
-        <div class="px-4 mx-auto w-full max-w-8xl">
+        <div class="pl-4  w-full max-w-8xl">
             <div class="lg:flex">
                 <aside id="sidebar"
                 class="hidden fixed flex-none w-72 h-full lg:static lg:h-screen lg:overflow-y-auto lg:pt-0 lg:w-60 lg:block lg:border-r-2">
@@ -105,17 +105,17 @@
                                             
                                         </li>
                                 </li>
-                                <li class="border-b-2 pb-3">
+                                <li class="mt-2 border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/adminJ/aggiungi-dati-corsi') }}"
                                         class="mb-2  font-semibold tracking-wide text-gray-500 dark:text-white">
-                                        <br>ACQUISISCI DATI INCORPORAMENTO</h5> </a>
+                                        ACQUISISCI DATI INCORPORAMENTO</h5> </a>
                                 </li>
-                                <li class="border-b-2 pb-3">
+                                <li class="mt-2 border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/adminJ/schede-individuali') }}"
-                                        class="mb-2 font-semibold tracking-wide text-gray-500 dark:text-white">
-                                        <br>SCHEDE INDIVIDUALI ALLIEVI</h5> </a>
+                                        class="mb-2 hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
+                                        SCHEDE INDIVIDUALI ALLIEVI</h5> </a>
                                 </li>
-                                <li class="mt-4 border-b-2 pb-3">
+                                <li class="mt-2 border-b-2 pb-3">
                                     <button href="{{ url('corsi/marescialli/adminJ/schede-riepilogative') }}"data-collapse-toggle="dropdownSchedeRiepilogative"
                                         class=" font-semibold tracking-wide text-gray-500 dark:text-white">
                                         SCHEDE RIEPILOGATIVE</h5> 
@@ -152,9 +152,9 @@
                                     </div>
                                         
                                 </li>
-                                <li class="mt-4 border-b-2 pb-3">
+                                <li class="mt-2 border-b-2 pb-3">
                                     <a href="{{ url('corsi/marescialli/adminJ/modifica-dati-allievi') }}"
-                                        class="mb-2 font-semibold tracking-wide text-gray-500 dark:text-white">
+                                        class="mb-2 hover:text-gray-900 font-semibold tracking-wide text-gray-500 dark:text-white">
                                         MODIFICA DATI ALLIEVI</h5> </a>
                                 </li>
                                 
